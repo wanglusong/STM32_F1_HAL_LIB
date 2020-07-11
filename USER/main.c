@@ -14,6 +14,8 @@
 #include "fontupd.h"
 #include "text.h"	
 #include "TEA5767.h"
+#include "timer.h"
+#include "lvgl.h"
 
 extern unsigned long frequency;
 
@@ -73,6 +75,12 @@ int main(void)
 		LCD_Clear(WHITE);//清屏	       
 	}  
 	POINT_COLOR=RED;       
+	
+	/*little vGL init*/
+	lv_init();
+	TIM3_Init(999,71);//lvgl提供1ms心跳节拍
+	/*init end*/
+	
 	Show_Str(70,50,200,16,"扩音系统从机",16,0);			
 
 	TEA5767_func_t.tea5767_freq = 92000;//100142 滨海电台
