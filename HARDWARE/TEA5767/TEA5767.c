@@ -1,9 +1,13 @@
 #include "TEA5767.h"
 #include "delay.h"
 #include "usart.h"
+#include "string.h"
+#include "key.h"
 
 #define max_freq 108000
 #define min_freq 87500
+
+TEA5767_func TEA5767_func_t;
 
 unsigned char radio_data[5]={0x29,0xc2,0x20,0x11,0x00};
 
@@ -27,15 +31,12 @@ void IIC_Init(void)
 	GPIOB->CRH&=0XFFFF00FF;//PB10/11 推挽输出
 	GPIOB->CRH|=0X00003300;	   
 	GPIOB->ODR|=0X0C00;    //PB10、PB11置高
-	//按键输入PA0,上拉输入
-//	RCC->APB2ENR|=1<<2;//使能PA时钟							 
-//	GPIOA->CRL&=0XFFFFFFF0;
-//	GPIOA->CRL|=0X00000008;//PA0上拉输入
-//	GPIOA->ODR|=0X0001;//PA0置1	 
-	//按键输入PE2~4,上拉输入
-//	GPIOE->CRL&=0XFFF000FF;	//PE2~4设置成输入	  
-//	GPIOE->CRL|=0X00088800; 				   
-//	GPIOE->ODR|=7<<2;	   	//PE2~4 上拉
+
+	memset(&TEA5767_func_t,0,sizeof(TEA5767_func));
+	
+	TEA5767_func_t.tea5767_freq = 92000;//100142 滨海电台	
+	
+	Set_Frequency(TEA5767_func_t.tea5767_freq); //设置电台频率为101.8MHz
 }
 
 /**********************************************************
@@ -389,5 +390,69 @@ void Auto_Search(char mode)
     }    
 }
 
-
+void Tea5767_main(void)
+{
+		 u8 key;
+	
+		 key=KEY_Scan(0);
+		 if(key)
+		{
+			printf("key is = %d\r\n",key);
+			
+			switch(key)
+			{
+				case 2:
+				{
+					if(TEA5767_func_t.mode == 1)
+					{
+						Auto_Search(1);//自动向上搜索
+					}else
+					{
+						Search(1);  //手动向上搜索
+					}
+					
+					TEA5767_func_t.tea5767_freq = frequency;
+					
+//					LCD_ShowxNum(50+5*16,90,TEA5767_func_t.tea5767_freq/1000,3,16,0);	
+//					Show_Str(50+5*16+16+8,90,200,16,".",16,0);
+//					LCD_ShowxNum(50+5*16+16+8+8,90,TEA5767_func_t.tea5767_freq%1000,3,16,0);
+					
+					key = 0;
+					break;
+				}
+				case 3:
+				{
+					if(TEA5767_func_t.mode == 1)
+					{
+						Auto_Search(0);//自动向下搜索
+					}else
+					{
+						Search(0);  //手动向下搜索
+					}
+					
+					TEA5767_func_t.tea5767_freq = frequency;
+					
+//					LCD_ShowxNum(50+5*16,90,TEA5767_func_t.tea5767_freq/1000,3,16,0);	
+//					Show_Str(50+5*16+16+8,90,200,16,".",16,0);
+//					LCD_ShowxNum(50+5*16+16+8+8,90,TEA5767_func_t.tea5767_freq%1000,3,16,0);							
+					key = 0;
+					break;
+				}
+				case 1:
+				{
+					TEA5767_func_t.mode = ! TEA5767_func_t.mode;
+					
+					if(TEA5767_func_t.mode == 0)
+					{
+//						Show_Str(50+5*16,210,200,16,"手动",16,0);	
+					}else
+					{
+//						Show_Str(50+5*16,210,200,16,"自动",16,0);	
+					}
+					key = 0;
+					break;
+				}
+			}
+		}
+}
 

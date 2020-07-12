@@ -3,6 +3,15 @@
 
 #include "sys.h"
 
+typedef struct TEA5767_T
+{
+	u32 tea5767_freq;
+	u8 tea5767_vloume;
+	u8 mode;
+}TEA5767_func;
+
+extern TEA5767_func TEA5767_func_t;
+
 //IO·½ÏòÉèÖÃ
 #define SDA_IN()  {GPIOB->CRH&=0XFFFF0FFF;GPIOB->CRH|=8<<12;} //PB11
 #define SDA_OUT() {GPIOB->CRH&=0XFFFF0FFF;GPIOB->CRH|=3<<12;}
@@ -33,4 +42,6 @@ void TEA5767_Read(void);
 void Search(char mode);
 void Auto_Search(char mode);
 void Set_Frequency(u32 fre);
+void Tea5767_main(void);
+
 #endif
