@@ -1,16 +1,4 @@
 #include "spi.h"
-//////////////////////////////////////////////////////////////////////////////////	 
-//本程序只供学习使用，未经作者许可，不得用于其它任何用途
-//ALIENTEK STM32F103开发板
-//SPI驱动代码	   
-//正点原子@ALIENTEK
-//技术论坛:www.openedv.com
-//创建日期:2017/5/30
-//版本：V1.0
-//版权所有，盗版必究。
-//Copyright(C) 广州市星翼电子科技有限公司 2014-2024
-//All rights reserved									  
-////////////////////////////////////////////////////////////////////////////////// 	
 
 SPI_HandleTypeDef SPI1_Handler;  //SPI1句柄
 
@@ -38,22 +26,39 @@ void SPI1_Init(void)
     SPI1_ReadWriteByte(0Xff);                           //启动传输
 }
 
-//SPI5底层驱动，时钟使能，引脚配置
+//SPI2底层驱动，时钟使能，引脚配置
 //此函数会被HAL_SPI_Init()调用
 //hspi:SPI句柄
 void HAL_SPI_MspInit(SPI_HandleTypeDef *hspi)
 {
-    GPIO_InitTypeDef GPIO_Initure;
-    
-    __HAL_RCC_GPIOA_CLK_ENABLE();       //使能GPIOA时钟
-    __HAL_RCC_SPI1_CLK_ENABLE();        //使能SPI1时钟
-    
-    //PA5,6,7
-    GPIO_Initure.Pin=GPIO_PIN_5|GPIO_PIN_6|GPIO_PIN_7;
-    GPIO_Initure.Mode=GPIO_MODE_AF_PP;              //复用推挽输出
-    GPIO_Initure.Pull=GPIO_PULLUP;                  //上拉
-    GPIO_Initure.Speed=GPIO_SPEED_FREQ_HIGH;        //快速            
-    HAL_GPIO_Init(GPIOA,&GPIO_Initure);
+	  if(hspi->Instance == SPI1)
+		{
+			GPIO_InitTypeDef GPIO_Initure;
+			
+			__HAL_RCC_GPIOA_CLK_ENABLE();       //使能GPIOA时钟
+			__HAL_RCC_SPI1_CLK_ENABLE();        //使能SPI1时钟
+			
+			//PA5,6,7
+			GPIO_Initure.Pin=GPIO_PIN_5|GPIO_PIN_6|GPIO_PIN_7;
+			GPIO_Initure.Mode=GPIO_MODE_AF_PP;              //复用推挽输出
+			GPIO_Initure.Pull=GPIO_PULLUP;                  //上拉
+			GPIO_Initure.Speed=GPIO_SPEED_FREQ_HIGH;        //快速            
+			HAL_GPIO_Init(GPIOA,&GPIO_Initure);
+		}
+		else if(hspi->Instance == SPI2)
+		{
+			GPIO_InitTypeDef GPIO_Initure;
+			
+			__HAL_RCC_GPIOB_CLK_ENABLE();       //使能GPIOB时钟
+			__HAL_RCC_SPI2_CLK_ENABLE();        //使能SPI2时钟
+			
+			//PB13,14,15
+			GPIO_Initure.Pin=GPIO_PIN_13|GPIO_PIN_14|GPIO_PIN_15;
+			GPIO_Initure.Mode=GPIO_MODE_AF_PP;              //复用推挽输出
+			GPIO_Initure.Pull=GPIO_PULLUP;                  //上拉
+			GPIO_Initure.Speed=GPIO_SPEED_FREQ_HIGH;        //快速            
+			HAL_GPIO_Init(GPIOB,&GPIO_Initure);
+		}
 }
 
 //SPI速度设置函数

@@ -17,6 +17,8 @@
 #include "timer.h"
 #include "lvgl.h"
 #include "lv_gui_main.h"
+#include "lcd_config.h"
+#include "lv_demo_keypad_encoder.h"
 
 #ifndef LV_DISPALY
 #include "lv_port_disp.h"
@@ -34,26 +36,26 @@ int main(void)
 	uart_init(9600);				//UART
 	LED_Init();							//LED
 	KEY_Init();							//KEY
- 	LCD_Init();							//LCD     
 	
+	/*lvgl的1ms心跳*/
+	TIM3_Init(999,71);	
 	/*little vGL init*/
 	lv_init();
-	/*lvgl的1ms心跳*/
-	TIM3_Init(999,71);
 	/*LCD映射到LVGL*/
 	lv_port_disp_init();
 	/*init end*/
 	
 	/*userinit*/
-	lv_st_theme_Init();
-	lv_ex_get_started_3();
-
+	lv_demo_keypad_encoder();
+	//lv_ex_get_started_3();
+	
 	printf("system is starting\r\n");
 	
 	while(1)
 	{
 
-		LED0=!LED0;
+		lv_task_handler();
+		LED1=!LED1;
 		delay_ms(50);
 
 	}
