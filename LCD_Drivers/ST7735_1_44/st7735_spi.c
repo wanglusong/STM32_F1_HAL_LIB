@@ -32,10 +32,6 @@ u8 ST7735_SPI_WriteByte(u8 TxData)
 	u8 Rxdata;
 	HAL_SPI_TransmitReceive(&SPI2_Handler,&TxData,&Rxdata,1, 1000);       
  	return Rxdata;  	
-//	while((SPI2->SR&SPI_FLAG_TXE)==RESET);		//等待发送区空	  
-//	SPI2->DR=TxData;	 	//发送一个byte   
-//	while((SPI2->SR&SPI_FLAG_RXNE)==RESET);//等待接收完一个byte  
-//	return SPI2->DR;          	     //返回收到的数据	
 } 
 
 /****************************************************************************

@@ -4,18 +4,36 @@
 #include "sys.h"
 #include "malloc.h"
 
-#if 0
-#define ST7735_SPI	
-#else
-#define TFT_SPI	
+#if 1
+#define ST7735_SPI	/*开放---则不使用该功能*/
 #endif
 
-#ifndef TFT_SPI
-#include "lcd.h"
+#if 1
+#define TFT_SPI	 /*开放---则不使用该功能*/
+#endif
+
+#if 1
+#define OLED_IIC	/*开放---则不使用该功能*/
+#endif
+
+#if 0
+#define ST7789_SPI	/*开放---则不使用该功能*/
+#endif
+
+#ifndef TFT_SPI /*使用TFT屏幕*/
+#include "tft_lcd.h"
 #endif
 
 #ifndef ST7735_SPI /*使用1.44_st7735屏幕*/
 #include "st7735_spi.h"
+#endif
+
+#ifndef OLED_IIC /*使用iic_oled屏幕*/
+#include "oled_iic.h"
+#endif
+
+#ifndef ST7789_SPI /*使用1.13_st7789屏幕*/
+#include "st7789_spi.h"
 #endif
 
 

@@ -4,6 +4,8 @@
 #include "string.h"
 #include "key.h"
 
+#if 0
+
 #define max_freq 108000
 #define min_freq 87500
 
@@ -456,3 +458,4 @@ void Tea5767_main(void)
 		}
 }
 
+#endif

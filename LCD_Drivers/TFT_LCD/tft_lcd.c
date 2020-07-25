@@ -1,4 +1,4 @@
-#include "lcd.h"
+#include "tft_lcd.h"
 #include "stdlib.h"
 #include "font.h" 
 #include "usart.h"
