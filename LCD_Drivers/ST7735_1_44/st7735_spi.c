@@ -1,6 +1,6 @@
 #include "st7735_spi.h"
 #include "delay.h"
-#include "usart.h"
+#include "uartall.h"
 
 #ifndef ST7735_SPI
 

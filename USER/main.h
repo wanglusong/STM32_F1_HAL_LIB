@@ -3,6 +3,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f1xx_hal.h"
+#include "sys.h"
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
 /* Exported macro ------------------------------------------------------------*/
@@ -12,8 +13,9 @@
 #define DISABLE 0
 
 
-#define		ESP8266_FUNC		ENABLE/*¿ª¹ØESP8266¹¦ÄÜ*/
-#define		LVGL_FUNC		DISABLE/*¿ª¹ØLVGL¹¦ÄÜ*/
+#define		ESP8266_FUNC		ENABLE/*å¼€å…³ESP8266åŠŸèƒ½*/
+#define		LVGL_FUNC		DISABLE/*å¼€å…³LVGLåŠŸèƒ½*/
+#define		UART_FUNC		ENABLE/*å¼€å…³ä¸²å£åŠŸèƒ½*/
 
 
 #endif /* __MAIN_H */

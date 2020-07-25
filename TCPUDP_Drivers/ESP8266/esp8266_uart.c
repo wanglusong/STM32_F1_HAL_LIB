@@ -1,5 +1,5 @@
 #include "esp8266_uart.h"
-#include "usart.h"	
+#include "uartall.h"	
 #include "delay.h"	
 
 #if ESP8266_FUNC
@@ -30,7 +30,7 @@ void esp8266_init(void)
 	 	delay_ms(1000);	
 	  esp8266_to_at_cmd("AT+CIPAP=\"192.168.10.5\"");
 	 	delay_ms(2000);	
-	  esp8266_to_at_cmd("AT+CWSAP=\"–°∑… Û\",\"xfs12345678\",11,3");
+	  esp8266_to_at_cmd("AT+CWSAP=\"small-fly-mouse\",\"xfs12345678\",11,3");
 	 	delay_ms(1000);
 		esp8266_to_at_cmd("AT+CIPMUX=1");
 	 	delay_ms(1000);

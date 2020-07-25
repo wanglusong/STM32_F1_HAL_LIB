@@ -68,13 +68,20 @@
 #define OLED_CMD  0	//写命令
 #define OLED_DATA 1	//写数据
 
+#define LCD_DRAWRECTANGLE 1 /*开启外围显示框---显示屏显示一个矩阵框*/
+
 void st7789_Lcd_Init(void); 
 void st7789_Lcd_Clear(u16 Color);
 
 #define ST7789_LVGL
 #ifndef ST7789_LVGL
+
 void st7789_Lcd_Fill(u16 x,u16 y,u16 color);
+
 #else
+//清屏
+void st7789_Lcd_Clear(u16 Color);
+//填充
 void st7789_Lcd_Fill(u16 xsta,u16 ysta,u16 xend,u16 yend,u16 color);
 //画线
 void st7789_Lcd_DrawLine(u16 x1, u16 y1, u16 x2, u16 y2, u16 color);
@@ -88,9 +95,19 @@ void ST7789_LCD_ShowChinese(unsigned int x,unsigned int y,unsigned char index,u1
 void ST7789_LCD_ShowChinese_Search(u16 x, u16 y, u16 color, u8 *s);
 //写字符
 void ST7789_LCD_ShowChar(u16 x,u16 y,u8 num,u8 mode,u8 size,u16 color);
+//写字符串
+void ST7789_LCD_ShowString(u16 x,u16 y,const u8 *p, u8 size, u16 color);
 //写数字
 void ST7789_LCD_ShowNum(u16 x,u16 y,u32 num,u8 len,u8 size,u16 color);
+//显示一张图片
+void st7789_Lcd_Showpicture(u16 x, u16 y, u16 img_w, u16 img_h, bool opaclear,const unsigned char *p);
+//点	
 u32 mypow(u8 m,u8 n);
+/*收到消息动画*/
+void st7789_rec_msg_to_notation(char show_img);
+/*待机动画*/
+void st7789_sleep_msg_to_notation(char show_img);
+
 #endif
 
 #endif

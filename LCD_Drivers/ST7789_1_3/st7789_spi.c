@@ -3,14 +3,21 @@
 #include "delay.h"
 
 #ifndef ST7789_SPI
-
 #include "st7789_font.h"
 #include "string.h"
+#include "st7789_img.h"
 
 /*static func*/
 static u32 mypow(u8 m,u8 n);
 /*static param*/
 static u16 BACK_COLOR,POINT_COLOR;   //画笔色
+
+#if 0
+const unsigned char *img_show_msg1 = &gImage_st7789_rec_msg1[7200]; 
+const unsigned char *img_show_msg2 = &gImage_st7789_rec_msg2[7200]; 
+const unsigned char *img_show_msg3 = &gImage_st7789_rec_msg3[7200]; 
+const unsigned char *img_show_msg4 = &gImage_st7789_rec_msg4[7200]; 
+#endif
 
 static
 void LCD_Writ_Bus(char dat)   //串行数据写入
@@ -97,7 +104,10 @@ void st7789_Lcd_Clear(u16 Color)
 				LCD_WR_DATA(Color);	 			 
 			}
 
-	  }
+	 }
+#if LCD_DRAWRECTANGLE	 
+	 st7789_Lcd_DrawRectangle(5, 5, 235, 235, POINT_COLOR);
+#endif
 }
 
 //画点
@@ -167,7 +177,7 @@ void ST7789_LCD_ShowChar(u16 x,u16 y,u8 num,u8 mode,u8 size,u16 color)
 		else return;								//没有的字库
 		for(t1=0;t1<8;t1++)
 		{			    
-			if(temp&0x80)LCD_DrawPoint(x,y,POINT_COLOR);
+			if(temp&0x80)LCD_DrawPoint(x,y,color);
 			else if(mode==0)LCD_DrawPoint(x,y,BACK_COLOR);
 			temp<<=1;
 			y++;
@@ -182,6 +192,22 @@ void ST7789_LCD_ShowChar(u16 x,u16 y,u8 num,u8 mode,u8 size,u16 color)
 		}  	 
 	}  
 }  
+
+//显示字符串
+//x,y:起点坐标  
+//*p:字符串起始地址
+//用16字体
+void ST7789_LCD_ShowString(u16 x,u16 y,const u8 *p, u8 size, u16 color)
+{         
+    while(*p!='\0')
+    {       
+        if(x>LCD_W-size){x=0;y+=size;}
+        if(y>LCD_H-size){y=x=0;st7789_Lcd_Clear(BACK_COLOR);}
+        ST7789_LCD_ShowChar(x,y,*p,0,size,color);
+        x+=8;
+        p++;
+    }  
+}
 
 //显示数字
 //x,y :起点坐标	 
@@ -213,11 +239,27 @@ void ST7789_LCD_ShowNum(u16 x,u16 y,u32 num,u8 len,u8 size,u16 color)
 void ST7789_LCD_ShowChinese(unsigned int x,unsigned int y,unsigned char index,u16 size, u16 color)	
 {  
 	unsigned char i,j;
-	unsigned char *temp=ST7789_Hzk;    
-    Address_set(x,y,x+(size-1),y+(size-1)); //设置区域      
-	temp+=index*size;	
+	unsigned char *temp=ST7789_Hzk;  
+	unsigned char sizepoint;
+    Address_set(x,y,x+(size-1),y+(size-1)); //设置区域 
+
+	if(size == 16)
+	{
+		temp+=index*(size*2);
+		sizepoint = size*2;		
+	}
+	else if(size == 24)
+	{
+		temp+=index*(size*3);	
+		sizepoint = size*3;	
+	}		
+	else if(size == 32)
+	{
+		temp+=index*(size*4);
+		sizepoint = size*4;
+	}
 	
-	for(j=0;j<size;j++)
+	for(j=0;j<sizepoint;j++)
 	{
 		for(i=0;i<8;i++)
 		{ 		     
@@ -244,12 +286,11 @@ void ST7789_LCD_ShowChinese_Search(u16 x, u16 y, u16 color, u8 *s)
 
 	while(*s) 
 	{	
-		if(*s >= 128) 
+		if((*s) >= 128) 
 		{		
-	
 			for (k=0;k<HZnum;k++) 
 			{	
-			  if ((FONT_16[k].Index[0]==*s)&&(FONT_16[k].Index[1]==*(s+1)))
+			  if ((FONT_16[k].Index[0]==*(s))&&(FONT_16[k].Index[1]==*(s+1))&&(FONT_16[k].Index[2]==*(s+2)))/*UIF8码时的偏移量，注意*/
 			  { 	
 					Address_set(x,y,x+16-1,y+16-1);
 				    for(i=0;i<16*2;i++)
@@ -263,15 +304,94 @@ void ST7789_LCD_ShowChinese_Search(u16 x, u16 y, u16 color, u8 *s)
 							}
 						}
 					}
-					
-					
+					x+=16;
+					break;
 				}
+//			  delay_ms(50);/*调试使用*/
 			}
-		s+=2;x+=16;
+			s+=3;/*UIF8码时的偏移量，注意*/
 		}
 		else
 		s+=1; 
-	}		
+	}	
+}
+
+/*显示一张图片*/
+void st7789_Lcd_Showpicture(u16 x, u16 y, u16 img_w, u16 img_h, bool opaclear,const unsigned char *p) //显示图片
+{
+  int i; 
+	unsigned char picH,picL; 
+	
+	if(!opaclear)
+	{
+		Address_set(x,y,x+img_w-1,y+img_h-1);//窗口设置
+		for(i=0;i<img_w*img_h;i++)
+		{	
+			picL=*(p+i*2);	//数据低位在前
+			picH=*(p+i*2+1);				
+			LCD_WR_DATA(picH<<8|picL);  						
+		}	
+	}
+	else
+	{
+		st7789_Lcd_Fill(x , y, x+img_w, y+img_h, BACK_COLOR);/*清除IMG*/
+	}
+}
+
+/*收到消息动画*/
+void st7789_rec_msg_to_notation(char show_img)
+{
+	switch(show_img)
+	{
+		case 1:
+		{
+			st7789_Lcd_Showpicture(150, 160, 60, 60, false, gImage_st7789_rec_msg1);
+			break;
+		}
+		case 2:
+		{
+			st7789_Lcd_Showpicture(150, 160, 60, 60, false, gImage_st7789_rec_msg2);
+			break;
+		}
+		case 3:
+		{
+			st7789_Lcd_Showpicture(150, 160, 60, 60, false, gImage_st7789_rec_msg3);
+			break;
+		}
+		case 4:
+		{
+			st7789_Lcd_Showpicture(150, 160, 60, 60, false, gImage_st7789_rec_msg4);
+			break;
+		}
+		default:
+		{
+			st7789_Lcd_Showpicture(150, 160, 60, 60, true, NULL);
+			break;
+		}
+	}
+}
+
+/*待机动画*/
+void st7789_sleep_msg_to_notation(char show_img)
+{
+	switch(show_img)
+	{
+		case 1:
+		{
+			st7789_Lcd_Showpicture(150, 160, 60, 60, false, gImage_st7789_sleep_msg1);
+			break;
+		}
+		case 2:
+		{
+			st7789_Lcd_Showpicture(150, 160, 60, 60, false, gImage_st7789_sleep_msg2);
+			break;
+		}
+		default:
+		{
+			st7789_Lcd_Showpicture(150, 160, 60, 60, true, NULL);
+			break;
+		}
+	}
 }
 #endif
 
@@ -465,13 +585,12 @@ void st7789_Lcd_Init(void)
 
 		LCD_WR_REG(0x11); 
 		//Delay (120); 
-
-		LCD_WR_REG(0x29); 
 		
-		BACK_COLOR=BLACK;
-	  POINT_COLOR=WHITE; 		
+		BACK_COLOR=BLACK;/*赋予背景*/
+	  POINT_COLOR=WHITE;/*赋予画笔颜色*/ 		
 		st7789_Lcd_Clear(BACK_COLOR); //清屏
-		st7789_Lcd_DrawRectangle(5, 5, 235, 235, POINT_COLOR);
+		
+		LCD_WR_REG(0x29); //开启屏幕
 } 
 
 #endif

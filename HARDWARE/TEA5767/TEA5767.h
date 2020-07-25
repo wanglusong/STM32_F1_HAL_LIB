@@ -14,27 +14,27 @@ extern TEA5767_func TEA5767_func_t;
 
 #if 0
 
-//IO·½ÏòÉèÖÃ
+//IOæ–¹å‘è®¾ç½®
 #define SDA_IN()  {GPIOB->CRH&=0XFFFF0FFF;GPIOB->CRH|=8<<12;} //PB11
 #define SDA_OUT() {GPIOB->CRH&=0XFFFF0FFF;GPIOB->CRH|=3<<12;}
-//IO¹Ü½Å¶¨Òå
-#define	IIC_CLK	 (1<<10)  //Êý¾Ý/ÃüÁîÑ¡Ôñ¶Ë¿Ú	PB10
-#define	IIC_SDA  (1<<11)  //Êý¾Ý¶Ë¿Ú		  	PB11 
-//IO²Ù×÷º¯Êý	 
+//IOç®¡è„šå®šä¹‰
+#define	IIC_CLK	 (1<<10)  //æ•°æ®/å‘½ä»¤é€‰æ‹©ç«¯å£	PB10
+#define	IIC_SDA  (1<<11)  //æ•°æ®ç«¯å£		  	PB11 
+//IOæ“ä½œå‡½æ•°	 
 #define IIC_SCL_SET(x)   GPIOB->ODR=(GPIOB->ODR&~IIC_CLK)|(x ? IIC_CLK:0)
 #define IIC_SDA_SET(x)   GPIOB->ODR=(GPIOB->ODR&~IIC_SDA)|(x ? IIC_SDA:0)	 
-#define READ_SDA() ((GPIOB->IDR&(IIC_SDA))?1:0)//ÊäÈëµÄÊ±ºò
+#define READ_SDA() ((GPIOB->IDR&(IIC_SDA))?1:0)//è¾“å…¥çš„æ—¶å€™
 
-//IICËùÓÐ²Ù×÷º¯Êý
-void IIC_Init(void);                //³õÊ¼»¯IICµÄIO¿Ú				 
-void IIC_Start(void);				//·¢ËÍIIC¿ªÊ¼ÐÅºÅ
-void IIC_Stop(void);	  			//·¢ËÍIICÍ£Ö¹ÐÅºÅ
-void IIC_Send_Byte(u8 txd);			//IIC·¢ËÍÒ»¸ö×Ö½Ú
-u8 IIC_Read_Byte(unsigned char ack);//IIC¶ÁÈ¡Ò»¸ö×Ö½Ú
-u8 IIC_Wait_Ack(void); 				//IICµÈ´ýACKÐÅºÅ
-void IIC_Ack(void);					//IIC·¢ËÍACKÐÅºÅ
-void IIC_NAck(void);				//IIC²»·¢ËÍACKÐÅºÅ
-//TEA5767²Ù×÷º¯Êý
+//IICæ‰€æœ‰æ“ä½œå‡½æ•°
+void IIC_Init(void);                //åˆå§‹åŒ–IICçš„IOå£				 
+void IIC_Start(void);				//å‘é€IICå¼€å§‹ä¿¡å·
+void IIC_Stop(void);	  			//å‘é€IICåœæ­¢ä¿¡å·
+void IIC_Send_Byte(u8 txd);			//IICå‘é€ä¸€ä¸ªå­—èŠ‚
+u8 IIC_Read_Byte(unsigned char ack);//IICè¯»å–ä¸€ä¸ªå­—èŠ‚
+u8 IIC_Wait_Ack(void); 				//IICç­‰å¾…ACKä¿¡å·
+void IIC_Ack(void);					//IICå‘é€ACKä¿¡å·
+void IIC_NAck(void);				//IICä¸å‘é€ACKä¿¡å·
+//TEA5767æ“ä½œå‡½æ•°
 
 void Key_Scan(void);
 void TEA5767_Write(void);

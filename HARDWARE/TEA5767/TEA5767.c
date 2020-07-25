@@ -1,6 +1,6 @@
 #include "TEA5767.h"
 #include "delay.h"
-#include "usart.h"
+#include "uartall.h"
 #include "string.h"
 #include "key.h"
 
@@ -13,117 +13,117 @@ TEA5767_func TEA5767_func_t;
 
 unsigned char radio_data[5]={0x29,0xc2,0x20,0x11,0x00};
 
-unsigned char read_data[5];        //TEA5767¶Á³öµÄ×´Ì¬
+unsigned char read_data[5];        //TEA5767è¯»å‡ºçš„çŠ¶æ€
 unsigned long frequency;
 unsigned int pll;
 
 u8 key_down=0;
 /**********************************************************
-** º¯ÊýÃû: IIC_Init
-** ¹¦ÄÜÃèÊö: I2CµÄGPIO³õÊ¼»¯
-** ÊäÈë²ÎÊý: ÎÞ
-** Êä³ö²ÎÊý: ÎÞ
-** ·µ    »Ø£ºÎÞ
+** å‡½æ•°å: IIC_Init
+** åŠŸèƒ½æè¿°: I2Cçš„GPIOåˆå§‹åŒ–
+** è¾“å…¥å‚æ•°: æ— 
+** è¾“å‡ºå‚æ•°: æ— 
+** è¿”    å›žï¼šæ— 
 ***********************************************************/
 void IIC_Init(void)	
 {					     
  	//CLK-PB10,SDA-PB11
-	RCC->APB2ENR|=1<<3;//ÏÈÊ¹ÄÜÍâÉèPBÊ±ÖÓ
-	RCC->APB2ENR|=1<<6;//ÏÈÊ¹ÄÜÍâÉèPCÊ±ÖÓ 							 
-	GPIOB->CRH&=0XFFFF00FF;//PB10/11 ÍÆÍìÊä³ö
+	RCC->APB2ENR|=1<<3;//å…ˆä½¿èƒ½å¤–è®¾PBæ—¶é’Ÿ
+	RCC->APB2ENR|=1<<6;//å…ˆä½¿èƒ½å¤–è®¾PCæ—¶é’Ÿ 							 
+	GPIOB->CRH&=0XFFFF00FF;//PB10/11 æŽ¨æŒ½è¾“å‡º
 	GPIOB->CRH|=0X00003300;	   
-	GPIOB->ODR|=0X0C00;    //PB10¡¢PB11ÖÃ¸ß
+	GPIOB->ODR|=0X0C00;    //PB10ã€PB11ç½®é«˜
 
 	memset(&TEA5767_func_t,0,sizeof(TEA5767_func));
 	
-	TEA5767_func_t.tea5767_freq = 92000;//100142 ±õº£µçÌ¨	
+	TEA5767_func_t.tea5767_freq = 92000;//100142 æ»¨æµ·ç”µå°	
 	
-	Set_Frequency(TEA5767_func_t.tea5767_freq); //ÉèÖÃµçÌ¨ÆµÂÊÎª101.8MHz
+	Set_Frequency(TEA5767_func_t.tea5767_freq); //è®¾ç½®ç”µå°é¢‘çŽ‡ä¸º101.8MHz
 }
 
 /**********************************************************
-** º¯ÊýÃû: Key_Scan
-** ¹¦ÄÜÃèÊö: °´¼ü¼ì²â
-** ÊäÈë²ÎÊý: ÎÞ
-** Êä³ö²ÎÊý: key_down--Êä³ö°´¼üÖµ
-** ·µ    »Ø£ºÎÞ
+** å‡½æ•°å: Key_Scan
+** åŠŸèƒ½æè¿°: æŒ‰é”®æ£€æµ‹
+** è¾“å…¥å‚æ•°: æ— 
+** è¾“å‡ºå‚æ•°: key_down--è¾“å‡ºæŒ‰é”®å€¼
+** è¿”    å›žï¼šæ— 
 ***********************************************************/
 void Key_Scan(void)
 {
 	
-	if(GPIOA->IDR&GPIO_PIN_0) //PA0¼ü°´ÏÂ
+	if(GPIOA->IDR&GPIO_PIN_0) //PA0é”®æŒ‰ä¸‹
 	{
 		delay_ms(6);
 		if(GPIOA->IDR&GPIO_PIN_0)
 		{
 			key_down=3;
 		}
-		while(GPIOA->IDR&GPIO_PIN_0);//µÈ´ý°´¼üÊÍ·Å
+		while(GPIOA->IDR&GPIO_PIN_0);//ç­‰å¾…æŒ‰é”®é‡Šæ”¾
 	}
-	if(!(GPIOE->IDR&GPIO_PIN_3)) //PE3¼ü°´ÏÂ
+	if(!(GPIOE->IDR&GPIO_PIN_3)) //PE3é”®æŒ‰ä¸‹
 	{
 		delay_ms(6);
 		if(!(GPIOE->IDR&GPIO_PIN_3))
 		{
 			key_down=1;
 		}
-		while(!(GPIOE->IDR&GPIO_PIN_3));//µÈ´ý°´¼üÊÍ·Å
+		while(!(GPIOE->IDR&GPIO_PIN_3));//ç­‰å¾…æŒ‰é”®é‡Šæ”¾
 	}
-		if(!(GPIOE->IDR&GPIO_PIN_4)) //PE4¼ü°´ÏÂ
+		if(!(GPIOE->IDR&GPIO_PIN_4)) //PE4é”®æŒ‰ä¸‹
 	{
 		delay_ms(6);
 		if(!(GPIOE->IDR&GPIO_PIN_4))
 		{
 			key_down=2;
 		}
-		while(!(GPIOE->IDR&GPIO_PIN_4));//µÈ´ý°´¼üÊÍ·Å
+		while(!(GPIOE->IDR&GPIO_PIN_4));//ç­‰å¾…æŒ‰é”®é‡Šæ”¾
 	}
 }
 /**********************************************************
-** º¯ÊýÃû: IIC_Start
-** ¹¦ÄÜÃèÊö: ²úÉúIICÆðÊ¼ÐÅºÅ 
-** ÊäÈë²ÎÊý: ÎÞ
-** Êä³ö²ÎÊý: ÎÞ
-** ·µ    »Ø£ºÎÞ
+** å‡½æ•°å: IIC_Start
+** åŠŸèƒ½æè¿°: äº§ç”ŸIICèµ·å§‹ä¿¡å· 
+** è¾“å…¥å‚æ•°: æ— 
+** è¾“å‡ºå‚æ•°: æ— 
+** è¿”    å›žï¼šæ— 
 ***********************************************************/
 void IIC_Start(void)
 {
-	SDA_OUT();     //SDAÏßÅäÖÃÎªÊä³ö
-	IIC_SDA_SET(1);	//SDAÖÃ1  	  
-	IIC_SCL_SET(1); //SCLÖÃ1  
+	SDA_OUT();     //SDAçº¿é…ç½®ä¸ºè¾“å‡º
+	IIC_SDA_SET(1);	//SDAç½®1  	  
+	IIC_SCL_SET(1); //SCLç½®1  
 	delay_us(4);
- 	IIC_SDA_SET(0);//SDAÖÃ0  START:when CLK is high,DATA change form high to low 
+ 	IIC_SDA_SET(0);//SDAç½®0  START:when CLK is high,DATA change form high to low 
 	delay_us(4);
-	IIC_SCL_SET(0);//SCLÖÃ0 Ç¯×¡I2C×ÜÏß£¬×¼±¸·¢ËÍ»ò½ÓÊÕÊý¾Ý 
+	IIC_SCL_SET(0);//SCLç½®0 é’³ä½I2Cæ€»çº¿ï¼Œå‡†å¤‡å‘é€æˆ–æŽ¥æ”¶æ•°æ® 
 }	  
 /**********************************************************
-** º¯ÊýÃû: IIC_Stop
-** ¹¦ÄÜÃèÊö: ²úÉúIICÍ£Ö¹ÐÅºÅ 
-** ÊäÈë²ÎÊý: ÎÞ
-** Êä³ö²ÎÊý: ÎÞ
-** ·µ    »Ø£ºÎÞ
+** å‡½æ•°å: IIC_Stop
+** åŠŸèƒ½æè¿°: äº§ç”ŸIICåœæ­¢ä¿¡å· 
+** è¾“å…¥å‚æ•°: æ— 
+** è¾“å‡ºå‚æ•°: æ— 
+** è¿”    å›žï¼šæ— 
 ***********************************************************/
 void IIC_Stop(void)
 {
-	SDA_OUT();//SDAÏßÅäÖÃÎªÊä³ö
+	SDA_OUT();//SDAçº¿é…ç½®ä¸ºè¾“å‡º
 	IIC_SCL_SET(0);
 	IIC_SDA_SET(0);//STOP:when CLK is high DATA change form low to high
  	delay_us(4);
 	IIC_SCL_SET(1); 
-	IIC_SDA_SET(1);//·¢ËÍI2C×ÜÏß½áÊøÐÅºÅ							   	
+	IIC_SDA_SET(1);//å‘é€I2Cæ€»çº¿ç»“æŸä¿¡å·							   	
 }
 /**********************************************************
-** º¯ÊýÃû: IIC_Wait_Ack
-** ¹¦ÄÜÃèÊö:µÈ´ýÓ¦´ðÐÅºÅµ½À´
-** ÊäÈë²ÎÊý: ÎÞ
-** Êä³ö²ÎÊý: ÎÞ
-** ·µ    »Ø£º0£¬½ÓÊÕÓ¦´ðÊ§°Ü
-             1£¬½ÓÊÕÓ¦´ð³É¹¦
+** å‡½æ•°å: IIC_Wait_Ack
+** åŠŸèƒ½æè¿°:ç­‰å¾…åº”ç­”ä¿¡å·åˆ°æ¥
+** è¾“å…¥å‚æ•°: æ— 
+** è¾“å‡ºå‚æ•°: æ— 
+** è¿”    å›žï¼š0ï¼ŒæŽ¥æ”¶åº”ç­”å¤±è´¥
+             1ï¼ŒæŽ¥æ”¶åº”ç­”æˆåŠŸ
 ***********************************************************/
 u8 IIC_Wait_Ack(void)
 {
 	u8 ucErrTime=0;
-	SDA_IN();      //SDAÉèÖÃÎªÊäÈë  
+	SDA_IN();      //SDAè®¾ç½®ä¸ºè¾“å…¥  
 	IIC_SDA_SET(1);
 	delay_us(1);	   
 	IIC_SCL_SET(1);	 
@@ -133,18 +133,18 @@ u8 IIC_Wait_Ack(void)
 		if(ucErrTime>250)
 		{
 			IIC_Stop();
-			return 0;  //³¬Ê±ÍË³ö
+			return 0;  //è¶…æ—¶é€€å‡º
 		}
 	}
-	IIC_SCL_SET(0);//Ê±ÖÓÖÃ0 	   
+	IIC_SCL_SET(0);//æ—¶é’Ÿç½®0 	   
 	return 1;  
 } 
 /**********************************************************
-** º¯ÊýÃû: IIC_Ack
-** ¹¦ÄÜÃèÊö:²úÉúACKÓ¦´ð
-** ÊäÈë²ÎÊý: ÎÞ
-** Êä³ö²ÎÊý: ÎÞ
-** ·µ    »Ø£ºÎÞ
+** å‡½æ•°å: IIC_Ack
+** åŠŸèƒ½æè¿°:äº§ç”ŸACKåº”ç­”
+** è¾“å…¥å‚æ•°: æ— 
+** è¾“å‡ºå‚æ•°: æ— 
+** è¿”    å›žï¼šæ— 
 ***********************************************************/
 void IIC_Ack(void)
 {
@@ -158,11 +158,11 @@ void IIC_Ack(void)
 }
 
 /**********************************************************
-** º¯ÊýÃû: IIC_NAck
-** ¹¦ÄÜÃèÊö:²»²úÉúACKÓ¦´ð
-** ÊäÈë²ÎÊý: ÎÞ
-** Êä³ö²ÎÊý: ÎÞ
-** ·µ    »Ø£ºÎÞ
+** å‡½æ•°å: IIC_NAck
+** åŠŸèƒ½æè¿°:ä¸äº§ç”ŸACKåº”ç­”
+** è¾“å…¥å‚æ•°: æ— 
+** è¾“å‡ºå‚æ•°: æ— 
+** è¿”    å›žï¼šæ— 
 ***********************************************************/
 void IIC_NAck(void)
 {
@@ -175,17 +175,17 @@ void IIC_NAck(void)
 	IIC_SCL_SET(0);
 }
 /**********************************************************
-** º¯ÊýÃû:IIC_Send_Byte
-** ¹¦ÄÜÃèÊö:IIC·¢ËÍÒ»¸ö×Ö½Ú   
-** ÊäÈë²ÎÊý: txd ·¢ËÍµÄ×Ö½ÚÊý¾Ý
-** Êä³ö²ÎÊý: ÎÞ
-** ·µ    »Ø£ºÎÞ
+** å‡½æ•°å:IIC_Send_Byte
+** åŠŸèƒ½æè¿°:IICå‘é€ä¸€ä¸ªå­—èŠ‚   
+** è¾“å…¥å‚æ•°: txd å‘é€çš„å­—èŠ‚æ•°æ®
+** è¾“å‡ºå‚æ•°: æ— 
+** è¿”    å›žï¼šæ— 
 ***********************************************************/
 void IIC_Send_Byte(u8 txd)
 {                        
     u8 t;   
 	SDA_OUT(); 	    
-    IIC_SCL_SET(0);//À­µÍÊ±ÖÓ¿ªÊ¼Êý¾Ý´«Êä
+    IIC_SCL_SET(0);//æ‹‰ä½Žæ—¶é’Ÿå¼€å§‹æ•°æ®ä¼ è¾“
     for(t=0;t<8;t++)
     {              
         IIC_SDA_SET((txd&0x80)>>7);
@@ -198,77 +198,77 @@ void IIC_Send_Byte(u8 txd)
     }	 
 } 	    
 /**********************************************************
-** º¯ÊýÃû:IIC_Read_Byte
-** ¹¦ÄÜÃèÊö:¶Á1×Ö½Ú
-** ÊäÈë²ÎÊý:ack£¬1--·¢ËÍACK
-				 0--·¢ËÍnACK
-** Êä³ö²ÎÊý: ÎÞ
-** ·µ    »Ø£º·µ»Ø¶ÁÈ¡µÄÒ»×Ö½ÚÊý¾Ý
+** å‡½æ•°å:IIC_Read_Byte
+** åŠŸèƒ½æè¿°:è¯»1å­—èŠ‚
+** è¾“å…¥å‚æ•°:ackï¼Œ1--å‘é€ACK
+				 0--å‘é€nACK
+** è¾“å‡ºå‚æ•°: æ— 
+** è¿”    å›žï¼šè¿”å›žè¯»å–çš„ä¸€å­—èŠ‚æ•°æ®
 ***********************************************************/
 u8 IIC_Read_Byte(unsigned char ack)
 {
 	unsigned char i,receive=0;
-	SDA_IN();//SDAÉèÖÃÎªÊäÈë
+	SDA_IN();//SDAè®¾ç½®ä¸ºè¾“å…¥
     for(i=0;i<8;i++ )
 	{
         IIC_SCL_SET(0); //CLK=0
         delay_us(1);
 		IIC_SCL_SET(1);	 //CLK=1
         receive<<=1;
-        if(READ_SDA())//¶ÁÈ¡SDAÏßÊý¾Ý
+        if(READ_SDA())//è¯»å–SDAçº¿æ•°æ®
 			receive++;    
     }					 
     if (!ack)
-        IIC_NAck();//·¢ËÍnACK
+        IIC_NAck();//å‘é€nACK
     else
-        IIC_Ack(); //·¢ËÍACK   
+        IIC_Ack(); //å‘é€ACK   
     return receive;
 }
 /**********************************************************
-** º¯ÊýÃû:TEA5767_Write
-** ¹¦ÄÜÃèÊö:ÏòTEA5767Ð´Èë5¸ö×Ö½ÚÊý¾Ý
-** ÊäÈë²ÎÊý:ÎÞ
-** Êä³ö²ÎÊý:ÎÞ
-** ·µ    »Ø:ÎÞ
+** å‡½æ•°å:TEA5767_Write
+** åŠŸèƒ½æè¿°:å‘TEA5767å†™å…¥5ä¸ªå­—èŠ‚æ•°æ®
+** è¾“å…¥å‚æ•°:æ— 
+** è¾“å‡ºå‚æ•°:æ— 
+** è¿”    å›ž:æ— 
 ***********************************************************/
 void TEA5767_Write(void)
 {
     unsigned char i;
-    IIC_Start(); //·¢ËÍÆðÊ¼ÐÅºÅ
-    IIC_Send_Byte(0xc0);        //TEA5767Ð´µØÖ·
-    IIC_Wait_Ack();	  //µÈ´ýÓ¦´ð
+    IIC_Start(); //å‘é€èµ·å§‹ä¿¡å·
+    IIC_Send_Byte(0xc0);        //TEA5767å†™åœ°å€
+    IIC_Wait_Ack();	  //ç­‰å¾…åº”ç­”
     for(i=0;i<5;i++)
     {
-        IIC_Send_Byte(radio_data[i]);//Á¬ÐøÐ´Èë5¸ö×Ö½ÚÊý¾Ý
-        IIC_Ack(); //·¢ËÍÓ¦´ð
+        IIC_Send_Byte(radio_data[i]);//è¿žç»­å†™å…¥5ä¸ªå­—èŠ‚æ•°æ®
+        IIC_Ack(); //å‘é€åº”ç­”
     }
-    IIC_Stop(); //·¢ËÍÍ£Ö¹ÐÅºÅ   
+    IIC_Stop(); //å‘é€åœæ­¢ä¿¡å·   
 }
 
 /**********************************************************
-** º¯ÊýÃû:Get_PLL
-** ¹¦ÄÜÃèÊö:ÓÉÆµÂÊÖµ¼ÆËãPLL
-** ÊäÈë²ÎÊý:ÎÞ
-** Êä³ö²ÎÊý:pll--µÃµ½PLLÖµ
-** ·µ    »Ø:ÎÞ
+** å‡½æ•°å:Get_PLL
+** åŠŸèƒ½æè¿°:ç”±é¢‘çŽ‡å€¼è®¡ç®—PLL
+** è¾“å…¥å‚æ•°:æ— 
+** è¾“å‡ºå‚æ•°:pll--å¾—åˆ°PLLå€¼
+** è¿”    å›ž:æ— 
 ***********************************************************/
 void Get_PLL(void)
 {
     unsigned char hlsi;
-    hlsi=radio_data[2]&0x10;  //HLSIÎ»
+    hlsi=radio_data[2]&0x10;  //HLSIä½
     if (hlsi)
-        pll=(unsigned int)((float)((frequency+225)*4)/(float)32.768);    //ÆµÂÊµ¥Î»:k
+        pll=(unsigned int)((float)((frequency+225)*4)/(float)32.768);    //é¢‘çŽ‡å•ä½:k
     else
-        pll=(unsigned int)((float)((frequency-225)*4)/(float)32.768);    //ÆµÂÊµ¥Î»:k
+        pll=(unsigned int)((float)((frequency-225)*4)/(float)32.768);    //é¢‘çŽ‡å•ä½:k
 }
 
 
 /**********************************************************
-** º¯ÊýÃû:Get_Frequency
-** ¹¦ÄÜÃèÊö:ÓÉPLL¼ÆËãÆµÂÊ
-** ÊäÈë²ÎÊý:ÎÞ
-** Êä³ö²ÎÊý:frequency--µÃµ½ÆµÂÊÖµ
-** ·µ    »Ø:ÎÞ
+** å‡½æ•°å:Get_Frequency
+** åŠŸèƒ½æè¿°:ç”±PLLè®¡ç®—é¢‘çŽ‡
+** è¾“å…¥å‚æ•°:æ— 
+** è¾“å‡ºå‚æ•°:frequency--å¾—åˆ°é¢‘çŽ‡å€¼
+** è¿”    å›ž:æ— 
 ***********************************************************/
 void Get_Frequency(void)
 {
@@ -277,17 +277,17 @@ void Get_Frequency(void)
     npll=pll;
     hlsi=radio_data[2]&0x10;
     if(hlsi)
-        frequency=(unsigned long)((float)(npll)*(float)8.192-225);    //ÆµÂÊµ¥Î»:KHz
+        frequency=(unsigned long)((float)(npll)*(float)8.192-225);    //é¢‘çŽ‡å•ä½:KHz
     else
-        frequency=(unsigned long)((float)(npll)*(float)8.192+225);    //ÆµÂÊµ¥Î»:KHz
+        frequency=(unsigned long)((float)(npll)*(float)8.192+225);    //é¢‘çŽ‡å•ä½:KHz
 }
 
 /**********************************************************
-** º¯ÊýÃû:Get_Frequency
-** ¹¦ÄÜÃèÊö:ÓÉPLL¼ÆËãÆµÂÊ
-** ÊäÈë²ÎÊý:ÎÞ
-** Êä³ö²ÎÊý:frequency--µÃµ½ÆµÂÊÖµ
-** ·µ    »Ø:ÎÞ
+** å‡½æ•°å:Get_Frequency
+** åŠŸèƒ½æè¿°:ç”±PLLè®¡ç®—é¢‘çŽ‡
+** è¾“å…¥å‚æ•°:æ— 
+** è¾“å‡ºå‚æ•°:frequency--å¾—åˆ°é¢‘çŽ‡å€¼
+** è¿”    å›ž:æ— 
 ***********************************************************/
 void TEA5767_Read(void)
 {
@@ -295,25 +295,25 @@ void TEA5767_Read(void)
     unsigned char temp_l,temp_h;
     pll=0;
     IIC_Start();
-    IIC_Send_Byte(0xc1);        //TEA5767¶ÁµØÖ·
+    IIC_Send_Byte(0xc1);        //TEA5767è¯»åœ°å€
     IIC_Wait_Ack();
-    for(i=0;i<5;i++)   //¶ÁÈ¡5¸ö×Ö½ÚÊý¾Ý
+    for(i=0;i<5;i++)   //è¯»å–5ä¸ªå­—èŠ‚æ•°æ®
     {
-        read_data[i]=IIC_Read_Byte(1);//¶ÁÈ¡Êý¾Ýºó£¬·¢ËÍÓ¦´ð
+        read_data[i]=IIC_Read_Byte(1);//è¯»å–æ•°æ®åŽï¼Œå‘é€åº”ç­”
     }
     IIC_Stop();
-    temp_l=read_data[1];//µÃµ½PLLµÍ8Î» 
-    temp_h=read_data[0];//µÃµ½PLL¸ß6Î»
+    temp_l=read_data[1];//å¾—åˆ°PLLä½Ž8ä½ 
+    temp_h=read_data[0];//å¾—åˆ°PLLé«˜6ä½
     temp_h&=0x3f;
-    pll=temp_h*256+temp_l; //PLLÖµ
-    Get_Frequency();//×ª»»ÎªÆµÂÊÖµ
+    pll=temp_h*256+temp_l; //PLLå€¼
+    Get_Frequency();//è½¬æ¢ä¸ºé¢‘çŽ‡å€¼
 }
 /**********************************************************
-** º¯ÊýÃû:Set_Frequency
-** ¹¦ÄÜÃèÊö:ÉèÖÃµçÌ¨ÆµÂÊ
-** ÊäÈë²ÎÊý:fre--Ð´ÈëµÄµçÌ¨ÆµÂÊÖµ£¨kHz£©
-** Êä³ö²ÎÊý:ÎÞ
-** ·µ    »Ø:ÎÞ
+** å‡½æ•°å:Set_Frequency
+** åŠŸèƒ½æè¿°:è®¾ç½®ç”µå°é¢‘çŽ‡
+** è¾“å…¥å‚æ•°:fre--å†™å…¥çš„ç”µå°é¢‘çŽ‡å€¼ï¼ˆkHzï¼‰
+** è¾“å‡ºå‚æ•°:æ— 
+** è¿”    å›ž:æ— 
 ***********************************************************/
 void Set_Frequency(u32 fre)
 {
@@ -327,68 +327,68 @@ void Set_Frequency(u32 fre)
     TEA5767_Write();
 }
 /**********************************************************
-** º¯ÊýÃû:Search
-** ¹¦ÄÜÃèÊö:ÊÖ¶¯ËÑË÷µçÌ¨£¬²»ÓÃ¿¼ÂÇTEA5767ÓÃÓÚËÑÌ¨µÄÏà¹ØÎ»:SM,SUD
-** ÊäÈë²ÎÊý:mode=1£¬ÏòÉÏËÑË÷£¬ÆµÂÊÖµ+0.1MHz
-			mode=0£¬ÏòÏÂËÑË÷£¬ÆµÂÊÖµ-0.1MHz
-** Êä³ö²ÎÊý:ÎÞ
-** ·µ    »Ø:ÎÞ
+** å‡½æ•°å:Search
+** åŠŸèƒ½æè¿°:æ‰‹åŠ¨æœç´¢ç”µå°ï¼Œä¸ç”¨è€ƒè™‘TEA5767ç”¨äºŽæœå°çš„ç›¸å…³ä½:SM,SUD
+** è¾“å…¥å‚æ•°:mode=1ï¼Œå‘ä¸Šæœç´¢ï¼Œé¢‘çŽ‡å€¼+0.1MHz
+			mode=0ï¼Œå‘ä¸‹æœç´¢ï¼Œé¢‘çŽ‡å€¼-0.1MHz
+** è¾“å‡ºå‚æ•°:æ— 
+** è¿”    å›ž:æ— 
 ***********************************************************/
 void Search(char mode)
 {
-    TEA5767_Read(); //¶ÁÈ¡µ±Ç°ÆµÂÊÖµ       
-    if(mode) //ÏòÉÏËÑË÷
+    TEA5767_Read(); //è¯»å–å½“å‰é¢‘çŽ‡å€¼       
+    if(mode) //å‘ä¸Šæœç´¢
     {
         frequency+=10;
-        if(frequency>max_freq)//ÆµÂÊ´ïµ½×î´óÖµ
+        if(frequency>max_freq)//é¢‘çŽ‡è¾¾åˆ°æœ€å¤§å€¼
             frequency=min_freq;
     }
-    else   //ÏòÏÂËÑË÷
+    else   //å‘ä¸‹æœç´¢
     {
         frequency-=10;
-        if(frequency<min_freq)//ÆµÂÊ´ïµ½×îÐ¡Öµ
+        if(frequency<min_freq)//é¢‘çŽ‡è¾¾åˆ°æœ€å°å€¼
             frequency=max_freq;
     }          
-    Get_PLL();//¼ÆËãPLLÖµ
-    radio_data[0]=pll/256; //ÖØÐÂÐ´Èë5¸ö×Ö½ÚÊý¾Ý
+    Get_PLL();//è®¡ç®—PLLå€¼
+    radio_data[0]=pll/256; //é‡æ–°å†™å…¥5ä¸ªå­—èŠ‚æ•°æ®
     radio_data[1]=pll%256;
     radio_data[2]=0x20;
     radio_data[3]=0x11;
     radio_data[4]=0x00;
     TEA5767_Write();
-	TEA5767_Read();//¶ÁÈ¡ÆµÂÊÖµ
-	//while(GPIOA->IDR&GPIO_Pin_0); //µÈ´ýPA0°´¼üÊÍ·Å
+	TEA5767_Read();//è¯»å–é¢‘çŽ‡å€¼
+	//while(GPIOA->IDR&GPIO_Pin_0); //ç­‰å¾…PA0æŒ‰é”®é‡Šæ”¾
 }
 
 /**********************************************************
-** º¯ÊýÃû:Auto_Search
-** ¹¦ÄÜÃèÊö:×Ô¶¯ËÑË÷µçÌ¨
-** ÊäÈë²ÎÊý:mode=1£¬ÆµÂÊÔö¼ÓËÑË÷
-			mode=0£¬ÆµÂÊ¼õÐ¡ËÑË÷
-** Êä³ö²ÎÊý:ÎÞ
-** ·µ    »Ø:ÎÞ
+** å‡½æ•°å:Auto_Search
+** åŠŸèƒ½æè¿°:è‡ªåŠ¨æœç´¢ç”µå°
+** è¾“å…¥å‚æ•°:mode=1ï¼Œé¢‘çŽ‡å¢žåŠ æœç´¢
+			mode=0ï¼Œé¢‘çŽ‡å‡å°æœç´¢
+** è¾“å‡ºå‚æ•°:æ— 
+** è¿”    å›ž:æ— 
 ***********************************************************/
 void Auto_Search(char mode)
 {
-	TEA5767_Read();//¶ÁÈ¡ÆµÂÊ
-    Get_PLL();	   //×ª»»ÎªPLLÖµ
-    if(mode)//ÆµÂÊÔö¼ÓËÑÌ¨
+	TEA5767_Read();//è¯»å–é¢‘çŽ‡
+    Get_PLL();	   //è½¬æ¢ä¸ºPLLå€¼
+    if(mode)//é¢‘çŽ‡å¢žåŠ æœå°
         radio_data[2]=0xa0;
-    else	//ÆµÂÊ¼õÐ¡ËÑÌ¨
+    else	//é¢‘çŽ‡å‡å°æœå°
         radio_data[2]=0x20;  
 	  
     radio_data[0]=pll/256+0x40;
     radio_data[1]=pll%256;    
     radio_data[3]=0x11;
     radio_data[4]=0x00;
-    TEA5767_Write();  //Ð´Èë5¸ö×Ö½ÚÊý¾Ý
-    TEA5767_Read();//¶ÁÈ¡ÆµÂÊÖµ
-//	  printf(" |%d\n",frequency);	//´®¿ÚÊä³öÆµÂÊÖµ 
-    if((read_data[0]&0x80))     //ËÑÌ¨³É¹¦£¬¿É±£´æÆäÆµÂÊÖµ´ýÓÃ
+    TEA5767_Write();  //å†™å…¥5ä¸ªå­—èŠ‚æ•°æ®
+    TEA5767_Read();//è¯»å–é¢‘çŽ‡å€¼
+//	  printf(" |%d\n",frequency);	//ä¸²å£è¾“å‡ºé¢‘çŽ‡å€¼ 
+    if((read_data[0]&0x80))     //æœå°æˆåŠŸï¼Œå¯ä¿å­˜å…¶é¢‘çŽ‡å€¼å¾…ç”¨
     {
         TEA5767_Read();
 //		printf(" frequency=%d\n",frequency);
-		// while(GPIOA->IDR&GPIO_Pin_0); //µÈ´ýPA0°´¼üÊÍ·Å
+		// while(GPIOA->IDR&GPIO_Pin_0); //ç­‰å¾…PA0æŒ‰é”®é‡Šæ”¾
     }    
 }
 
@@ -407,10 +407,10 @@ void Tea5767_main(void)
 				{
 					if(TEA5767_func_t.mode == 1)
 					{
-						Auto_Search(1);//×Ô¶¯ÏòÉÏËÑË÷
+						Auto_Search(1);//è‡ªåŠ¨å‘ä¸Šæœç´¢
 					}else
 					{
-						Search(1);  //ÊÖ¶¯ÏòÉÏËÑË÷
+						Search(1);  //æ‰‹åŠ¨å‘ä¸Šæœç´¢
 					}
 					
 					TEA5767_func_t.tea5767_freq = frequency;
@@ -426,10 +426,10 @@ void Tea5767_main(void)
 				{
 					if(TEA5767_func_t.mode == 1)
 					{
-						Auto_Search(0);//×Ô¶¯ÏòÏÂËÑË÷
+						Auto_Search(0);//è‡ªåŠ¨å‘ä¸‹æœç´¢
 					}else
 					{
-						Search(0);  //ÊÖ¶¯ÏòÏÂËÑË÷
+						Search(0);  //æ‰‹åŠ¨å‘ä¸‹æœç´¢
 					}
 					
 					TEA5767_func_t.tea5767_freq = frequency;
@@ -446,10 +446,10 @@ void Tea5767_main(void)
 					
 					if(TEA5767_func_t.mode == 0)
 					{
-//						Show_Str(50+5*16,210,200,16,"ÊÖ¶¯",16,0);	
+//						Show_Str(50+5*16,210,200,16,"æ‰‹åŠ¨",16,0);	
 					}else
 					{
-//						Show_Str(50+5*16,210,200,16,"×Ô¶¯",16,0);	
+//						Show_Str(50+5*16,210,200,16,"è‡ªåŠ¨",16,0);	
 					}
 					key = 0;
 					break;

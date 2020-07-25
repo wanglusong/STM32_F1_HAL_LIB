@@ -159,7 +159,7 @@
         <SetRegEntry>
           <Number>0</Number>
           <Key>DLGUARM</Key>
-          <Name>d</Name>
+          <Name>/</Name>
         </SetRegEntry>
         <SetRegEntry>
           <Number>0</Number>
@@ -176,66 +176,130 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>134</LineNumber>
+          <LineNumber>279</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134279046</Address>
+          <Address>134222766</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>..\..\LittleVGL\lvgl\src\lv_core\lv_obj.c</Filename>
+          <Filename>E:\songcode\STM32_F1_HAL_LIB\ST_HAL\LCD_Drivers\ST7789_1_14\st7789_spi.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\__________\../../LittleVGL/lvgl/src/lv_core/lv_obj.c\134</Expression>
+          <Expression>\\__________\../LCD_Drivers/ST7789_1_14/st7789_spi.c\279</Expression>
         </Bp>
         <Bp>
           <Number>1</Number>
           <Type>0</Type>
-          <LineNumber>181</LineNumber>
+          <LineNumber>281</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134279146</Address>
+          <Address>134222770</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>..\..\LittleVGL\lvgl\src\lv_core\lv_obj.c</Filename>
+          <Filename>E:\songcode\STM32_F1_HAL_LIB\ST_HAL\LCD_Drivers\ST7789_1_14\st7789_spi.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\__________\../../LittleVGL/lvgl/src/lv_core/lv_obj.c\181</Expression>
+          <Expression>\\__________\../LCD_Drivers/ST7789_1_14/st7789_spi.c\281</Expression>
         </Bp>
         <Bp>
           <Number>2</Number>
           <Type>0</Type>
-          <LineNumber>183</LineNumber>
+          <LineNumber>283</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134279044</Address>
+          <Address>134222774</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>..\..\LittleVGL\lvgl\src\lv_core\lv_obj.c</Filename>
+          <Filename>E:\songcode\STM32_F1_HAL_LIB\ST_HAL\LCD_Drivers\ST7789_1_14\st7789_spi.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\__________\../../LittleVGL/lvgl/src/lv_core/lv_obj.c\183</Expression>
+          <Expression>\\__________\../LCD_Drivers/ST7789_1_14/st7789_spi.c\283</Expression>
         </Bp>
         <Bp>
           <Number>3</Number>
           <Type>0</Type>
-          <LineNumber>183</LineNumber>
+          <LineNumber>289</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134279150</Address>
+          <Address>134222810</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>..\..\LittleVGL\lvgl\src\lv_core\lv_obj.c</Filename>
+          <Filename>E:\songcode\STM32_F1_HAL_LIB\ST_HAL\LCD_Drivers\ST7789_1_14\st7789_spi.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\__________\../../LittleVGL/lvgl/src/lv_core/lv_obj.c\183</Expression>
+          <Expression>\\__________\../LCD_Drivers/ST7789_1_14/st7789_spi.c\289</Expression>
+        </Bp>
+        <Bp>
+          <Number>4</Number>
+          <Type>0</Type>
+          <LineNumber>291</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134222830</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>E:\songcode\STM32_F1_HAL_LIB\ST_HAL\LCD_Drivers\ST7789_1_14\st7789_spi.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\__________\../LCD_Drivers/ST7789_1_14/st7789_spi.c\291</Expression>
+        </Bp>
+        <Bp>
+          <Number>5</Number>
+          <Type>0</Type>
+          <LineNumber>294</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134222862</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>E:\songcode\STM32_F1_HAL_LIB\ST_HAL\LCD_Drivers\ST7789_1_14\st7789_spi.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\__________\../LCD_Drivers/ST7789_1_14/st7789_spi.c\294</Expression>
+        </Bp>
+        <Bp>
+          <Number>6</Number>
+          <Type>0</Type>
+          <LineNumber>299</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134222890</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>E:\songcode\STM32_F1_HAL_LIB\ST_HAL\LCD_Drivers\ST7789_1_14\st7789_spi.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\__________\../LCD_Drivers/ST7789_1_14/st7789_spi.c\299</Expression>
+        </Bp>
+        <Bp>
+          <Number>7</Number>
+          <Type>0</Type>
+          <LineNumber>296</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134222864</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>E:\songcode\STM32_F1_HAL_LIB\ST_HAL\LCD_Drivers\ST7789_1_14\st7789_spi.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\__________\../LCD_Drivers/ST7789_1_14/st7789_spi.c\296</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -765,7 +829,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\LCD_Drivers\ST7789_1_14\st7789_spi.c</PathWithFileName>
+      <PathWithFileName>..\LCD_Drivers\ST7789_1_3\st7789_spi.c</PathWithFileName>
       <FilenameWithoutPath>st7789_spi.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
