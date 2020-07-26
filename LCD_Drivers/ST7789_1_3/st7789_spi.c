@@ -2,10 +2,22 @@
 #include "stdlib.h"
 #include "delay.h"
 
+/*
+该文件为UTF8格式,不要乱改，否则显示字库异常.
+*/
+
 #ifndef ST7789_SPI
 #include "st7789_font.h"
 #include "string.h"
 #include "st7789_img.h"
+
+#if UART_FUNC
+#include "uartall.h"
+#endif
+
+#if TIM_FUNC
+#include "timer.h"
+#endif
 
 /*static func*/
 static u32 mypow(u8 m,u8 n);
@@ -283,14 +295,16 @@ void ST7789_LCD_ShowChinese_Search(u16 x, u16 y, u16 color, u8 *s)
 	unsigned short k;
 	u16 HZnum;
 	HZnum=sizeof(FONT_16)/sizeof(st7789_typFNT_GBK16);
-
 	while(*s) 
 	{	
 		if((*s) >= 128) 
 		{		
 			for (k=0;k<HZnum;k++) 
-			{	
+			{
+			  #if 1/*UTF8编码*/
 			  if ((FONT_16[k].Index[0]==*(s))&&(FONT_16[k].Index[1]==*(s+1))&&(FONT_16[k].Index[2]==*(s+2)))/*UIF8码时的偏移量，注意*/
+			  #endif
+			  //if ((FONT_16[k].Index[0]==*(s))&&(FONT_16[k].Index[1]==*(s+1)))
 			  { 	
 					Address_set(x,y,x+16-1,y+16-1);
 				    for(i=0;i<16*2;i++)
@@ -309,7 +323,11 @@ void ST7789_LCD_ShowChinese_Search(u16 x, u16 y, u16 color, u8 *s)
 				}
 //			  delay_ms(50);/*调试使用*/
 			}
+			#if 1
 			s+=3;/*UIF8码时的偏移量，注意*/
+			#endif
+			
+			//s+=2;/*GB2312编码偏移量*/
 		}
 		else
 		s+=1; 
@@ -392,6 +410,25 @@ void st7789_sleep_msg_to_notation(char show_img)
 			break;
 		}
 	}
+}
+
+/*
+启动UI配置
+*/
+void ST7789_Display_Launch(void)
+{
+	ST7789_LCD_ShowChinese_Search(120,60,GREEN,(u8*)"开心每一天");
+	
+	ST7789_LCD_ShowChinese_Search(20,100,BROWN,(u8*)"您输入的文字为");
+	ST7789_LCD_ShowChar(132,100,':',0,16,BROWN);
+	
+	ST7789_LCD_ShowChinese_Search(36,140,LIGHTGREEN,(u8*)"当前好感度为");
+	ST7789_LCD_ShowChar(132,140,':',0,16,LIGHTGREEN);/*:*/
+	ST7789_LCD_ShowNum(148,140,0,3,16,LIGHTGREEN);/*输入接口*/
+	ST7789_LCD_ShowChar(196,140,'%',0,16,LIGHTGREEN);/*%*/
+	
+	ST7789_LCD_ShowChinese_Search(36,190,MAGENTA,(u8*)"当前动态");
+	ST7789_LCD_ShowChar(116,190,':',0,16,MAGENTA);/*:*/
 }
 #endif
 
@@ -593,5 +630,109 @@ void st7789_Lcd_Init(void)
 		LCD_WR_REG(0x29); //开启屏幕
 } 
 
+/*临时项目函数*/
+void display_recnum_cb(u8 recnum)
+{
+	ST7789_LCD_ShowNum(148,140,recnum,3,16,LIGHTGREEN);/*输入接口*/
+}
+
+void module_rec_msg(u8 recnum, show_recnum func)
+{
+	if(recnum != 0)
+	{
+		func(recnum);
+	}
+}
+
+void display_recfont_cb(u8 *pfont)
+{
+	ST7789_LCD_ShowChinese_Search(148,100,BROWN,(u8*)pfont);/*显示汉字*/
+}
+
+void module_rec_font_msg(u8 *pfont, show_recfont func)/*汉字消息*/
+{
+	if(pfont != NULL)
+	{
+		func(pfont);
+	}
+}
+
+void main_run_task(void)
+{
+		if(uart_config_t.uart_state == true)
+		{
+			memcpy(uart_config_t.uart_deal_buf,uart_config_t.uart_buf,uart_config_t.uart_count);
+			memset(uart_config_t.uart_buf,0,uart_config_t.uart_count);
+			
+			uart_config_t.uart_state = false;
+			/*数字处理区*/
+			if(uart_config_t.uart_deal_buf[11] < 128 && uart_config_t.uart_deal_buf[12] < 128)/*表示是数字*/
+			{
+				if(uart_config_t.uart_deal_buf[13] == 0)
+				{
+					main_param_t.rec_num = (uart_config_t.uart_deal_buf[11] - 0x30)*10 + uart_config_t.uart_deal_buf[12] - 0x30;
+				}
+				else
+				{
+					main_param_t.rec_num = (uart_config_t.uart_deal_buf[11] - 0x30)*100 + (uart_config_t.uart_deal_buf[12] - 0x30)*10 
+						+ uart_config_t.uart_deal_buf[13] - 0x30;
+				}
+				if(main_param_t.rec_num <= 100)
+				module_rec_msg(main_param_t.rec_num,(show_recnum*)display_recnum_cb);
+				UART3_apTrace("%d",main_param_t.rec_num );
+				main_param_t.rec_num = 0;
+				main_param_t.runstatus = true;
+				uart_config_t.uart_count = 0;
+				
+				/*启动计时*/
+				u8 time_status = Get_TIM_State(&TIM5_Handler);
+				if(time_status == HAL_TIM_STATE_READY)
+				{
+					TIM_ON_OFF_IT(&TIM5_Handler,true);
+					tim_config_t.TIM5_Status = true;
+				}
+			}
+			else if(uart_config_t.uart_deal_buf[11] >= 128)/*汉字区域*/
+			{
+				
+				delay_ms(50);
+				strncpy((char*)main_param_t.rec_Chinese, (char*)uart_config_t.uart_deal_buf + 11,  (uart_config_t.uart_count - 11));/*检索出现汉字的地方*/
+				module_rec_font_msg((u8 *)main_param_t.rec_Chinese, (show_recfont*)display_recfont_cb);/*显示汉字 main_param_t.rec_Chinese*/
+				UART3_apTrace("%s",main_param_t.rec_Chinese);
+				
+				main_param_t.runstatus = true;
+				uart_config_t.uart_count = 0;
+				
+				/*启动计时*/
+				u8 time_status = Get_TIM_State(&TIM5_Handler);
+				if(time_status == HAL_TIM_STATE_READY)
+				{
+					TIM_ON_OFF_IT(&TIM5_Handler,true);
+					tim_config_t.TIM5_Status = true;
+				}
+				/*播报语音*/
+				UART2_apTrace("%s",main_param_t.rec_Chinese);
+				/*复位数据*/
+				memset(main_param_t.rec_Chinese, 0, sizeof(main_param_t.rec_Chinese));
+				
+			}
+			
+		}
+		
+		if(main_param_t.runstatus == true)/*有消息动画*/
+		{
+			main_param_t.anim_count_rec_msg++;
+			if(main_param_t.anim_count_rec_msg > 4)main_param_t.anim_count_rec_msg = 1;
+			st7789_rec_msg_to_notation(main_param_t.anim_count_rec_msg);
+		}
+		
+		if(main_param_t.runstatus == false)/*待机动画*/
+		{
+			main_param_t.anim_count_sleep_msg++;
+			if(main_param_t.anim_count_sleep_msg > 2)main_param_t.anim_count_sleep_msg = 1;
+			st7789_sleep_msg_to_notation(main_param_t.anim_count_sleep_msg);
+		}
+
+}
 #endif
 

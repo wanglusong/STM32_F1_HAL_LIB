@@ -4,6 +4,9 @@
 
 #if UART_FUNC
 
+#include "string.h"
+#include "timer.h"	
+
 #if ESP8266_FUNC
 #include "esp8266_uart.h"
 #endif
@@ -66,6 +69,9 @@ u16 UART5_RX_STA=0;       //接收状态标记
 u8 aRx5Buffer[RXBUFFERSIZE];//HAL库使用的串口接收缓冲
 UART_HandleTypeDef UART5_Handler; //UART句柄
 
+/*extern param*/
+UART_CONFIG uart_config_t;
+
 //初始化IO 串口1 
 //bound:波特率
 void uart1_init(u32 bound)
@@ -82,6 +88,8 @@ void uart1_init(u32 bound)
 	
 	HAL_UART_Receive_IT(&UART1_Handler, (u8 *)aRxBuffer, RXBUFFERSIZE);//该函数会开启接收中断：标志位UART_IT_RXNE，并且设置接收缓冲以及接收缓冲接收最大数据量
   
+	/*init config*/
+	memset(&uart_config_t, 0, sizeof(UART_CONFIG));
 }
  
 //串口1中断服务程序
@@ -529,7 +537,16 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 	
 	if(huart->Instance==USART1)//如果是串口1
 	{
-	  //esp8266_Receive(aRxBuffer[0]);
+		uart_config_t.uart_buf[uart_config_t.uart_count] = aRxBuffer[0];
+		uart_config_t.uart_count++;
+		
+		
+		char tim_state  = Get_TIM_State(&TIM4_Handler);
+		if(tim_state == HAL_TIM_STATE_READY)
+		{
+			TIM_ON_OFF_IT(&TIM4_Handler,true);
+			tim_config_t.status = true;
+		}		
 	}
 	else if(huart->Instance==USART2)//如果是串口2
 	{
@@ -537,7 +554,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 	}	
 	else if(huart->Instance==USART3)//如果是串口3
 	{
-		
+	
 	}		
 	else if(huart->Instance==UART4)//如果是串口4
 	{

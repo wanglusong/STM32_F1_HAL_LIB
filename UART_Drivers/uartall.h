@@ -5,6 +5,15 @@
 
 #if UART_FUNC
 
+typedef struct uart_param_t
+{
+	u16 uart_count;/*计数*/
+	u8 uart_buf[256];/*存储区*/
+	u8 uart_deal_buf[256];/*处理区*/
+	bool uart_state;/*接收状态*/
+	
+}UART_CONFIG;
+
 #define USART_REC_LEN  			200  		//定义最大接收字节数 200
 
 
@@ -15,6 +24,9 @@
 #define EN_UART5_RX 			1		
 
 #define RXBUFFERSIZE   1 					//缓存大小
+
+/*extern func*/
+extern UART_CONFIG uart_config_t;
 
 extern u8  USART_RX_BUF[USART_REC_LEN]; 	//接收缓冲,最大USART_REC_LEN个字节.末字节为换行符 
 extern u16 USART_RX_STA;         			//接收状态标记	
@@ -35,19 +47,6 @@ extern UART_HandleTypeDef UART4_Handler; 	//UART句柄
 extern u8  UART5_RX_BUF[USART_REC_LEN]; 	//接收缓冲,最大USART_REC_LEN个字节.末字节为换行符 
 extern u16 UART5_RX_STA;         			//接收状态标记	
 extern UART_HandleTypeDef UART5_Handler; 	//UART句柄
-
-
-extern u8 aRxBuffer[RXBUFFERSIZE];			//HAL库USART1接收Buffer
-extern u8 aRx2Buffer[RXBUFFERSIZE];			//HAL库USART2接收Buffer
-extern u8 aRx3Buffer[RXBUFFERSIZE];			//HAL库USART2接收Buffer
-extern u8 aRx4Buffer[RXBUFFERSIZE];			//HAL库UART4接收Buffer
-extern u8 aRx5Buffer[RXBUFFERSIZE];			//HAL库UART5接收Buffer
-
-//<!---------------  项目添加 ---------------!>
-extern u8 flagrun;
-extern u8 runstate;
-extern u8 flagrunstate;
-//<!----------------------------------------!>
 
 
 void uart1_init(u32 bound);

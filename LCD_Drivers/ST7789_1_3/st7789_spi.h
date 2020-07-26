@@ -1,9 +1,13 @@
 #ifndef __ST7789_SPI_H_
 #define __ST7789_SPI_H_
 
-#include "sys.h"
+#include "main.h"
 
 #ifndef ST7789_SPI
+
+/*
+该文件为UTF8格式,不要乱改，否则显示字库异常.
+*/
 
 #define LCD_W 240
 #define LCD_H 240
@@ -108,6 +112,20 @@ void st7789_rec_msg_to_notation(char show_img);
 /*待机动画*/
 void st7789_sleep_msg_to_notation(char show_img);
 
+/*功能运行区*/
+void ST7789_Display_Launch(void);
+
+/*临时项目func*/
+typedef void *show_recnum(u8 recnum);
+typedef void *show_recfont(u8 *pfont);
+/*数字处理区*/
+void display_recnum_cb(u8 recnum);
+void module_rec_msg(u8 recnum, show_recnum func);/*数字消息*/
+/*汉字处理区*/
+void display_recfont_cb(u8 *pfont);
+void module_rec_font_msg(u8 *pfont, show_recfont func);/*汉字消息*/
+
+void main_run_task(void);
 #endif
 
 #endif

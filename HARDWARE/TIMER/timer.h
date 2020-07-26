@@ -1,20 +1,37 @@
 #ifndef _TIMER_H
 #define _TIMER_H
-#include "sys.h"
-//////////////////////////////////////////////////////////////////////////////////	 
-//本程序只供学习使用，未经作者许可，不得用于其它任何用途
-//ALIENTEK STM32F103开发板
-//定时器驱动代码	   
-//正点原子@ALIENTEK
-//技术论坛:www.openedv.com
-//创建日期:2019/11/15
-//版本：V1.0
-//版权所有，盗版必究。
-//Copyright(C) 广州市星翼电子科技有限公司 2014-2024
-//All rights reserved									  
-////////////////////////////////////////////////////////////////////////////////// 	
-extern TIM_HandleTypeDef TIM3_Handler;      //定时器句柄 
 
+#include "main.h"
+
+#if TIM_FUNC
+
+typedef struct tim_config
+{
+	bool status;
+	u16 tim_count;
+	
+	bool TIM5_Status;
+	u16 TIM5_Tim_Count;	
+	
+}TIM_CONFIG;
+
+/*extern func*/
+extern TIM_CONFIG tim_config_t;/*参数结构体*/
+
+extern TIM_HandleTypeDef TIM3_Handler;      //定时器句柄 
+extern TIM_HandleTypeDef TIM4_Handler;  
+extern TIM_HandleTypeDef TIM5_Handler; 
+
+/*初始化*/
 void TIM3_Init(u16 arr,u16 psc);
+void TIM4_Init(u16 arr,u16 psc);
+void TIM5_Init(u16 arr,u16 psc);
+
+/*开关定时器*/
+void TIM_ON_OFF_IT(TIM_HandleTypeDef *htim, bool status);
+/*获取定时器状态*/
+HAL_TIM_StateTypeDef Get_TIM_State(TIM_HandleTypeDef *htim);
+#endif
+
 #endif
 

@@ -3,6 +3,13 @@
 
 #include "sys.h"
 
+/*
+很重要！！！
+很重要！！！
+很重要！！！
+该文件为UTF8格式,不要乱改，否则显示字库异常.
+*/
+
 #ifndef ST7789_SPI
 
 //常用ASCII表
@@ -369,7 +376,10 @@ u8 ST7789_Hzk[]={
 typedef struct  
 {
     char Msk[32]; /*点阵码数据*/
+		#if 1 /*UTF8编码*/
 		u8 Index[4];	/*汉字内码索引*/  /*UIF8码时的偏移量，注意*/
+		#endif
+		//u8 Index[3];	/*GB2312编码*/
 }st7789_typFNT_GBK16;
 
 /*
