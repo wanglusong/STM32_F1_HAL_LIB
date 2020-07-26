@@ -6,15 +6,15 @@
 #ifndef ST7789_SPI
 
 /*
-è¯¥æ–‡ä»¶ä¸ºUTF8æ ¼å¼,ä¸è¦ä¹±æ”¹ï¼Œå¦åˆ™æ˜¾ç¤ºå­—åº“å¼‚å¸¸.
+¸ÃÎÄ¼şÎªUTF8¸ñÊ½,²»ÒªÂÒ¸Ä£¬·ñÔòÏÔÊ¾×Ö¿âÒì³£.
 */
 
 #define LCD_W 240
 #define LCD_H 240
 
-//OLEDæ¨¡å¼è®¾ç½®
-//0:4çº¿ä¸²è¡Œæ¨¡å¼
-//1:å¹¶è¡Œ8080æ¨¡å¼
+//OLEDÄ£Ê½ÉèÖÃ
+//0:4Ïß´®ĞĞÄ£Ê½
+//1:²¢ĞĞ8080Ä£Ê½
 #define OLED_MODE 0
 #define SIZE 16
 #define XLevelL		0x00
@@ -25,7 +25,7 @@
 #define X_WIDTH 	128
 #define Y_WIDTH 	64	    
 
-//ç”»ç¬”é¢œè‰²
+//»­±ÊÑÕÉ«
 #define WHITE         	 0xFFFF
 #define BLACK         	 0x0000	  
 #define BLUE         	 0x001F  
@@ -37,23 +37,23 @@
 #define GREEN         	 0x07E0
 #define CYAN          	 0x7FFF
 #define YELLOW        	 0xFFE0
-#define BROWN 			 0XBC40 //æ£•è‰²
-#define BRRED 			 0XFC07 //æ£•çº¢è‰²
-#define GRAY  			 0X8430 //ç°è‰²
-//GUIé¢œè‰²
+#define BROWN 			 0XBC40 //×ØÉ«
+#define BRRED 			 0XFC07 //×ØºìÉ«
+#define GRAY  			 0X8430 //»ÒÉ«
+//GUIÑÕÉ«
 
-#define DARKBLUE      	 0X01CF	//æ·±è“è‰²
-#define LIGHTBLUE      	 0X7D7C	//æµ…è“è‰²  
-#define GRAYBLUE       	 0X5458 //ç°è“è‰²
-//ä»¥ä¸Šä¸‰è‰²ä¸ºPANELçš„é¢œè‰² 
+#define DARKBLUE      	 0X01CF	//ÉîÀ¶É«
+#define LIGHTBLUE      	 0X7D7C	//Ç³À¶É«  
+#define GRAYBLUE       	 0X5458 //»ÒÀ¶É«
+//ÒÔÉÏÈıÉ«ÎªPANELµÄÑÕÉ« 
  
-#define LIGHTGREEN     	 0X841F //æµ…ç»¿è‰²
-#define LGRAY 			 0XC618 //æµ…ç°è‰²(PANNEL),çª—ä½“èƒŒæ™¯è‰²
+#define LIGHTGREEN     	 0X841F //Ç³ÂÌÉ«
+#define LGRAY 			 0XC618 //Ç³»ÒÉ«(PANNEL),´°Ìå±³¾°É«
 
-#define LGRAYBLUE        0XA651 //æµ…ç°è“è‰²(ä¸­é—´å±‚é¢œè‰²)
-#define LBBLUE           0X2B12 //æµ…æ£•è“è‰²(é€‰æ‹©æ¡ç›®çš„åè‰²)
+#define LGRAYBLUE        0XA651 //Ç³»ÒÀ¶É«(ÖĞ¼ä²ãÑÕÉ«)
+#define LBBLUE           0X2B12 //Ç³×ØÀ¶É«(Ñ¡ÔñÌõÄ¿µÄ·´É«)
 
-//-----------------OLEDç«¯å£å®šä¹‰----------------  					   
+//-----------------OLED¶Ë¿Ú¶¨Òå----------------  					   
 #define OLED_SCLK_Clr() HAL_GPIO_WritePin(GPIOC,GPIO_PIN_8,GPIO_PIN_RESET)//CLK
 #define OLED_SCLK_Set() HAL_GPIO_WritePin(GPIOC,GPIO_PIN_8,GPIO_PIN_SET)
 
@@ -69,10 +69,10 @@
 #define OLED_BLK_Clr()  HAL_GPIO_WritePin(GPIOB,GPIO_PIN_8,GPIO_PIN_RESET)//BLK
 #define OLED_BLK_Set()  HAL_GPIO_WritePin(GPIOB,GPIO_PIN_8,GPIO_PIN_SET)
 
-#define OLED_CMD  0	//å†™å‘½ä»¤
-#define OLED_DATA 1	//å†™æ•°æ®
+#define OLED_CMD  0	//Ğ´ÃüÁî
+#define OLED_DATA 1	//Ğ´Êı¾İ
 
-#define LCD_DRAWRECTANGLE 1 /*å¼€å¯å¤–å›´æ˜¾ç¤ºæ¡†---æ˜¾ç¤ºå±æ˜¾ç¤ºä¸€ä¸ªçŸ©é˜µæ¡†*/
+#define LCD_DRAWRECTANGLE 1 /*¿ªÆôÍâÎ§ÏÔÊ¾¿ò---ÏÔÊ¾ÆÁÏÔÊ¾Ò»¸ö¾ØÕó¿ò*/
 
 void st7789_Lcd_Init(void); 
 void st7789_Lcd_Clear(u16 Color);
@@ -83,47 +83,47 @@ void st7789_Lcd_Clear(u16 Color);
 void st7789_Lcd_Fill(u16 x,u16 y,u16 color);
 
 #else
-//æ¸…å±
+//ÇåÆÁ
 void st7789_Lcd_Clear(u16 Color);
-//å¡«å……
+//Ìî³ä
 void st7789_Lcd_Fill(u16 xsta,u16 ysta,u16 xend,u16 yend,u16 color);
-//ç”»çº¿
+//»­Ïß
 void st7789_Lcd_DrawLine(u16 x1, u16 y1, u16 x2, u16 y2, u16 color);
-//ç”»çŸ©å½¢
+//»­¾ØĞÎ
 void st7789_Lcd_DrawRectangle(u16 x1, u16 y1, u16 x2, u16 y2, u16 color);
-//åœ¨æŒ‡å®šä½ç½®ç”»ä¸€ä¸ªæŒ‡å®šå¤§å°çš„åœ†
+//ÔÚÖ¸¶¨Î»ÖÃ»­Ò»¸öÖ¸¶¨´óĞ¡µÄÔ²
 void st7789_Draw_Circle(u16 x0,u16 y0,u8 r, u16 color);
-//å›ºå®šæ–¹å¼å†™æ±‰å­—
+//¹Ì¶¨·½Ê½Ğ´ºº×Ö
 void ST7789_LCD_ShowChinese(unsigned int x,unsigned int y,unsigned char index,u16 size, u16 color);
-//æŒ‡é’ˆæŸ¥è¯¢æ–¹å¼å†™æ±‰å­—
+//Ö¸Õë²éÑ¯·½Ê½Ğ´ºº×Ö
 void ST7789_LCD_ShowChinese_Search(u16 x, u16 y, u16 color, u8 *s);
-//å†™å­—ç¬¦
+//Ğ´×Ö·û
 void ST7789_LCD_ShowChar(u16 x,u16 y,u8 num,u8 mode,u8 size,u16 color);
-//å†™å­—ç¬¦ä¸²
+//Ğ´×Ö·û´®
 void ST7789_LCD_ShowString(u16 x,u16 y,const u8 *p, u8 size, u16 color);
-//å†™æ•°å­—
+//Ğ´Êı×Ö
 void ST7789_LCD_ShowNum(u16 x,u16 y,u32 num,u8 len,u8 size,u16 color);
-//æ˜¾ç¤ºä¸€å¼ å›¾ç‰‡
+//ÏÔÊ¾Ò»ÕÅÍ¼Æ¬
 void st7789_Lcd_Showpicture(u16 x, u16 y, u16 img_w, u16 img_h, bool opaclear,const unsigned char *p);
-//ç‚¹	
+//µã	
 u32 mypow(u8 m,u8 n);
-/*æ”¶åˆ°æ¶ˆæ¯åŠ¨ç”»*/
+/*ÊÕµ½ÏûÏ¢¶¯»­*/
 void st7789_rec_msg_to_notation(char show_img);
-/*å¾…æœºåŠ¨ç”»*/
+/*´ı»ú¶¯»­*/
 void st7789_sleep_msg_to_notation(char show_img);
 
-/*åŠŸèƒ½è¿è¡ŒåŒº*/
+/*¹¦ÄÜÔËĞĞÇø*/
 void ST7789_Display_Launch(void);
 
-/*ä¸´æ—¶é¡¹ç›®func*/
+/*ÁÙÊ±ÏîÄ¿func*/
 typedef void *show_recnum(u8 recnum);
 typedef void *show_recfont(u8 *pfont);
-/*æ•°å­—å¤„ç†åŒº*/
+/*Êı×Ö´¦ÀíÇø*/
 void display_recnum_cb(u8 recnum);
-void module_rec_msg(u8 recnum, show_recnum func);/*æ•°å­—æ¶ˆæ¯*/
-/*æ±‰å­—å¤„ç†åŒº*/
+void module_rec_msg(u8 recnum, show_recnum func);/*Êı×ÖÏûÏ¢*/
+/*ºº×Ö´¦ÀíÇø*/
 void display_recfont_cb(u8 *pfont);
-void module_rec_font_msg(u8 *pfont, show_recfont func);/*æ±‰å­—æ¶ˆæ¯*/
+void module_rec_font_msg(u8 *pfont, show_recfont func);/*ºº×ÖÏûÏ¢*/
 
 void main_run_task(void);
 #endif

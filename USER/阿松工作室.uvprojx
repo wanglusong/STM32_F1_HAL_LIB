@@ -274,7 +274,7 @@
               <OCR_RVCT4>
                 <Type>1</Type>
                 <StartAddress>0x8000000</StartAddress>
-                <Size>0x10000</Size>
+                <Size>0x11000</Size>
               </OCR_RVCT4>
               <OCR_RVCT5>
                 <Type>1</Type>
@@ -336,7 +336,7 @@
               <MiscControls>--diag_suppress=111 --diag_suppress=174 --locale=english</MiscControls>
               <Define>USE_HAL_DRIVER,STM32F103xE</Define>
               <Undefine></Undefine>
-              <IncludePath>..\CORE;..\USER;..\OBJ;..\SYSTEM\delay;..\SYSTEM\sys;..\SYSTEM\usart;..\USMART;..\MALLOC;..\FATFS\exfuns;..\FATFS\src;..\HALLIB\STM32F1xx_HAL_Driver\Inc;..\HARDWARE\KEY;..\HARDWARE\LED;..\HARDWARE\SD;..\HARDWARE\SPI;..\HARDWARE\W25QXX;..\TEXT;..\HARDWARE\TEA5767;..\HARDWARE\TIMER;..\..\LittleVGL\lv_port;..\..\LittleVGL\lvgl;..\..\LittleVGL;..\..\LittleVGL\lv_examples\src\lv_demo_keypad_encoder;..\LCD_Drivers;..\LCD_Drivers\ST7735_1_44;..\LCD_Drivers\TFT_LCD;..\LCD_Drivers\OLED_0_96_IIC;..\TCPUDP_Drivers\ESP8266;..\LCD_Drivers\ST7789_1_3</IncludePath>
+              <IncludePath>..\CORE;..\USER;..\OBJ;..\SYSTEM\delay;..\SYSTEM\sys;..\USMART;..\MALLOC;..\FATFS\exfuns;..\FATFS\src;..\HALLIB\STM32F1xx_HAL_Driver\Inc;..\HARDWARE\KEY;..\HARDWARE\LED;..\HARDWARE\SD;..\HARDWARE\SPI;..\HARDWARE\W25QXX;..\TEXT;..\HARDWARE\TEA5767;..\..\LittleVGL\lv_port;..\..\LittleVGL\lvgl;..\..\LittleVGL;..\..\LittleVGL\lv_examples\src\lv_demo_keypad_encoder;..\LCD_Drivers;..\LCD_Drivers\ST7735_1_44;..\LCD_Drivers\TFT_LCD;..\LCD_Drivers\OLED_0_96_IIC;..\TCPUDP_Drivers\ESP8266;..\LCD_Drivers\ST7789_1_3;..\UART_Drivers;..\HARDWARE\TIMER</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -510,11 +510,6 @@
               <FileType>1</FileType>
               <FilePath>..\SYSTEM\sys\sys.c</FilePath>
             </File>
-            <File>
-              <FileName>usart.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\usart\usart.c</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -579,6 +574,16 @@
               <FileName>st7789_spi.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\LCD_Drivers\ST7789_1_3\st7789_spi.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>UART/Drivers</GroupName>
+          <Files>
+            <File>
+              <FileName>uartall.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\UART_Drivers\uartall.c</FilePath>
             </File>
           </Files>
         </Group>
