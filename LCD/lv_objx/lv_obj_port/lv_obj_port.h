@@ -1,4 +1,4 @@
-#ifndef __LV_OBJ_PORT_H_
+﻿#ifndef __LV_OBJ_PORT_H_
 #define __LV_OBJ_PORT_H_
 
 #ifdef __cplusplus
@@ -291,6 +291,49 @@ extern lv_group_t *interphone_indev_group;
 extern lv_poc_activity_t * current_activity;
 extern lv_poc_status_bar_t      *lv_poc_status_bar;
 extern nv_poc_setting_msg_t    * poc_setting_conf;
+
+extern lv_style_t theme_white_style_base;
+extern lv_style_t theme_white_style_list_scroll;
+extern lv_style_t theme_white_style_list_page;
+extern lv_style_t theme_white_style_list_btn_rel;
+extern lv_style_t theme_white_style_list_btn_pr;
+extern lv_style_t theme_white_style_list_btn_ina;
+extern lv_style_t theme_white_style_win_header;
+extern lv_style_t theme_white_style_idle_big_clock;
+extern lv_style_t theme_white_style_idle_date_label;
+extern lv_style_t theme_white_style_idle_msg_label;
+extern lv_style_t theme_white_style_switch_bg;
+extern lv_style_t theme_white_style_switch_indic;
+extern lv_style_t theme_white_style_switch_knob_off;
+extern lv_style_t theme_white_style_switch_knob_on;
+extern lv_style_t theme_white_style_rb;
+extern lv_style_t theme_white_style_cb;
+extern lv_style_t theme_white_style_about_label;
+extern lv_style_t theme_white_style_status_bar;
+extern lv_style_t theme_white_style_status_bar_time;
+extern lv_style_t theme_white_style_control;
+
+extern lv_style_t theme_black_style_base;
+extern lv_style_t theme_black_style_list_scroll;
+extern lv_style_t theme_black_style_list_page;
+extern lv_style_t theme_black_style_list_btn_rel;
+extern lv_style_t theme_black_style_list_btn_pr;
+extern lv_style_t theme_black_style_list_btn_ina;
+extern lv_style_t theme_black_style_win_header;
+extern lv_style_t theme_black_style_idle_big_clock;
+extern lv_style_t theme_black_style_idle_date_label;
+extern lv_style_t theme_black_style_idle_msg_label;
+extern lv_style_t theme_black_style_switch_bg;
+extern lv_style_t theme_black_style_switch_indic;
+extern lv_style_t theme_black_style_switch_knob_off;
+extern lv_style_t theme_black_style_switch_knob_on;
+extern lv_style_t theme_black_style_rb;
+extern lv_style_t theme_black_style_cb;
+extern lv_style_t theme_black_style_about_label;
+extern lv_style_t theme_black_style_status_bar;
+extern lv_style_t theme_black_style_status_bar_time;
+extern lv_style_t theme_black_style_control;
+
 
 /*******************
 *     NAME:   _lv_poc_activity_list_node_t

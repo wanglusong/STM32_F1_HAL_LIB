@@ -3,26 +3,26 @@
 #include "key.h"
 #include "string.h"
 #include "lv_gui_main.h"
-#include "appstart.h"/*Éè±¸ÅäÖÃÍ·*/
+#include "appstart.h"/*è®¾å¤‡é…ç½®å¤´*/
 
 /*
-´òÓ¡ÎÊÌâ£º
+æ‰“å°é—®é¢˜ï¼š
 
-¸ÃÎÄ¼þ±àÂëÎªASN±àÂë,×¢Òâ·ñÔò´òÓ¡×Ö·û´®ÊÇÂÒÂëµÄ,Í¬Ê±±£Ö¤KEIL5ÎªGB2312±àÂë.
-¢Ù¼ÇÊÂ±¾´ò¿ªÁí´æÎªASN±àÂë;
-¢ÚKEIL5±àÂë¸ÄÎªGB2312 --- ½â¾ö´òÓ¡Òì³£.
+è¯¥æ–‡ä»¶ç¼–ç ä¸ºASNç¼–ç ,æ³¨æ„å¦åˆ™æ‰“å°å­—ç¬¦ä¸²æ˜¯ä¹±ç çš„,åŒæ—¶ä¿è¯KEIL5ä¸ºGB2312ç¼–ç .
+â‘ è®°äº‹æœ¬æ‰“å¼€å¦å­˜ä¸ºASNç¼–ç ;
+â‘¡KEIL5ç¼–ç æ”¹ä¸ºGB2312 --- è§£å†³æ‰“å°å¼‚å¸¸.
 
-ÏÔÊ¾ÎÊÌâ£º
+æ˜¾ç¤ºé—®é¢˜ï¼š
 
-¸ÃÎÄ¼þ²»ÄÜµ÷ÓÃst7789×Ö¿âÏÔÊ¾º¯Êý£¬ÓÉÓÚ±àÂëÎªUTF8£¬Êý¾ÝÆ«ÒÆ²»Ò»Ñù£¬ÏÔÊ¾Òì³£.
-¢ÙÔÚst7789ÓÃÓÚ»Øµ÷ÏÔÊ¾»òÕßÌ×º¯ÊýÊ¹ÓÃ.
-¢ÚÈô»»GB2312±àÂë¸ñÊ½»¹ÊÇÏÔÊ¾Òì³££¬Ö¸ÕëÆ«ÒÆÐèÖØËã£¬±È½Ï¸´ÔÓ£¬ËùÒÔ¾¡Á¿²»Òª¸ÄÎÄ¼þ±àÂë¡£
+è¯¥æ–‡ä»¶ä¸èƒ½è°ƒç”¨st7789å­—åº“æ˜¾ç¤ºå‡½æ•°ï¼Œç”±äºŽç¼–ç ä¸ºUTF8ï¼Œæ•°æ®åç§»ä¸ä¸€æ ·ï¼Œæ˜¾ç¤ºå¼‚å¸¸.
+â‘ åœ¨st7789ç”¨äºŽå›žè°ƒæ˜¾ç¤ºæˆ–è€…å¥—å‡½æ•°ä½¿ç”¨.
+â‘¡è‹¥æ¢GB2312ç¼–ç æ ¼å¼è¿˜æ˜¯æ˜¾ç¤ºå¼‚å¸¸ï¼ŒæŒ‡é’ˆåç§»éœ€é‡ç®—ï¼Œæ¯”è¾ƒå¤æ‚ï¼Œæ‰€ä»¥å°½é‡ä¸è¦æ”¹æ–‡ä»¶ç¼–ç ã€‚
 
 2020-7-27
-½â¾ö£º
+è§£å†³ï¼š
 
-¢ÙÓÃ¼ÇÊÂ±¾±£´æÎªANSI¸ñÊ½ÎÄ¼þ;
-¢ÚMDK5±£´æÎªGB2312¸ñÊ½.
+â‘ ç”¨è®°äº‹æœ¬ä¿å­˜ä¸ºANSIæ ¼å¼æ–‡ä»¶;
+â‘¡MDK5ä¿å­˜ä¸ºGB2312æ ¼å¼.
 */
 
 /*	constants */
@@ -58,7 +58,7 @@ MAIN_PARAM main_param_t;
 
 int main(void)
 { 
-	/*ÁÙÊ±ÏîÄ¿²ÎÊý*/
+	/*ä¸´æ—¶é¡¹ç›®å‚æ•°*/
 	memset(&main_param_t, 0, sizeof(MAIN_PARAM));
 	
 	HAL_Init();                    	 	   
@@ -84,7 +84,7 @@ int main(void)
 	KEY_Init();							//KEY
 	
 #if LVGL_FUNC
-	/*lvglµÄ1msÐÄÌø*/
+	/*lvglçš„1mså¿ƒè·³*/
 	
 #if TIM_FUNC	
 	TIM3_Init(999,71);	
@@ -93,7 +93,7 @@ int main(void)
 	
 	/*little vGL init*/
 	lv_init();
-	/*LCDÓ³ÉäLVGL*/
+	/*LCDæ˜ å°„LVGL*/
 	lv_port_disp_init();
 	/*userinit*/
 	lv_start();
@@ -104,7 +104,7 @@ int main(void)
 #if LVGL_FUNC
 
 #if UART_FUNC
-	UART2_apTrace("Éè±¸Æô¶¯£¬³õÊ¼»¯ÎÞÏßÄ£¿éÖÐ£¡");
+	UART2_apTrace("è®¾å¤‡å¯åŠ¨ï¼Œåˆå§‹åŒ–æ— çº¿æ¨¡å—ä¸­ï¼");
 #endif
 
 	st7789_Lcd_Init();
@@ -117,20 +117,20 @@ int main(void)
 #endif
 
 #if UART_FUNC
-	UART2_apTrace("»¶Ó­Ê¹ÓÃ¹Â¶ÀÖ¢¶ùÍ¯¿µ¸´ÏµÍ³£¡");
+	UART2_apTrace("æ¬¢è¿Žä½¿ç”¨å­¤ç‹¬ç—‡å„¿ç«¥åº·å¤ç³»ç»Ÿï¼");
 #endif
 
 	#if 1
-	/*Éè±¸Ãû*/
+	/*è®¾å¤‡å*/
 	#define displaybaseaddr 12
-	#define displaycolor YELLOW/*"¹Â¶ÀÖ¢¶ùÍ¯¿µ¸´Éè±¸"*/
+	#define displaycolor YELLOW/*"å­¤ç‹¬ç—‡å„¿ç«¥åº·å¤è®¾å¤‡"*/
 	ST7789_LCD_ShowChinese(displaybaseaddr+0 +0,20,0,24,displaycolor);ST7789_LCD_ShowChinese(displaybaseaddr+24*1,20,1,24,displaycolor);ST7789_LCD_ShowChinese(displaybaseaddr+24*2,20,2,24,displaycolor);
 	ST7789_LCD_ShowChinese(displaybaseaddr+24*3,20,3,24,displaycolor);ST7789_LCD_ShowChinese(displaybaseaddr+24*4,20,4,24,displaycolor);ST7789_LCD_ShowChinese(displaybaseaddr+24*5,20,5,24,displaycolor);
 	ST7789_LCD_ShowChinese(displaybaseaddr+24*6,20,6,24,displaycolor);ST7789_LCD_ShowChinese(displaybaseaddr+24*7,20,7,24,displaycolor);ST7789_LCD_ShowChinese(displaybaseaddr+24*8,20,8,24,displaycolor);
 	#else
-	ST7789_LCD_ShowChinese_Search(50,20,WHITE,(u8*)"¹Â¶ÀÖ¢¶ùÍ¯¿µ¸´Éè±¸");
+	ST7789_LCD_ShowChinese_Search(50,20,WHITE,(u8*)"å­¤ç‹¬ç—‡å„¿ç«¥åº·å¤è®¾å¤‡");
 	#endif
-	/*UTF8±àÂëÏÔÊ¾ÇøÓò*/
+	/*UTF8ç¼–ç æ˜¾ç¤ºåŒºåŸŸ*/
 	ST7789_Display_Launch();
 #endif
 #endif
@@ -148,13 +148,13 @@ int main(void)
 		{
 			main_param_t.runcounttime = 0;
 			delay_ms(10);
-			if(main_param_t.runstatus == true)/*ÓÐÏûÏ¢¶¯»­*/
+			if(main_param_t.runstatus == true)/*æœ‰æ¶ˆæ¯åŠ¨ç”»*/
 			{
 				main_param_t.anim_count_rec_msg+=1;
 				if(main_param_t.anim_count_rec_msg > 4)main_param_t.anim_count_rec_msg = 1;
 				st7789_rec_msg_to_notation(main_param_t.anim_count_rec_msg);
 			}
-			else if(main_param_t.runstatus == false)/*´ý»ú¶¯»­*/
+			else if(main_param_t.runstatus == false)/*å¾…æœºåŠ¨ç”»*/
 			{
 				main_param_t.anim_count_sleep_msg+=1;
 				if(main_param_t.anim_count_sleep_msg > 2)main_param_t.anim_count_sleep_msg = 1;
@@ -170,14 +170,15 @@ int main(void)
 #if item_32415
 		adc_config_t.original_adc_vlaue = Get_Adc_Average(ADC_CHANNEL_CONF_5, ADC_CHANNEL_Sampling_5);
 		
-		adc_config_t.original_adc_vlaue = adc_config_t.original_adc_vlaue * 3.5 / 3.3;/*²É¼¯·¶Î§ÊÇ3.3  ×ªÎª 3.5v*/
-		adc_config_t.m_voltage  = adc_config_t.original_adc_vlaue * 1.0/ 1000.0;/*×ªÎª mv */
-		//UART1_apTrace("²É¼¯µ½µÄADÖµÎª = %d , %6.4f", adc_config_t.original_adc_vlaue,adc_config_t.m_voltage);
+		adc_config_t.original_adc_vlaue = adc_config_t.original_adc_vlaue * 3.5 / 3.3;/*é‡‡é›†èŒƒå›´æ˜¯3.3  è½¬ä¸º 3.5v*/
+		adc_config_t.m_voltage  = adc_config_t.original_adc_vlaue * 1.0/ 1000.0;/*è½¬ä¸º mv */
+		//UART1_apTrace("é‡‡é›†åˆ°çš„ADå€¼ä¸º = %d , %6.4f", adc_config_t.original_adc_vlaue,adc_config_t.m_voltage);
 		UART1_apTrace("%6.4f\r\n", adc_config_t.m_voltage);
 #endif
 		
 		LED1 = !LED1;
-		delay_ms(500);/*´«ÊäÖÜÆÚ*/
+		UART1_apTrace("system running\r\n");
+		delay_ms(500);
 		
 	}
 }

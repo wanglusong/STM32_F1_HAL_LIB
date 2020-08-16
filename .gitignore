@@ -50,3 +50,11 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+PRO/OBJ
+.PRO/JLinkLog
+.keilkilll.bat
+PRO/DebugConfig
+PRO/JLinkSettings
+PRO/阿松工作室.uvguix
+PRO/阿松工作室

@@ -1215,7 +1215,7 @@ lv_poc_activity_t * lv_poc_create_idle(void)
 	{
 		return NULL;
 	}
-	//poc_setting_conf = lv_poc_setting_conf_read();
+	//nv_setting_config_const(poc_setting_conf);
 	activity_idle = lv_poc_create_activity(&activity_idle_ext,true,true,&control);
 	lv_poc_activity_set_signal_cb(activity_idle, lv_poc_idle_signal_func);
 	lv_poc_activity_set_design_cb(activity_idle, lv_poc_idle_design_func);

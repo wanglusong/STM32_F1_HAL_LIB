@@ -81,6 +81,15 @@ poc_set_lcd_status(IN int8_t wakeup);
 OUT bool
 poc_get_lcd_status(void);
 
+/*
+	  name : nv_setting_config_const
+	 param : config nv
+	  date : 2020-08-16
+*/
+void
+nv_setting_config_const(OUT nv_poc_setting_msg_t * poc_setting);
+	
+
 #ifdef __cplusplus
 }
 #endif

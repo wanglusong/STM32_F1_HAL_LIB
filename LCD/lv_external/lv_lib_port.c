@@ -206,20 +206,19 @@ poc_get_lcd_status(void)
 void
 nv_setting_config_const(OUT nv_poc_setting_msg_t * poc_setting)
 {
-#if 0
-	poc_setting->font.list_btn_big_font = (uint32_t)LV_POC_FONT_MSYH(6500, 18);
-	poc_setting->font.list_btn_small_font = (uint32_t)LV_POC_FONT_MSYH(6500, 15);
-	poc_setting->font.about_label_big_font = (uint32_t)LV_POC_FONT_MSYH(6500, 18);
-	poc_setting->font.about_label_small_font = (uint32_t)LV_POC_FONT_MSYH(6500, 15);
-	poc_setting->font.win_title_font = (uint32_t)LV_POC_FONT_MSYH(6500, 18);
-	poc_setting->font.activity_control_font = (uint32_t)LV_POC_FONT_MSYH(6500, 15);
-	poc_setting->font.status_bar_time_font = (uint32_t)LV_POC_FONT_MSYH(6500, 14);
-	poc_setting->font.idle_big_clock_font = (uint32_t)LV_POC_FONT_MSYH(2500, 45);//主界面时间time
-	poc_setting->font.idle_date_label_font = (uint32_t)LV_POC_FONT_MSYH(2500, 18);//主界面日期label
-	poc_setting->font.idle_page2_msg_font = (uint32_t)LV_POC_FONT_MSYH(6500, 15);
-	poc_setting->font.idle_popwindows_msg_font = (uint32_t)LV_POC_FONT_MSYH(6500, 18);
-	poc_setting->font.idle_lockgroupwindows_msg_font = (uint32_t)LV_POC_FONT_MSYH(6500, 14);
-	poc_setting->font.idle_shutdownwindows_msg_font = (uint32_t)LV_POC_FONT_MSYH(6500, 16);
+	poc_setting->font.list_btn_big_font = (uint32_t)LV_THEME_DEFAULT_FONT_NORMAL;
+	poc_setting->font.list_btn_small_font = (uint32_t)LV_THEME_DEFAULT_FONT_NORMAL;
+	poc_setting->font.about_label_big_font = (uint32_t)LV_THEME_DEFAULT_FONT_NORMAL;
+	poc_setting->font.about_label_small_font = (uint32_t)LV_THEME_DEFAULT_FONT_NORMAL;
+	poc_setting->font.win_title_font = (uint32_t)LV_THEME_DEFAULT_FONT_NORMAL;
+	poc_setting->font.activity_control_font = (uint32_t)LV_THEME_DEFAULT_FONT_NORMAL;
+	poc_setting->font.status_bar_time_font = (uint32_t)LV_THEME_DEFAULT_FONT_NORMAL;
+	poc_setting->font.idle_big_clock_font = (uint32_t)LV_THEME_DEFAULT_FONT_NORMAL;//time
+	poc_setting->font.idle_date_label_font = (uint32_t)LV_THEME_DEFAULT_FONT_NORMAL;//label
+	poc_setting->font.idle_page2_msg_font = (uint32_t)LV_THEME_DEFAULT_FONT_NORMAL;
+	poc_setting->font.idle_popwindows_msg_font = (uint32_t)LV_THEME_DEFAULT_FONT_NORMAL;
+	poc_setting->font.idle_lockgroupwindows_msg_font = (uint32_t)LV_THEME_DEFAULT_FONT_NORMAL;
+	poc_setting->font.idle_shutdownwindows_msg_font = (uint32_t)LV_THEME_DEFAULT_FONT_NORMAL;
 
 	poc_setting->theme.white = &theme_white;
 	poc_setting->theme.white->style_base = (uint32_t)&theme_white_style_base;
@@ -242,7 +241,7 @@ nv_setting_config_const(OUT nv_poc_setting_msg_t * poc_setting)
 	poc_setting->theme.white->style_status_bar_time = (uint32_t)&theme_white_style_status_bar_time;
 	poc_setting->theme.white->style_win_header = (uint32_t)&theme_white_style_win_header;
 	poc_setting->theme.white->style_control = (uint32_t)&theme_white_style_control;
-#endif
+
 
 #ifdef CONFIG_POC_GUI_CHOICE_THEME_SUPPORT
 	poc_setting->theme.black = &theme_black;

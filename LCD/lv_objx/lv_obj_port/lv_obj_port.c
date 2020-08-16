@@ -510,8 +510,6 @@ static bool lv_poc_status_bar_init(void)
 ********************/
 static bool lv_poc_theme_init(void)
 {
-	#define LV_POC_SWITCH_ON_OFF_INDIC_COLOR LV_COLOR_MAKE(0x77, 0x77, 0x77);
-
 	lv_style_init(&theme_white_style_base);
 	lv_style_set_bg_color(&theme_white_style_base, LV_STATE_DEFAULT, LV_COLOR_MAKE(0x00,0x00,0x00));
 	lv_style_set_bg_grad_color(&theme_white_style_base, LV_STATE_DEFAULT, LV_COLOR_MAKE(0x00,0x00,0x00));
@@ -543,11 +541,105 @@ static bool lv_poc_theme_init(void)
 
 	lv_style_copy(&theme_white_style_list_btn_rel, &theme_white_style_list_scroll);
 	lv_style_set_text_color(&theme_white_style_list_btn_rel, LV_STATE_DEFAULT, LV_COLOR_MAKE(0x11, 0x11, 0x11));
-	//lv_style_set_text_font(&theme_white_style_list_btn_rel, LV_STATE_DEFAULT, (lv_font_t *)poc_setting_conf->font.list_btn_current_font);
+	lv_style_set_text_font(&theme_white_style_list_btn_rel, LV_STATE_DEFAULT, (lv_font_t *)poc_setting_conf->font.list_btn_current_font);
 	lv_style_set_pad_left(&theme_white_style_list_btn_rel, LV_STATE_DEFAULT, 2);
 	lv_style_set_pad_right(&theme_white_style_list_btn_rel, LV_STATE_DEFAULT, 3);
 	lv_style_set_pad_inner(&theme_white_style_list_btn_rel, LV_STATE_DEFAULT, 5);
 
+	lv_style_copy(&theme_white_style_list_btn_pr, &theme_white_style_list_btn_rel);
+	lv_style_set_bg_color(&theme_white_style_list_btn_pr, LV_STATE_DEFAULT, LV_COLOR_BLUE);
+	lv_style_set_bg_grad_color(&theme_white_style_list_btn_pr, LV_STATE_DEFAULT, LV_COLOR_BLUE);
+	lv_style_set_bg_opa(&theme_white_style_list_btn_pr, LV_STATE_DEFAULT, LV_OPA_70);
+	lv_style_set_text_font(&theme_white_style_list_btn_pr, LV_STATE_DEFAULT, (lv_font_t *)poc_setting_conf->font.list_btn_current_font);
+
+	lv_style_copy(&theme_white_style_list_btn_ina, &theme_white_style_list_btn_rel);
+	lv_style_set_bg_color(&theme_white_style_list_btn_ina, LV_STATE_DEFAULT, LV_COLOR_GRAY);
+	lv_style_set_bg_grad_color(&theme_white_style_list_btn_ina, LV_STATE_DEFAULT, LV_COLOR_GRAY);
+	lv_style_set_text_font(&theme_white_style_list_btn_ina, LV_STATE_DEFAULT, (lv_font_t *)poc_setting_conf->font.list_btn_current_font);
+
+	lv_style_init(&theme_white_style_win_header);
+	lv_style_set_bg_color(&theme_white_style_win_header, LV_STATE_DEFAULT, LV_COLOR_MAKE(0xee,0xb7,0x00));
+	lv_style_set_bg_grad_color(&theme_white_style_win_header, LV_STATE_DEFAULT, LV_COLOR_MAKE(0xee,0xb7,0x00));
+	lv_style_set_bg_opa(&theme_white_style_win_header, LV_STATE_DEFAULT, LV_OPA_COVER);
+	lv_style_set_text_color(&theme_white_style_win_header, LV_STATE_DEFAULT, LV_COLOR_MAKE(0xee,0xee,0xee));
+	lv_style_set_text_font(&theme_white_style_win_header, LV_STATE_DEFAULT, (lv_font_t *)poc_setting_conf->font.win_title_font);
+
+	lv_style_init(&theme_white_style_idle_big_clock);
+	lv_style_set_text_color(&theme_white_style_idle_big_clock, LV_STATE_DEFAULT, LV_COLOR_WHITE);
+	lv_style_set_text_font(&theme_white_style_idle_big_clock, LV_STATE_DEFAULT, (lv_font_t *)poc_setting_conf->font.idle_big_clock_font);
+
+	lv_style_init(&theme_white_style_idle_date_label);
+	lv_style_set_text_color(&theme_white_style_idle_date_label, LV_STATE_DEFAULT, LV_COLOR_WHITE);
+	lv_style_set_text_font(&theme_white_style_idle_date_label, LV_STATE_DEFAULT, (lv_font_t *)poc_setting_conf->font.idle_date_label_font);
+
+	lv_style_init(&theme_white_style_idle_msg_label);
+	lv_style_set_text_color(&theme_white_style_idle_msg_label, LV_STATE_DEFAULT, LV_COLOR_WHITE);
+	lv_style_set_text_font(&theme_white_style_idle_msg_label, LV_STATE_DEFAULT, (lv_font_t *)poc_setting_conf->font.idle_page2_msg_font);
+
+	lv_style_init(&theme_white_style_switch_bg);
+	lv_style_set_bg_color(&theme_white_style_switch_bg, LV_STATE_DEFAULT, LV_COLOR_MAKE(0x3f, 0x38, 0x3f));
+	lv_style_set_bg_grad_color(&theme_white_style_switch_bg, LV_STATE_DEFAULT, LV_COLOR_MAKE(0x3f, 0x38, 0x3f));
+	lv_style_set_pad_top(&theme_white_style_switch_bg, LV_STATE_DEFAULT, 2);
+	lv_style_set_pad_bottom(&theme_white_style_switch_bg, LV_STATE_DEFAULT, 2);
+	lv_style_set_pad_left(&theme_white_style_switch_bg, LV_STATE_DEFAULT, 2);
+	lv_style_set_pad_right(&theme_white_style_switch_bg, LV_STATE_DEFAULT, 2);
+	lv_style_set_border_width(&theme_white_style_switch_bg, LV_STATE_DEFAULT, 0);
+	lv_style_set_radius(&theme_white_style_switch_bg, LV_STATE_DEFAULT, LV_RADIUS_CIRCLE);
+
+	lv_style_init(&theme_white_style_switch_indic);
+	lv_style_set_bg_color(&theme_white_style_switch_indic, LV_STATE_DEFAULT, LV_COLOR_MAKE(0xef, 0xc8, 0x9f));
+	lv_style_set_bg_grad_color(&theme_white_style_switch_indic, LV_STATE_DEFAULT, LV_COLOR_MAKE(0xef, 0xc8, 0x9f));
+	lv_style_set_pad_top(&theme_white_style_switch_indic, LV_STATE_DEFAULT, 0);
+	lv_style_set_pad_bottom(&theme_white_style_switch_indic, LV_STATE_DEFAULT, 0);
+	lv_style_set_pad_left(&theme_white_style_switch_indic, LV_STATE_DEFAULT, 0);
+	lv_style_set_pad_right(&theme_white_style_switch_indic, LV_STATE_DEFAULT, 0);
+	lv_style_set_border_width(&theme_white_style_switch_indic, LV_STATE_DEFAULT, 0);
+	lv_style_set_radius(&theme_white_style_switch_indic, LV_STATE_DEFAULT, LV_RADIUS_CIRCLE);
+	lv_style_set_pad_inner(&theme_white_style_switch_indic, LV_STATE_DEFAULT, 0);
+
+	lv_style_init(&theme_white_style_switch_knob_off);
+	lv_style_set_bg_color(&theme_white_style_switch_knob_off, LV_STATE_DEFAULT, LV_COLOR_MAKE(0x77, 0x77, 0x77));
+	lv_style_set_bg_grad_color(&theme_white_style_switch_knob_off, LV_STATE_DEFAULT, LV_COLOR_MAKE(0x77, 0x77, 0x77));
+	lv_style_set_border_width(&theme_white_style_switch_knob_off, LV_STATE_DEFAULT, 0);
+	lv_style_set_radius(&theme_white_style_switch_knob_off, LV_STATE_DEFAULT, LV_RADIUS_CIRCLE);
+	lv_style_set_shadow_width(&theme_white_style_switch_knob_off, LV_STATE_DEFAULT, 0);
+
+	lv_style_init(&theme_white_style_switch_knob_on);
+	lv_style_set_bg_color(&theme_white_style_switch_knob_on, LV_STATE_DEFAULT, LV_COLOR_MAKE(0x77, 0x77, 0x77));
+	lv_style_set_bg_grad_color(&theme_white_style_switch_knob_on, LV_STATE_DEFAULT, LV_COLOR_MAKE(0x77, 0x77, 0x77));
+	lv_style_set_border_width(&theme_white_style_switch_knob_on, LV_STATE_DEFAULT, 0);
+	lv_style_set_radius(&theme_white_style_switch_knob_on, LV_STATE_DEFAULT, LV_RADIUS_CIRCLE);
+	lv_style_set_shadow_width(&theme_white_style_switch_knob_on, LV_STATE_DEFAULT, 0);
+
+	lv_style_init(&theme_white_style_rb);
+	lv_style_set_border_width(&theme_white_style_rb, LV_STATE_DEFAULT, 0);
+	lv_style_set_radius(&theme_white_style_rb, LV_STATE_DEFAULT, LV_RADIUS_CIRCLE);
+	lv_style_set_shadow_width(&theme_white_style_rb, LV_STATE_DEFAULT, 0);
+
+	lv_style_init(&theme_white_style_cb);
+	lv_style_set_border_width(&theme_white_style_cb, LV_STATE_DEFAULT, 0);
+	lv_style_set_radius(&theme_white_style_cb, LV_STATE_DEFAULT, LV_RADIUS_CIRCLE);
+	lv_style_set_shadow_width(&theme_white_style_cb, LV_STATE_DEFAULT, 0);
+
+	lv_style_copy(&theme_white_style_about_label, &theme_white_style_list_scroll);
+	lv_style_set_text_color(&theme_white_style_about_label, LV_STATE_DEFAULT, LV_COLOR_MAKE(0x11, 0x11, 0x11));
+	lv_style_set_text_font(&theme_white_style_about_label, LV_STATE_DEFAULT, (lv_font_t *)poc_setting_conf->font.about_label_current_font);
+
+	lv_style_init(&theme_white_style_status_bar);
+	lv_style_set_bg_color(&theme_white_style_status_bar, LV_STATE_DEFAULT, LV_COLOR_MAKE(0x00,0x00,0x00));
+	lv_style_set_bg_grad_color(&theme_white_style_status_bar, LV_STATE_DEFAULT, LV_COLOR_MAKE(0x00,0x00,0x00));
+	lv_style_set_bg_opa(&theme_white_style_status_bar, LV_STATE_DEFAULT, LV_OPA_90);
+	lv_style_set_radius(&theme_white_style_status_bar, LV_STATE_DEFAULT, 0);
+
+	lv_style_copy(&theme_white_style_status_bar_time, &theme_white_style_list_scroll);
+	lv_style_set_text_color(&theme_white_style_status_bar_time, LV_STATE_DEFAULT, LV_COLOR_WHITE);
+	lv_style_set_text_font(&theme_white_style_status_bar_time, LV_STATE_DEFAULT, (lv_font_t *)poc_setting_conf->font.status_bar_time_font);
+
+	lv_style_init(&theme_white_style_control);
+	lv_style_set_bg_color(&theme_white_style_control, LV_STATE_DEFAULT, LV_COLOR_MAKE(0x88,0x33,0x00));
+	lv_style_set_bg_grad_color(&theme_white_style_control, LV_STATE_DEFAULT, LV_COLOR_MAKE(0x88,0x33,0x00));
+	lv_style_set_text_color(&theme_white_style_control, LV_STATE_DEFAULT, LV_COLOR_WHITE);
+	lv_style_set_text_font(&theme_white_style_control, LV_STATE_DEFAULT, (lv_font_t *)poc_setting_conf->font.activity_control_font);
 #if 0
 
     lv_style_copy(&theme_white_style_list_btn_pr, &theme_white_style_list_btn_rel);
@@ -890,15 +982,12 @@ lv_poc_activity_t *lv_poc_create_activity(lv_poc_activity_ext_t *activity_ext,
     if(!is_lv_poc_atctivity_init)
     {
         is_lv_poc_atctivity_init = true;
-
-        //lv_poc_theme_init();
+        lv_poc_theme_init();
         lv_poc_status_bar_init();
         lv_poc_activity_list_init();
         lv_poc_stack_init();
     }
-
-		/*主题*/
-    //poc_setting_conf = lv_poc_setting_conf_read();
+	/*主题*/
     //poc_display_style = (lv_style_t *)(poc_setting_conf->theme.current_theme->style_base);
     lv_poc_activity_t *activity = (lv_poc_activity_t *)lv_mem_alloc(sizeof(lv_poc_activity_t));
 
@@ -1181,7 +1270,6 @@ void lv_poc_activity_set_signal_cb(lv_poc_activity_t *activity,
 {
     if(NULL != func)
     {
-        //activity->display->signal_func = func;
         activity->signal_func = func;
     }
 }
