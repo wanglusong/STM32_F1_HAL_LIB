@@ -1,19 +1,8 @@
-#include "sys.h"
 #include "delay.h"
-#include "uartall.h"
 #include "led.h"
 #include "key.h"
-#include "malloc.h" 
-#include "MMC_SD.h" 
-#include "ff.h"  
-#include "exfuns.h"
 #include "string.h"
-#include "TEA5767.h"
-#include "tim.h"
-#include "lvgl.h"
 #include "lv_gui_main.h"
-#include "lcd_config.h"
-#include "lv_demo_keypad_encoder.h"
 #include "appstart.h"/*设备配置头*/
 
 /*
@@ -36,14 +25,28 @@
 ②MDK5保存为GB2312格式.
 */
 
-/*
-临时项目定义使用
-*/
-
+/*	constants */
 MAIN_PARAM main_param_t;
 
-/*----end---*/
+#if TIM_FUNC
+#include "tim.h"
+#endif
 
+#if LVGL_FUNC
+#include "lvgl.h"
+#endif
+
+#if LCD_FUNC
+#include "lcd_config.h"
+#endif
+
+#if UART_FUNC
+#include "uartall.h"
+#endif
+
+#if ADC_FUNC
+#include "adc.h"
+#endif
 
 #if ESP8266_FUNC
 #include "esp8266_uart.h"
@@ -61,6 +64,10 @@ int main(void)
 	HAL_Init();                    	 	   
 	Stm32_Clock_Init(RCC_PLL_MUL9);//72M
 	delay_init(72);         //DELAY
+	
+#if ADC_FUNC
+	MY_ADC_Init();
+#endif
 
 #if TIM_FUNC	
 	TIM4_Init(999,719);/*10ms*/
@@ -81,21 +88,20 @@ int main(void)
 	
 #if TIM_FUNC	
 	TIM3_Init(999,71);	
-	TIM_ON_OFF_IT(TIM3_Handler, true);
+	TIM_ON_OFF_IT(&TIM3_Handler, true);
 #endif	
 	
 	/*little vGL init*/
 	lv_init();
 	/*LCD映射LVGL*/
 	lv_port_disp_init();
-	/*init end*/
 	/*userinit*/
-	lv_demo_keypad_encoder();
-	lv_ex_get_started_3();
+	lv_start();
+	
 #endif
 
 #ifndef ST7789_SPI
-#if !LVGL_FUNC
+#if LVGL_FUNC
 
 #if UART_FUNC
 	UART2_apTrace("设备启动，初始化无线模块中！");
@@ -135,6 +141,7 @@ int main(void)
 		lv_task_handler();
 #endif
 		
+#if item_37472
 		main_run_task();
 		
 		if(main_param_t.runcounttime >=50)
@@ -154,11 +161,23 @@ int main(void)
 				st7789_sleep_msg_to_notation(main_param_t.anim_count_sleep_msg);
 			}
 			delay_ms(10);
-			LED1 = !LED1;
 		}
-		delay_ms(10);
 		
 		main_param_t.runcounttime++;
+		
+#endif		
+
+#if item_32415
+		adc_config_t.original_adc_vlaue = Get_Adc_Average(ADC_CHANNEL_CONF_5, ADC_CHANNEL_Sampling_5);
+		
+		adc_config_t.original_adc_vlaue = adc_config_t.original_adc_vlaue * 3.5 / 3.3;/*采集范围是3.3  转为 3.5v*/
+		adc_config_t.m_voltage  = adc_config_t.original_adc_vlaue * 1.0/ 1000.0;/*转为 mv */
+		//UART1_apTrace("采集到的AD值为 = %d , %6.4f", adc_config_t.original_adc_vlaue,adc_config_t.m_voltage);
+		UART1_apTrace("%6.4f\r\n", adc_config_t.m_voltage);
+#endif
+		
+		LED1 = !LED1;
+		delay_ms(500);/*传输周期*/
 		
 	}
 }

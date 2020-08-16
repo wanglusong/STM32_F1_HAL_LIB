@@ -21,24 +21,65 @@ Target DLL:      Segger\JL2CM3.dll V2.99.23.0
 Dialog DLL:      TCM.DLL V1.14.14.0
  
 <h2>Project:</h2>
-E:\songcode\STM32_F1_HAL_LIB\ST_HAL\USER\阿松工作室.uvprojx
-Project File Date:  07/26/2020
+E:\songcode\STM32_F1_HAL_LIB\components\Modules\PRO\阿松工作室.uvprojx
+Project File Date:  08/16/2020
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 3 (build 300)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
-Build target 'WORKPLACE'
-compiling st7789_spi.c...
+Build target 'COMPONENTS'
+compiling lv_lib_port.c...
+..\LCD\lv_external\lv_lib_port.c(32): warning:  #940-D: missing return statement at end of non-void function "lv_poc_get_keypad_dev"
+  }
+..\LCD\lv_external\lv_lib_port.c(43): warning:  #940-D: missing return statement at end of non-void function "lv_poc_setting_conf_init"
+  }
+..\LCD\lv_external\lv_lib_port.c(60): warning:  #940-D: missing return statement at end of non-void function "lv_poc_setting_conf_read"
+  }
+..\LCD\lv_external\lv_lib_port.c(74): warning:  #940-D: missing return statement at end of non-void function "lv_poc_setting_conf_write"
+  }
+..\LCD\lv_external\lv_lib_port.c(11): warning:  #177-D: variable "poc_setting_conf_local" was declared but never referenced
+  static nv_poc_setting_msg_t poc_setting_conf_local = {0};
+..\LCD\lv_external\lv_lib_port.c(12): warning:  #177-D: variable "theme_white" was declared but never referenced
+  static nv_poc_theme_msg_node_t theme_white = {0};
+..\LCD\lv_external\lv_lib_port.c: 6 warnings, 0 errors
+compiling lv_gui_main.c...
+compiling lv_idle_port.c...
+..\LCD\lv_apps\lv_idle_port\lv_idle_port.c(297): warning:  #177-D: variable "net_type_name" was declared but never referenced
+  	int8_t net_type_name[64];
+..\LCD\lv_apps\lv_idle_port\lv_idle_port.c(1221): warning:  #167-D: argument of type "_Bool (*)(struct _lv_obj_t *, const lv_area_t *, lv_design_mode_t)" is incompatible with parameter of type "lv_design_cb_t"
+  	lv_poc_activity_set_design_cb(activity_idle, lv_poc_idle_design_func);
+..\LCD\lv_apps\lv_idle_port\lv_idle_port.c(96): warning:  #550-D: variable "idle_old_page" was set but never used
+  static char idle_old_page = IDLE_PAGE_CURRENT;
+..\LCD\lv_apps\lv_idle_port\lv_idle_port.c: 3 warnings, 0 errors
+compiling lv_obj_port.c...
+..\LCD\lv_objx\lv_obj_port\lv_obj_port.c(982): warning:  #167-D: argument of type "_Bool (*)(lv_obj_t *, const lv_area_t *, lv_design_mode_t)" is incompatible with parameter of type "lv_design_cb_t"
+      lv_obj_set_design_cb(activity->display, lv_poc_design_cb);
+..\LCD\lv_objx\lv_obj_port\lv_obj_port.c(38): warning:  #177-D: variable "lv_poc_refresh_ui_state" was declared but never referenced
+  static char lv_poc_refresh_ui_state = 0;
+..\LCD\lv_objx\lv_obj_port\lv_obj_port.c(214): warning:  #177-D: function "lv_poc_activity_list_delete" was declared but never referenced
+  static void	lv_poc_activity_list_delete(lv_poc_activity_t * old_activity)
+..\LCD\lv_objx\lv_obj_port\lv_obj_port.c(434): warning:  #177-D: function "lv_poc_stack_pop" was declared but never referenced
+  static lv_poc_activity_t * lv_poc_stack_pop(void)
+..\LCD\lv_objx\lv_obj_port\lv_obj_port.c(456): warning:  #177-D: function "lv_poc_stack_top" was declared but never referenced
+  static lv_poc_activity_t * lv_poc_stack_top(void)
+..\LCD\lv_objx\lv_obj_port\lv_obj_port.c(511): warning:  #177-D: function "lv_poc_theme_init" was declared but never referenced
+  static bool lv_poc_theme_init(void)
+..\LCD\lv_objx\lv_obj_port\lv_obj_port.c: 6 warnings, 0 errors
+compiling lv_list_port.c...
+..\LCD\lv_objx\lv_list_port\lv_list_port.c(52): warning:  #940-D: missing return statement at end of non-void function "lv_poc_list_create"
+  }
+..\LCD\lv_objx\lv_list_port\lv_list_port.c: 1 warning, 0 errors
+compiling lv_win_port.c...
 linking...
-Program Size: Code=17356 RO-data=50192 RW-data=2396 ZI-data=3756  
+Program Size: Code=103480 RO-data=22384 RW-data=468 ZI-data=40772  
 FromELF: creating hex file...
-"..\OBJ\阿松工作室.axf" - 0 Error(s), 0 Warning(s).
+".\OBJ\阿松工作室.axf" - 0 Error(s), 16 Warning(s).
 
 <h2>Collection of Component include folders:</h2>
-  E:\songcode\STM32_F1_HAL_LIB\ST_HAL\USER\RTE
+  E:\songcode\STM32_F1_HAL_LIB\components\Modules\PRO\RTE
   C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include
 
 <h2>Collection of Component Files used:</h2>
-Build Time Elapsed:  00:00:05
+Build Time Elapsed:  00:00:12
 </pre>
 </body>
 </html>
