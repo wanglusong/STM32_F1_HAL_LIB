@@ -1,7 +1,7 @@
 #include "sys.h"
 #include "mmc_sd.h"			   
-#include "spi.h"
-#include "uartall.h"	
+#include "ech_spi.h"
+#include "ech_uartall.h"	
 					   
 u8  SD_Type=0;//SD卡的类型 
 ////////////////////////////////////移植修改区///////////////////////////////////

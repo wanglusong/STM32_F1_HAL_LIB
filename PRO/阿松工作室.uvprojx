@@ -336,7 +336,7 @@
               <MiscControls>--diag_suppress=111 --diag_suppress=174 --locale=english</MiscControls>
               <Define>USE_HAL_DRIVER,STM32F103xE</Define>
               <Undefine></Undefine>
-              <IncludePath>..\AUDIO\TEA5767;..\DRIVE\ADC;..\DRIVE\DELAY;..\DRIVE\KEY;..\DRIVE\LED;..\DRIVE\SPI;..\DRIVE\TIM;..\DRIVE\UART;..\FS\FATFS\exfuns;..\FS\FATFS\src;..\FS\FATFS\doc;..\FS\SD;..\FS\W25QXX;..\KERNEL\CORE;..\KERNEL\HALLIB\STM32F1xx_HAL_Driver\Inc;..\KERNEL\MALLOC;..\KERNEL\SYS;.\OBJ;..\PRO;..\..\LittleVGL;..\..\LittleVGL\lv_port;..\..\LittleVGL\lvgl;..\LCD\lv_drivers\OLED_0_96_IIC;..\LCD\lv_drivers\ST7735_1_44;..\LCD\lv_drivers\ST7789_1_3;..\LCD\lv_drivers\TFT_LCD;..\LCD;..\LCD\lv_include;..\LCD\lv_objx\lv_list_port;..\LCD\lv_objx\lv_obj_port;..\LCD\lv_objx\lv_win_port;..\LCD\lv_apps\lv_idle_port;..\LCD\resource\image\base_bg</IncludePath>
+              <IncludePath>..\AUDIO\TEA5767;..\DRIVE\ADC;..\DRIVE\DELAY;..\DRIVE\KEY;..\DRIVE\LED;..\DRIVE\SPI;..\DRIVE\TIM;..\DRIVE\UART;..\FS\FATFS\exfuns;..\FS\FATFS\src;..\FS\FATFS\doc;..\FS\SD;..\FS\W25QXX;..\KERNEL\CORE;..\KERNEL\HALLIB\STM32F1xx_HAL_Driver\Inc;..\KERNEL\MALLOC;..\KERNEL\SYS;.\OBJ;..\PRO;..\..\LittleVGL;..\..\LittleVGL\lv_port;..\..\LittleVGL\lvgl;..\LCD\lv_drivers\OLED_0_96_IIC;..\LCD\lv_drivers\ST7735_1_44;..\LCD\lv_drivers\ST7789_1_3;..\LCD\lv_drivers\TFT_LCD;..\LCD;..\LCD\lv_include;..\LCD\lv_objx\lv_list_port;..\LCD\lv_objx\lv_obj_port;..\LCD\lv_objx\lv_win_port;..\LCD\lv_apps\lv_idle_port;..\LCD\resource\image\base_bg;..\KERNEL\FREERTOS\include;..\KERNEL\FREERTOS\portable\RVDS\ARM_CM3;..\LCD\lv_apps\lv_ech_base_souce</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -648,6 +648,56 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>KERNEL/FreeRTOS_CORE</GroupName>
+          <Files>
+            <File>
+              <FileName>croutine.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\KERNEL\FREERTOS\croutine.c</FilePath>
+            </File>
+            <File>
+              <FileName>event_groups.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\KERNEL\FREERTOS\event_groups.c</FilePath>
+            </File>
+            <File>
+              <FileName>list.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\KERNEL\FREERTOS\list.c</FilePath>
+            </File>
+            <File>
+              <FileName>queue.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\KERNEL\FREERTOS\queue.c</FilePath>
+            </File>
+            <File>
+              <FileName>tasks.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\KERNEL\FREERTOS\tasks.c</FilePath>
+            </File>
+            <File>
+              <FileName>timers.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\KERNEL\FREERTOS\timers.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>KERNEL/FreeRTOS_PORTABLE</GroupName>
+          <Files>
+            <File>
+              <FileName>heap_4.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\KERNEL\FREERTOS\portable\MemMang\heap_4.c</FilePath>
+            </File>
+            <File>
+              <FileName>port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\KERNEL\FREERTOS\portable\RVDS\ARM_CM3\port.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>LCD/lv_drivers</GroupName>
           <Files>
             <File>
@@ -710,6 +760,11 @@
               <FileType>1</FileType>
               <FilePath>..\LCD\lv_apps\lv_idle_port\lv_idle_port.c</FilePath>
             </File>
+            <File>
+              <FileName>lv_ech_base_souce.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\LCD\lv_apps\lv_ech_base_souce\lv_ech_base_souce.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -719,6 +774,91 @@
               <FileName>ic_launcher_bg.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\LCD\resource\image\base_bg\ic_launcher_bg.c</FilePath>
+            </File>
+            <File>
+              <FileName>stat_sys_battery_0.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\LCD\resource\image\battery\stat_sys_battery_0.c</FilePath>
+            </File>
+            <File>
+              <FileName>stat_sys_battery_15.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\LCD\resource\image\battery\stat_sys_battery_15.c</FilePath>
+            </File>
+            <File>
+              <FileName>stat_sys_battery_28.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\LCD\resource\image\battery\stat_sys_battery_28.c</FilePath>
+            </File>
+            <File>
+              <FileName>stat_sys_battery_43.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\LCD\resource\image\battery\stat_sys_battery_43.c</FilePath>
+            </File>
+            <File>
+              <FileName>stat_sys_battery_57.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\LCD\resource\image\battery\stat_sys_battery_57.c</FilePath>
+            </File>
+            <File>
+              <FileName>stat_sys_battery_71.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\LCD\resource\image\battery\stat_sys_battery_71.c</FilePath>
+            </File>
+            <File>
+              <FileName>stat_sys_battery_85.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\LCD\resource\image\battery\stat_sys_battery_85.c</FilePath>
+            </File>
+            <File>
+              <FileName>stat_sys_battery_100.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\LCD\resource\image\battery\stat_sys_battery_100.c</FilePath>
+            </File>
+            <File>
+              <FileName>stat_sys_battery_charge_anim0.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\LCD\resource\image\battery\stat_sys_battery_charge_anim0.c</FilePath>
+            </File>
+            <File>
+              <FileName>stat_sys_battery_charge_anim15.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\LCD\resource\image\battery\stat_sys_battery_charge_anim15.c</FilePath>
+            </File>
+            <File>
+              <FileName>stat_sys_battery_charge_anim28.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\LCD\resource\image\battery\stat_sys_battery_charge_anim28.c</FilePath>
+            </File>
+            <File>
+              <FileName>stat_sys_battery_charge_anim43.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\LCD\resource\image\battery\stat_sys_battery_charge_anim43.c</FilePath>
+            </File>
+            <File>
+              <FileName>stat_sys_battery_charge_anim57.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\LCD\resource\image\battery\stat_sys_battery_charge_anim57.c</FilePath>
+            </File>
+            <File>
+              <FileName>stat_sys_battery_charge_anim71.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\LCD\resource\image\battery\stat_sys_battery_charge_anim71.c</FilePath>
+            </File>
+            <File>
+              <FileName>stat_sys_battery_charge_anim85.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\LCD\resource\image\battery\stat_sys_battery_charge_anim85.c</FilePath>
+            </File>
+            <File>
+              <FileName>stat_sys_battery_charge_anim100.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\LCD\resource\image\battery\stat_sys_battery_charge_anim100.c</FilePath>
+            </File>
+            <File>
+              <FileName>stat_sys_no_battery.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\LCD\resource\image\battery\stat_sys_no_battery.c</FilePath>
             </File>
           </Files>
         </Group>

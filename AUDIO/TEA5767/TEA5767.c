@@ -1,8 +1,8 @@
 #include "TEA5767.h"
-#include "delay.h"
-#include "uartall.h"
+#include "ech_delay.h"
+#include "ech_uartall.h"
 #include "string.h"
-#include "key.h"
+#include "ech_key.h"
 
 #if 0
 

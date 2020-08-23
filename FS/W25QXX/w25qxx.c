@@ -1,7 +1,7 @@
 #include "w25qxx.h"
-#include "spi.h"
-#include "delay.h"
-#include "uartall.h"
+#include "ech_spi.h"
+#include "ech_delay.h"
+#include "ech_uartall.h"
 #include "stm32f1xx_hal_gpio.h"
 
 u16 W25QXX_TYPE=W25Q64;	//默认是W25Q128

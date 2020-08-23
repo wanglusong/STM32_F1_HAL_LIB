@@ -29,6 +29,21 @@
 /*开关ADC功能*/
 #define		ADC_FUNC			CLOSE
 
+/* Task Config ---------------------------------------------------------------*/
+
+#define START_TASK_PRIO 1  /*task priority*/
+#define START_STK_SIZE 512 /*task stack size*/
+
+#define LV_ECH_LED_TASK_PRIO 5 
+#define LV_ECH_LED_STK_SIZE 512 
+
+#define LV_ECH_LVGL_TASK_PRIO 2 
+#define LV_ECH_LVGL_STK_SIZE 512 
+
+#define LV_ECH_START_TASK_PRIO 3 
+#define LV_ECH_START_STK_SIZE 1024
+
+
 /* Exported types ------------------------------------------------------------*/
 
 
@@ -52,9 +67,6 @@ extern MAIN_PARAM main_param_t;
 /* Exported functions ------------------------------------------------------- */
 
 /* project macro switch*/
-
-#define item_37472 CLOSE /*open or close*/
-#define item_32415 CLOSE /*open or close*/
 
 #endif /* __MAIN_H */
 

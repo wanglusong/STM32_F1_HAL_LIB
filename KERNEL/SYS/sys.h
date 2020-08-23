@@ -4,9 +4,9 @@
 #include "stm32f1xx.h" 
 #include "stdbool.h"
 
-//0,不使能ucos
-//1,֧使能ucos
-#define SYSTEM_SUPPORT_OS		0		
+//0,不使能os
+//1,֧使能os
+#define SYSTEM_SUPPORT_OS		1		
 
 typedef int32_t  s32;
 typedef int16_t s16;
