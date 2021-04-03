@@ -4,7 +4,7 @@
 #include "sys.h"
 #include "appstart.h"/*…Ë±∏≈‰÷√Õ∑*/
 
-#if ESP8266_FUNC
+#ifdef ESP8266_FUNC
 
 void esp8266_init(void);
 

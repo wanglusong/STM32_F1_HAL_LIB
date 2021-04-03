@@ -12,22 +12,22 @@
 #define CLOSE 0
 
 /*开关ESP8266功能*/
-#define		ESP8266_FUNC	CLOSE
+//#define		ESP8266_FUNC
 
 /*开关LCD功能*/
-#define		LCD_FUNC			OPEN
+#define		LCD_FUNC
 
 /*开关LVGL功能*/
-#define		LVGL_FUNC			OPEN
+//#define		LVGL_FUNC
 
 /*开关串口功能*/
-#define		UART_FUNC			OPEN
+#define		UART_FUNC
 
 /*开关定时器功能*/
-#define		TIM_FUNC			OPEN
+#define		TIM_FUNC
 
 /*开关ADC功能*/
-#define		ADC_FUNC			CLOSE
+#define		ADC_FUNC
 
 /* Task Config ---------------------------------------------------------------*/
 
@@ -35,13 +35,13 @@
 #define START_STK_SIZE 512 /*task stack size*/
 
 #define LV_ECH_LED_TASK_PRIO 5 
-#define LV_ECH_LED_STK_SIZE 512 
+#define LV_ECH_LED_STK_SIZE 128 
 
 #define LV_ECH_LVGL_TASK_PRIO 2 
-#define LV_ECH_LVGL_STK_SIZE 512 
+#define LV_ECH_LVGL_STK_SIZE 128 
 
 #define LV_ECH_START_TASK_PRIO 3 
-#define LV_ECH_START_STK_SIZE 1024
+#define LV_ECH_START_STK_SIZE 256
 
 
 /* Exported types ------------------------------------------------------------*/

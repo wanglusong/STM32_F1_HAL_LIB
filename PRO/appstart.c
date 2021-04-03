@@ -14,27 +14,27 @@
 /*	constants */
 MAIN_PARAM main_param_t;
 
-#if TIM_FUNC
+#ifdef TIM_FUNC
 #include "ech_tim.h"
 #endif
 
-#if LVGL_FUNC
+#ifdef LVGL_FUNC
 #include "lvgl.h"
 #endif
 
-#if LCD_FUNC
+#ifdef LCD_FUNC
 #include "ech_lcd_config.h"
 #endif
 
-#if UART_FUNC
+#ifdef UART_FUNC
 #include "ech_uartall.h"
 #endif
 
-#if ADC_FUNC
+#ifdef ADC_FUNC
 #include "ech_adc.h"
 #endif
 
-#if ESP8266_FUNC
+#ifdef ESP8266_FUNC
 #include "ech_esp8266_uart.h"
 #endif
 
@@ -65,16 +65,16 @@ void app_config(void)
 	/*init param*/
 	memset(&main_param_t, 0, sizeof(MAIN_PARAM));
 		
-#if ADC_FUNC
+#ifdef ADC_FUNC
 	MY_ADC_Init();
 #endif
 	
-#if TIM_FUNC	
+#ifdef TIM_FUNC	
 	TIM4_Init(999,719);/*10ms*/
 	TIM5_Init(9999,7199);/*1s*/
 #endif
 		
-#if UART_FUNC	
+#ifdef UART_FUNC	
 	uart1_init(9600);				//UART
 	uart2_init(9600);
 	uart3_init(9600);
@@ -82,10 +82,10 @@ void app_config(void)
 
 	KEY_Init(); 						//KEY
 		
-#if LVGL_FUNC
+#ifdef LVGL_FUNC
 
 	/*lvgl的1ms心跳time*/
-	#if TIM_FUNC	
+	#ifdef TIM_FUNC	
 	TIM3_Init(999,71);	
 	TIM_ON_OFF_IT(&TIM3_Handler, true);
 	/*little vGL init*/
@@ -98,7 +98,7 @@ void app_config(void)
 	
 #endif
 	
-#if ESP8266_FUNC
+#ifdef ESP8266_FUNC
 	UART_IRQ_FUNC(&UART1_Handler,false);
 	esp8266_init();
 	UART_IRQ_FUNC(&UART1_Handler,true);
@@ -192,7 +192,7 @@ void lvgl_task(void *pvParameters)
 	while(1)
 	{
 
-#if LVGL_FUNC
+#ifdef LVGL_FUNC
 		lv_task_handler();
 #endif
 		vTaskDelay(5);

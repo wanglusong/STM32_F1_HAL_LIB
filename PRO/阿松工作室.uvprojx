@@ -10,8 +10,8 @@
       <TargetName>COMPONENTS</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pArmCC>5060300::V5.06 update 3 (build 300)::ARMCC</pArmCC>
-      <pCCUsed>5060300::V5.06 update 3 (build 300)::ARMCC</pCCUsed>
+      <pCCUsed>5060750::V5.06 update 6 (build 750)::ARMCC</pCCUsed>
+      <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>STM32F103ZE</Device>
@@ -49,7 +49,7 @@
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
           <OutputDirectory>.\OBJ\</OutputDirectory>
-          <OutputName>阿松工作室</OutputName>
+          <OutputName>ech</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>1</CreateHexFile>
@@ -324,6 +324,7 @@
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
             <uC99>1</uC99>
+            <uGnu>0</uGnu>
             <useXO>0</useXO>
             <v6Lang>1</v6Lang>
             <v6LangP>1</v6LangP>
@@ -336,7 +337,7 @@
               <MiscControls>--diag_suppress=111 --diag_suppress=174 --locale=english</MiscControls>
               <Define>USE_HAL_DRIVER,STM32F103xE</Define>
               <Undefine></Undefine>
-              <IncludePath>..\AUDIO\TEA5767;..\DRIVE\ADC;..\DRIVE\DELAY;..\DRIVE\KEY;..\DRIVE\LED;..\DRIVE\SPI;..\DRIVE\TIM;..\DRIVE\UART;..\FS\FATFS\exfuns;..\FS\FATFS\src;..\FS\FATFS\doc;..\FS\SD;..\FS\W25QXX;..\KERNEL\CORE;..\KERNEL\HALLIB\STM32F1xx_HAL_Driver\Inc;..\KERNEL\MALLOC;..\KERNEL\SYS;.\OBJ;..\PRO;..\..\LittleVGL;..\..\LittleVGL\lv_port;..\..\LittleVGL\lvgl;..\LCD\lv_drivers\OLED_0_96_IIC;..\LCD\lv_drivers\ST7735_1_44;..\LCD\lv_drivers\ST7789_1_3;..\LCD\lv_drivers\TFT_LCD;..\LCD;..\LCD\lv_include;..\LCD\lv_objx\lv_list_port;..\LCD\lv_objx\lv_obj_port;..\LCD\lv_objx\lv_win_port;..\LCD\lv_apps\lv_idle_port;..\LCD\resource\image\base_bg;..\KERNEL\FREERTOS\include;..\KERNEL\FREERTOS\portable\RVDS\ARM_CM3;..\LCD\lv_apps\lv_ech_base_souce</IncludePath>
+              <IncludePath>..\AUDIO\TEA5767;..\FS\FATFS\exfuns;..\FS\FATFS\src;..\FS\FATFS\doc;..\FS\SD;..\FS\W25QXX;..\KERNEL\CORE;..\KERNEL\HALLIB\STM32F1xx_HAL_Driver\Inc;..\KERNEL\MALLOC;..\KERNEL\SYS;.\OBJ;..\PRO;..\..\LittleVGL;..\..\LittleVGL\lv_port;..\..\LittleVGL\lvgl;..\KERNEL\FREERTOS\include;..\KERNEL\FREERTOS\portable\RVDS\ARM_CM3;..\DRIVE\ECH_ADC;..\DRIVE\ECH_DELAY;..\DRIVE\ECH_KEY;..\DRIVE\ECH_LED;..\DRIVE\ECH_SPI;..\DRIVE\ECH_TIM;..\DRIVE\ECH_UART;..\ECH\gui\lv_apps\lv_ech_idle;..\ECH\gui\lv_apps\lv_ech_base_souce;..\ECH\gui\lv_drivers\ECH_OLED;..\ECH\gui\lv_drivers\ECH_ST7735;..\ECH\gui\lv_drivers\ECH_ST7789;..\ECH\gui\lv_drivers\ECH_TFT;..\ECH\gui\lv_include;..\ECH\gui\lv_objx\lv_ech_list;..\ECH\gui\lv_objx\lv_ech_obj;..\ECH\gui\lv_objx\lv_ech_win;..\ECH\gui\resource\image\base_bg;..\ECH\gui\resource\image\battery;..\ECH\gui\lv_drivers;..\ECH\gui\resource\font</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -391,39 +392,39 @@
           <GroupName>DRIVE</GroupName>
           <Files>
             <File>
-              <FileName>delay.c</FileName>
+              <FileName>ech_adc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\DRIVE\DELAY\delay.c</FilePath>
+              <FilePath>..\DRIVE\ECH_ADC\ech_adc.c</FilePath>
             </File>
             <File>
-              <FileName>key.c</FileName>
+              <FileName>ech_delay.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\DRIVE\KEY\key.c</FilePath>
+              <FilePath>..\DRIVE\ECH_DELAY\ech_delay.c</FilePath>
             </File>
             <File>
-              <FileName>led.c</FileName>
+              <FileName>ech_key.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\DRIVE\LED\led.c</FilePath>
+              <FilePath>..\DRIVE\ECH_KEY\ech_key.c</FilePath>
             </File>
             <File>
-              <FileName>spi.c</FileName>
+              <FileName>ech_led.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\DRIVE\SPI\spi.c</FilePath>
+              <FilePath>..\DRIVE\ECH_LED\ech_led.c</FilePath>
             </File>
             <File>
-              <FileName>tim.c</FileName>
+              <FileName>ech_spi.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\DRIVE\TIM\tim.c</FilePath>
+              <FilePath>..\DRIVE\ECH_SPI\ech_spi.c</FilePath>
             </File>
             <File>
-              <FileName>uartall.c</FileName>
+              <FileName>ech_tim.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\DRIVE\UART\uartall.c</FilePath>
+              <FilePath>..\DRIVE\ECH_TIM\ech_tim.c</FilePath>
             </File>
             <File>
-              <FileName>adc.c</FileName>
+              <FileName>ech_uartall.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\DRIVE\ADC\adc.c</FilePath>
+              <FilePath>..\DRIVE\ECH_UART\ech_uartall.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -698,167 +699,207 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>LCD/lv_drivers</GroupName>
+          <GroupName>ECH/gui/lv_apps</GroupName>
           <Files>
             <File>
-              <FileName>oled_iic.c</FileName>
+              <FileName>lv_ech_idle.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\LCD\lv_drivers\OLED_0_96_IIC\oled_iic.c</FilePath>
-            </File>
-            <File>
-              <FileName>st7735_spi.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\LCD\lv_drivers\ST7735_1_44\st7735_spi.c</FilePath>
-            </File>
-            <File>
-              <FileName>st7789_spi.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\LCD\lv_drivers\ST7789_1_3\st7789_spi.c</FilePath>
-            </File>
-            <File>
-              <FileName>tft_lcd.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\LCD\lv_drivers\TFT_LCD\tft_lcd.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>LCD/lv_external</GroupName>
-          <Files>
-            <File>
-              <FileName>lv_lib_port.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\LCD\lv_external\lv_lib_port.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>LCD/lv_objx</GroupName>
-          <Files>
-            <File>
-              <FileName>lv_list_port.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\LCD\lv_objx\lv_list_port\lv_list_port.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_obj_port.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\LCD\lv_objx\lv_obj_port\lv_obj_port.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_win_port.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\LCD\lv_objx\lv_win_port\lv_win_port.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>LCD/lv_apps</GroupName>
-          <Files>
-            <File>
-              <FileName>lv_idle_port.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\LCD\lv_apps\lv_idle_port\lv_idle_port.c</FilePath>
+              <FilePath>..\ECH\gui\lv_apps\lv_ech_idle\lv_ech_idle.c</FilePath>
             </File>
             <File>
               <FileName>lv_ech_base_souce.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\LCD\lv_apps\lv_ech_base_souce\lv_ech_base_souce.c</FilePath>
+              <FilePath>..\ECH\gui\lv_apps\lv_ech_base_souce\lv_ech_base_souce.c</FilePath>
             </File>
           </Files>
         </Group>
         <Group>
-          <GroupName>LCD/img_resources</GroupName>
+          <GroupName>ECH/gui/lv_drivers</GroupName>
           <Files>
+            <File>
+              <FileName>ech_oled_iic.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\ECH\gui\lv_drivers\ECH_OLED\ech_oled_iic.c</FilePath>
+            </File>
+            <File>
+              <FileName>ech_st7735_spi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\ECH\gui\lv_drivers\ECH_ST7735\ech_st7735_spi.c</FilePath>
+            </File>
+            <File>
+              <FileName>ech_st7789_spi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\ECH\gui\lv_drivers\ECH_ST7789\ech_st7789_spi.c</FilePath>
+            </File>
+            <File>
+              <FileName>ech_tft.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\ECH\gui\lv_drivers\ECH_TFT\ech_tft.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>ECH/gui/lv_external</GroupName>
+          <Files>
+            <File>
+              <FileName>lv_ech_lib.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\ECH\gui\lv_external\lv_ech_lib.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>ECH/gui/lv_objx</GroupName>
+          <Files>
+            <File>
+              <FileName>lv_ech_list.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\ECH\gui\lv_objx\lv_ech_list\lv_ech_list.c</FilePath>
+            </File>
+            <File>
+              <FileName>lv_ech_obj.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\ECH\gui\lv_objx\lv_ech_obj\lv_ech_obj.c</FilePath>
+            </File>
+            <File>
+              <FileName>lv_ech_win.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\ECH\gui\lv_objx\lv_ech_win\lv_ech_win.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>ECH/gui/resource/font</GroupName>
+          <Files>
+            <File>
+              <FileName>lv_poc_font_msyh_1bit_2500_12.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\ECH\gui\resource\font\lv_poc_font_msyh_1bit_2500_12.c</FilePath>
+            </File>
+            <File>
+              <FileName>lv_poc_font_msyh_1bit_2500_13.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\ECH\gui\resource\font\lv_poc_font_msyh_1bit_2500_13.c</FilePath>
+            </File>
+            <File>
+              <FileName>lv_poc_font_msyh_1bit_2500_14.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\ECH\gui\resource\font\lv_poc_font_msyh_1bit_2500_14.c</FilePath>
+            </File>
+            <File>
+              <FileName>lv_poc_font_msyh_1bit_2500_15.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\ECH\gui\resource\font\lv_poc_font_msyh_1bit_2500_15.c</FilePath>
+            </File>
+            <File>
+              <FileName>lv_poc_font_msyh_1bit_2500_16.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\ECH\gui\resource\font\lv_poc_font_msyh_1bit_2500_16.c</FilePath>
+            </File>
+            <File>
+              <FileName>lv_poc_font_msyh_1bit_2500_18.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\ECH\gui\resource\font\lv_poc_font_msyh_1bit_2500_18.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>ECH/gui/resource/img</GroupName>
+          <Files>
+            <File>
+              <FileName>img_cogwheel_rgb.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\ECH\gui\resource\image\base_bg\img_cogwheel_rgb.c</FilePath>
+            </File>
             <File>
               <FileName>ic_launcher_bg.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\LCD\resource\image\base_bg\ic_launcher_bg.c</FilePath>
+              <FilePath>..\ECH\gui\resource\image\base_bg\ic_launcher_bg.c</FilePath>
             </File>
             <File>
               <FileName>stat_sys_battery_0.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\LCD\resource\image\battery\stat_sys_battery_0.c</FilePath>
+              <FilePath>..\ECH\gui\resource\image\battery\stat_sys_battery_0.c</FilePath>
             </File>
             <File>
               <FileName>stat_sys_battery_15.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\LCD\resource\image\battery\stat_sys_battery_15.c</FilePath>
+              <FilePath>..\ECH\gui\resource\image\battery\stat_sys_battery_15.c</FilePath>
             </File>
             <File>
               <FileName>stat_sys_battery_28.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\LCD\resource\image\battery\stat_sys_battery_28.c</FilePath>
+              <FilePath>..\ECH\gui\resource\image\battery\stat_sys_battery_28.c</FilePath>
             </File>
             <File>
               <FileName>stat_sys_battery_43.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\LCD\resource\image\battery\stat_sys_battery_43.c</FilePath>
+              <FilePath>..\ECH\gui\resource\image\battery\stat_sys_battery_43.c</FilePath>
             </File>
             <File>
               <FileName>stat_sys_battery_57.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\LCD\resource\image\battery\stat_sys_battery_57.c</FilePath>
+              <FilePath>..\ECH\gui\resource\image\battery\stat_sys_battery_57.c</FilePath>
             </File>
             <File>
               <FileName>stat_sys_battery_71.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\LCD\resource\image\battery\stat_sys_battery_71.c</FilePath>
+              <FilePath>..\ECH\gui\resource\image\battery\stat_sys_battery_71.c</FilePath>
             </File>
             <File>
               <FileName>stat_sys_battery_85.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\LCD\resource\image\battery\stat_sys_battery_85.c</FilePath>
+              <FilePath>..\ECH\gui\resource\image\battery\stat_sys_battery_85.c</FilePath>
             </File>
             <File>
               <FileName>stat_sys_battery_100.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\LCD\resource\image\battery\stat_sys_battery_100.c</FilePath>
+              <FilePath>..\ECH\gui\resource\image\battery\stat_sys_battery_100.c</FilePath>
             </File>
             <File>
               <FileName>stat_sys_battery_charge_anim0.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\LCD\resource\image\battery\stat_sys_battery_charge_anim0.c</FilePath>
+              <FilePath>..\ECH\gui\resource\image\battery\stat_sys_battery_charge_anim0.c</FilePath>
             </File>
             <File>
               <FileName>stat_sys_battery_charge_anim15.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\LCD\resource\image\battery\stat_sys_battery_charge_anim15.c</FilePath>
+              <FilePath>..\ECH\gui\resource\image\battery\stat_sys_battery_charge_anim15.c</FilePath>
             </File>
             <File>
               <FileName>stat_sys_battery_charge_anim28.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\LCD\resource\image\battery\stat_sys_battery_charge_anim28.c</FilePath>
+              <FilePath>..\ECH\gui\resource\image\battery\stat_sys_battery_charge_anim28.c</FilePath>
             </File>
             <File>
               <FileName>stat_sys_battery_charge_anim43.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\LCD\resource\image\battery\stat_sys_battery_charge_anim43.c</FilePath>
+              <FilePath>..\ECH\gui\resource\image\battery\stat_sys_battery_charge_anim43.c</FilePath>
             </File>
             <File>
               <FileName>stat_sys_battery_charge_anim57.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\LCD\resource\image\battery\stat_sys_battery_charge_anim57.c</FilePath>
+              <FilePath>..\ECH\gui\resource\image\battery\stat_sys_battery_charge_anim57.c</FilePath>
             </File>
             <File>
               <FileName>stat_sys_battery_charge_anim71.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\LCD\resource\image\battery\stat_sys_battery_charge_anim71.c</FilePath>
+              <FilePath>..\ECH\gui\resource\image\battery\stat_sys_battery_charge_anim71.c</FilePath>
             </File>
             <File>
               <FileName>stat_sys_battery_charge_anim85.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\LCD\resource\image\battery\stat_sys_battery_charge_anim85.c</FilePath>
+              <FilePath>..\ECH\gui\resource\image\battery\stat_sys_battery_charge_anim85.c</FilePath>
             </File>
             <File>
               <FileName>stat_sys_battery_charge_anim100.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\LCD\resource\image\battery\stat_sys_battery_charge_anim100.c</FilePath>
+              <FilePath>..\ECH\gui\resource\image\battery\stat_sys_battery_charge_anim100.c</FilePath>
             </File>
             <File>
               <FileName>stat_sys_no_battery.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\LCD\resource\image\battery\stat_sys_no_battery.c</FilePath>
+              <FilePath>..\ECH\gui\resource\image\battery\stat_sys_no_battery.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -866,9 +907,9 @@
           <GroupName>NET</GroupName>
           <Files>
             <File>
-              <FileName>esp8266_uart.c</FileName>
+              <FileName>ech_esp8266_uart.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\NET\ESP8266\esp8266_uart.c</FilePath>
+              <FilePath>..\NET\ECH_ESP8266\ech_esp8266_uart.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1146,129 +1187,14 @@
               <FilePath>..\..\LittleVGL\lvgl\src\lv_font\lv_font.c</FilePath>
             </File>
             <File>
-              <FileName>lv_font_dejavu_16_persian_hebrew.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\LittleVGL\lvgl\src\lv_font\lv_font_dejavu_16_persian_hebrew.c</FilePath>
-            </File>
-            <File>
               <FileName>lv_font_fmt_txt.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\LittleVGL\lvgl\src\lv_font\lv_font_fmt_txt.c</FilePath>
             </File>
             <File>
-              <FileName>lv_font_montserrat_12.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\LittleVGL\lvgl\src\lv_font\lv_font_montserrat_12.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_montserrat_12_subpx.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\LittleVGL\lvgl\src\lv_font\lv_font_montserrat_12_subpx.c</FilePath>
-            </File>
-            <File>
               <FileName>lv_font_montserrat_14.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\LittleVGL\lvgl\src\lv_font\lv_font_montserrat_14.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_montserrat_16.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\LittleVGL\lvgl\src\lv_font\lv_font_montserrat_16.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_montserrat_18.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\LittleVGL\lvgl\src\lv_font\lv_font_montserrat_18.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_montserrat_20.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\LittleVGL\lvgl\src\lv_font\lv_font_montserrat_20.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_montserrat_22.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\LittleVGL\lvgl\src\lv_font\lv_font_montserrat_22.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_montserrat_24.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\LittleVGL\lvgl\src\lv_font\lv_font_montserrat_24.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_montserrat_26.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\LittleVGL\lvgl\src\lv_font\lv_font_montserrat_26.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_montserrat_28.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\LittleVGL\lvgl\src\lv_font\lv_font_montserrat_28.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_montserrat_28_compressed.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\LittleVGL\lvgl\src\lv_font\lv_font_montserrat_28_compressed.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_montserrat_30.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\LittleVGL\lvgl\src\lv_font\lv_font_montserrat_30.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_montserrat_32.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\LittleVGL\lvgl\src\lv_font\lv_font_montserrat_32.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_montserrat_34.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\LittleVGL\lvgl\src\lv_font\lv_font_montserrat_34.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_montserrat_36.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\LittleVGL\lvgl\src\lv_font\lv_font_montserrat_36.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_montserrat_38.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\LittleVGL\lvgl\src\lv_font\lv_font_montserrat_38.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_montserrat_40.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\LittleVGL\lvgl\src\lv_font\lv_font_montserrat_40.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_montserrat_42.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\LittleVGL\lvgl\src\lv_font\lv_font_montserrat_42.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_montserrat_44.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\LittleVGL\lvgl\src\lv_font\lv_font_montserrat_44.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_montserrat_46.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\LittleVGL\lvgl\src\lv_font\lv_font_montserrat_46.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_montserrat_48.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\LittleVGL\lvgl\src\lv_font\lv_font_montserrat_48.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_simsun_16_cjk.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\LittleVGL\lvgl\src\lv_font\lv_font_simsun_16_cjk.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_unscii_8.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\LittleVGL\lvgl\src\lv_font\lv_font_unscii_8.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1460,5 +1386,11 @@
       </Groups>
     </Target>
   </Targets>
+
+  <RTE>
+    <apis/>
+    <components/>
+    <files/>
+  </RTE>
 
 </Project>

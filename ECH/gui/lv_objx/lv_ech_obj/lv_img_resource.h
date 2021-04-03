@@ -99,8 +99,8 @@ LV_IMG_DECLARE(locked);
 LV_IMG_DECLARE(unlock);
 LV_IMG_DECLARE(power_off);
 LV_IMG_DECLARE(reboot);
-LV_IMG_DECLARE(img_poweroff_poc_logo_unicom);
-LV_IMG_DECLARE(img_poweron_poc_logo_sprd);
+LV_IMG_DECLARE(img_poweroff_ech_logo_unicom);
+LV_IMG_DECLARE(img_poweron_ech_logo_sprd);
 
 LV_IMG_DECLARE(no_battery_charging_shutdown);
 LV_IMG_DECLARE(indeterminate0);

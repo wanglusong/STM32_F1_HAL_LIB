@@ -1536,7 +1536,7 @@ static void HCD_Port_IRQHandler(HCD_HandleTypeDef *hhcd)
   hprt0_dup = USBx_HPRT0;
 
   hprt0_dup &= ~(USB_OTG_HPRT_PENA | USB_OTG_HPRT_PCDET | \
-                 USB_OTG_HPRT_PENCHNG | USB_OTG_HPRT_POCCHNG);
+                 USB_OTG_HPRT_PENCHNG | USB_OTG_HPRT_echCHNG);
 
   /* Check whether Port Connect detected */
   if ((hprt0 & USB_OTG_HPRT_PCDET) == USB_OTG_HPRT_PCDET)
@@ -1595,9 +1595,9 @@ static void HCD_Port_IRQHandler(HCD_HandleTypeDef *hhcd)
   }
 
   /* Check for an overcurrent */
-  if ((hprt0 & USB_OTG_HPRT_POCCHNG) == USB_OTG_HPRT_POCCHNG)
+  if ((hprt0 & USB_OTG_HPRT_echCHNG) == USB_OTG_HPRT_echCHNG)
   {
-    hprt0_dup |= USB_OTG_HPRT_POCCHNG;
+    hprt0_dup |= USB_OTG_HPRT_echCHNG;
   }
 
   /* Clear Port Interrupts */

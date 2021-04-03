@@ -2,7 +2,7 @@
 #include "ech_uartall.h"	
 #include "ech_delay.h"	
 
-#if ESP8266_FUNC
+#ifdef ESP8266_FUNC
 
 static
 void uart_to_onebyte(u8 byte)

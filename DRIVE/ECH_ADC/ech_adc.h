@@ -3,7 +3,7 @@
 
 #include "appstart.h"
 
-#if ADC_FUNC
+#ifdef ADC_FUNC
 
 //*****************************************//
 /*struct variable*/
@@ -63,9 +63,9 @@ extern ADC_CONFIG adc_config_t;
 
 //*****************************************//
 
-void MY_ADC_Init(void); 				//ADCÍ¨µÀ³õÊ¼»¯
-u16  Get_Adc(ADC_ChannelConf ch); 		        //»ñµÃÄ³¸öÍ¨µÀÖµ 
-u16 Get_Adc_Average(ADC_ChannelConf ch,ADC_Channel_Sampling_Count times);//µÃµ½Ä³¸öÍ¨µÀ¸ø¶¨´ÎÊı²ÉÑùµÄÆ½¾ùÖµ
+void MY_ADC_Init(void); 				//ADCé€šé“åˆå§‹åŒ–
+u16  Get_Adc(ADC_ChannelConf ch); 		        //è·å¾—æŸä¸ªé€šé“å€¼ 
+u16 Get_Adc_Average(ADC_ChannelConf ch,ADC_Channel_Sampling_Count times);//å¾—åˆ°æŸä¸ªé€šé“ç»™å®šæ¬¡æ•°é‡‡æ ·çš„å¹³å‡å€¼
 
 #endif
 

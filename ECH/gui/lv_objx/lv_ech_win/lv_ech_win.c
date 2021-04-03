@@ -22,34 +22,34 @@ static void * empty_win(lv_obj_t * parent, lv_area_t display_area)
 
 
 /*******************
-*     NAME:   lv_poc_win_create
+*     NAME:   lv_ech_win_create
 *   AUTHOR:   lugj
-* DESCRIPT:   创建poc窗口
+* DESCRIPT:   创建ech窗口
               parent只可以是activity中display成员，其他的lv_obj_t在有控制栏时会出现部分内容被控制栏遮挡
 *     DATE:   2019-11-25
 ********************/
-lv_poc_win_t * lv_poc_win_create(lv_obj_t * parent, const char * title, lv_poc_win_create_func_t func)
+lv_ech_win_t * lv_ech_win_create(lv_obj_t * parent, const char * title, lv_ech_win_create_func_t func)
 {
     lv_style_t * style_header;
-    lv_poc_win_t * new_win = (lv_poc_win_t *)lv_mem_alloc(sizeof(lv_poc_win_t));
-    //poc_setting_conf = lv_poc_setting_conf_read();
-    //style_header = (lv_style_t *)(poc_setting_conf->theme.current_theme->style_win_header);
+    lv_ech_win_t * new_win = (lv_ech_win_t *)lv_mem_alloc(sizeof(lv_ech_win_t));
+    //ech_setting_conf = lv_ech_setting_conf_read();
+    //style_header = (lv_style_t *)(ech_setting_conf->theme.current_theme->style_win_header);
     if(new_win == NULL)
     {
         return NULL;
     }
-    memset(new_win, 0, sizeof(lv_poc_win_t));
+    memset(new_win, 0, sizeof(lv_ech_win_t));
     new_win->header = lv_obj_create(parent, NULL);
-    //style_header->text.font = (lv_font_t *)poc_setting_conf->font.win_title_font;
+    //style_header->text.font = (lv_font_t *)ech_setting_conf->font.win_title_font;
     lv_obj_add_style(new_win->header, LV_OBJ_PART_MAIN, style_header);//lv_obj_add_style(control->background, LV_OBJ_PART_MAIN, ctrl_background_style);
-    lv_poc_activity_t * activity = lv_poc_activity_list_lookup(parent);
+    lv_ech_activity_t * activity = lv_ech_activity_list_lookup(parent);
     if(NULL != activity)
     {
-        lv_obj_set_size(new_win->header, lv_poc_get_display_width(parent), lv_poc_get_display_height(parent)/LV_POC_WIN_TITLE_HEIGHT_RATIO);
+        lv_obj_set_size(new_win->header, lv_ech_get_display_width(parent), lv_ech_get_display_height(parent)/LV_ech_WIN_TITLE_HEIGHT_RATIO);
     }
     else
     {
-        lv_obj_set_size(new_win->header, lv_obj_get_width(parent), lv_obj_get_height(parent)/LV_POC_WIN_TITLE_HEIGHT_RATIO);
+        lv_obj_set_size(new_win->header, lv_obj_get_width(parent), lv_obj_get_height(parent)/LV_ech_WIN_TITLE_HEIGHT_RATIO);
     }
     new_win->title = lv_label_create(new_win->header, NULL);
     if(title != NULL)
@@ -68,7 +68,7 @@ lv_poc_win_t * lv_poc_win_create(lv_obj_t * parent, const char * title, lv_poc_w
     new_win->display_area.y1 = lv_obj_get_y(new_win->header) + lv_obj_get_height(new_win->header);
     if(NULL != activity)
     {
-        new_win->display_area.y2 = lv_obj_get_y(new_win->header) + lv_poc_get_display_height(parent);
+        new_win->display_area.y2 = lv_obj_get_y(new_win->header) + lv_ech_get_display_height(parent);
     }
     else
     {

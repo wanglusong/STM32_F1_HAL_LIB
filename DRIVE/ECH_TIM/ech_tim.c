@@ -1,7 +1,7 @@
 #include "ech_tim.h"
 #include "lvgl.h"
 
-#if TIM_FUNC
+#ifdef TIM_FUNC
 #include "string.h"
 #include "ech_uartall.h"
 

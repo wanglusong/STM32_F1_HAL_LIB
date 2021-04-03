@@ -1,78 +1,78 @@
 #include "ech_adc.h"
 #include "ech_delay.h"
 
-#if ADC_FUNC
+#ifdef ADC_FUNC
 
 #include "string.h"
 
-ADC_HandleTypeDef ADC1_Handler;		//ADC¾ä±ú
+ADC_HandleTypeDef ADC1_Handler;		//ADCå¥æŸ„
 
 /*extern param*/
 ADC_CONFIG adc_config_t;
 
 
-//³õÊ¼»¯ADC
+//åˆå§‹åŒ–ADC
 //ch: ADC_channels 
-//Í¨µÀÖµ 0~16È¡Öµ·¶Î§Îª£ºADC_CHANNEL_0~ADC_CHANNEL_16
+//é€šé“å€¼ 0~16å–å€¼èŒƒå›´ä¸ºï¼šADC_CHANNEL_0~ADC_CHANNEL_16
 void MY_ADC_Init(void)
 { 
 	RCC_PeriphCLKInitTypeDef ADC_CLKInit;
 	
-	ADC_CLKInit.PeriphClockSelection=RCC_PERIPHCLK_ADC;			//ADCÍâÉèÊ±ÖÓ
-	ADC_CLKInit.AdcClockSelection=RCC_ADCPCLK2_DIV6;			//·ÖÆµÒò×Ó6Ê±ÖÓÎª72M/6=12MHz
-	HAL_RCCEx_PeriphCLKConfig(&ADC_CLKInit);					//ÉèÖÃADCÊ±ÖÓ
+	ADC_CLKInit.PeriphClockSelection=RCC_PERIPHCLK_ADC;			//ADCå¤–è®¾æ—¶é’Ÿ
+	ADC_CLKInit.AdcClockSelection=RCC_ADCPCLK2_DIV6;			//åˆ†é¢‘å› å­6æ—¶é’Ÿä¸º72M/6=12MHz
+	HAL_RCCEx_PeriphCLKConfig(&ADC_CLKInit);					//è®¾ç½®ADCæ—¶é’Ÿ
 	
 	ADC1_Handler.Instance=ADC1;
-	ADC1_Handler.Init.DataAlign=ADC_DATAALIGN_RIGHT;             //ÓÒ¶ÔÆë
-	ADC1_Handler.Init.ScanConvMode=DISABLE;                      //·ÇÉ¨ÃèÄ£Ê½
-	ADC1_Handler.Init.ContinuousConvMode=DISABLE;                //¹Ø±ÕÁ¬Ğø×ª»»
-	ADC1_Handler.Init.NbrOfConversion=1;                         //1¸ö×ª»»ÔÚ¹æÔòĞòÁĞÖĞ Ò²¾ÍÊÇÖ»×ª»»¹æÔòĞòÁĞ1 
-	ADC1_Handler.Init.DiscontinuousConvMode=DISABLE;             //½ûÖ¹²»Á¬Ğø²ÉÑùÄ£Ê½
-	ADC1_Handler.Init.NbrOfDiscConversion=0;                     //²»Á¬Ğø²ÉÑùÍ¨µÀÊıÎª0
-	ADC1_Handler.Init.ExternalTrigConv=ADC_SOFTWARE_START;       //Èí¼ş´¥·¢
-	HAL_ADC_Init(&ADC1_Handler);                                 //³õÊ¼»¯ 
+	ADC1_Handler.Init.DataAlign=ADC_DATAALIGN_RIGHT;             //å³å¯¹é½
+	ADC1_Handler.Init.ScanConvMode=DISABLE;                      //éæ‰«ææ¨¡å¼
+	ADC1_Handler.Init.ContinuousConvMode=DISABLE;                //å…³é—­è¿ç»­è½¬æ¢
+	ADC1_Handler.Init.NbrOfConversion=1;                         //1ä¸ªè½¬æ¢åœ¨è§„åˆ™åºåˆ—ä¸­ ä¹Ÿå°±æ˜¯åªè½¬æ¢è§„åˆ™åºåˆ—1 
+	ADC1_Handler.Init.DiscontinuousConvMode=DISABLE;             //ç¦æ­¢ä¸è¿ç»­é‡‡æ ·æ¨¡å¼
+	ADC1_Handler.Init.NbrOfDiscConversion=0;                     //ä¸è¿ç»­é‡‡æ ·é€šé“æ•°ä¸º0
+	ADC1_Handler.Init.ExternalTrigConv=ADC_SOFTWARE_START;       //è½¯ä»¶è§¦å‘
+	HAL_ADC_Init(&ADC1_Handler);                                 //åˆå§‹åŒ– 
 	
-	HAL_ADCEx_Calibration_Start(&ADC1_Handler);					 //Ğ£×¼ADC
+	HAL_ADCEx_Calibration_Start(&ADC1_Handler);					 //æ ¡å‡†ADC
 	
 	memset(&adc_config_t, 0, sizeof(ADC_CONFIG));
 }
 
-//ADCµ×²ãÇı¶¯£¬Òı½ÅÅäÖÃ£¬Ê±ÖÓÊ¹ÄÜ
-//´Ëº¯Êı»á±»HAL_ADC_Init()µ÷ÓÃ
-//hadc:ADC¾ä±ú
+//ADCåº•å±‚é©±åŠ¨ï¼Œå¼•è„šé…ç½®ï¼Œæ—¶é’Ÿä½¿èƒ½
+//æ­¤å‡½æ•°ä¼šè¢«HAL_ADC_Init()è°ƒç”¨
+//hadc:ADCå¥æŸ„
 void HAL_ADC_MspInit(ADC_HandleTypeDef* hadc)
 {
     GPIO_InitTypeDef GPIO_Initure;
-    __HAL_RCC_ADC1_CLK_ENABLE();            //Ê¹ÄÜADC1Ê±ÖÓ
-    __HAL_RCC_GPIOA_CLK_ENABLE();			//¿ªÆôGPIOAÊ±ÖÓ
+    __HAL_RCC_ADC1_CLK_ENABLE();            //ä½¿èƒ½ADC1æ—¶é’Ÿ
+    __HAL_RCC_GPIOA_CLK_ENABLE();			//å¼€å¯GPIOAæ—¶é’Ÿ
 	
     GPIO_Initure.Pin=GPIO_PIN_5;            //PA5
-    GPIO_Initure.Mode=GPIO_MODE_ANALOG;     //Ä£Äâ
-    GPIO_Initure.Pull=GPIO_NOPULL;          //²»´øÉÏÏÂÀ­
+    GPIO_Initure.Mode=GPIO_MODE_ANALOG;     //æ¨¡æ‹Ÿ
+    GPIO_Initure.Pull=GPIO_NOPULL;          //ä¸å¸¦ä¸Šä¸‹æ‹‰
     HAL_GPIO_Init(GPIOA,&GPIO_Initure);
 }
 
-//»ñµÃADCÖµ
-//ch: Í¨µÀÖµ 0~16£¬È¡Öµ·¶Î§Îª£ºADC_CHANNEL_0~ADC_CHANNEL_16
-//·µ»ØÖµ:×ª»»½á¹û
+//è·å¾—ADCå€¼
+//ch: é€šé“å€¼ 0~16ï¼Œå–å€¼èŒƒå›´ä¸ºï¼šADC_CHANNEL_0~ADC_CHANNEL_16
+//è¿”å›å€¼:è½¬æ¢ç»“æœ
 u16 Get_Adc(ADC_ChannelConf ch)   
 {
     ADC_ChannelConfTypeDef ADC1_ChanConf;
     
-    ADC1_ChanConf.Channel=ch;                                   //Í¨µÀ
-    ADC1_ChanConf.Rank=1;                                       //µÚ1¸öĞòÁĞ£¬ĞòÁĞ1
-    ADC1_ChanConf.SamplingTime=ADC_SAMPLETIME_239CYCLES_5;      //²ÉÑùÊ±¼ä               
-    HAL_ADC_ConfigChannel(&ADC1_Handler,&ADC1_ChanConf);        //Í¨µÀÅäÖÃ
+    ADC1_ChanConf.Channel=ch;                                   //é€šé“
+    ADC1_ChanConf.Rank=1;                                       //ç¬¬1ä¸ªåºåˆ—ï¼Œåºåˆ—1
+    ADC1_ChanConf.SamplingTime=ADC_SAMPLETIME_239CYCLES_5;      //é‡‡æ ·æ—¶é—´               
+    HAL_ADC_ConfigChannel(&ADC1_Handler,&ADC1_ChanConf);        //é€šé“é…ç½®
 	
-    HAL_ADC_Start(&ADC1_Handler);                               //¿ªÆôADC
+    HAL_ADC_Start(&ADC1_Handler);                               //å¼€å¯ADC
 	
-    HAL_ADC_PollForConversion(&ADC1_Handler,10);                //ÂÖÑ¯×ª»»
+    HAL_ADC_PollForConversion(&ADC1_Handler,10);                //è½®è¯¢è½¬æ¢
  
-	return (u16)HAL_ADC_GetValue(&ADC1_Handler);	        	//·µ»Ø×î½üÒ»´ÎADC1¹æÔò×éµÄ×ª»»½á¹û
+	return (u16)HAL_ADC_GetValue(&ADC1_Handler);	        	//è¿”å›æœ€è¿‘ä¸€æ¬¡ADC1è§„åˆ™ç»„çš„è½¬æ¢ç»“æœ
 }
-//»ñÈ¡Ö¸¶¨Í¨µÀµÄ×ª»»Öµ£¬È¡times´Î,È»ºóÆ½¾ù 
-//times:»ñÈ¡´ÎÊı
-//·µ»ØÖµ:Í¨µÀchµÄtimes´Î×ª»»½á¹ûÆ½¾ùÖµ
+//è·å–æŒ‡å®šé€šé“çš„è½¬æ¢å€¼ï¼Œå–timesæ¬¡,ç„¶åå¹³å‡ 
+//times:è·å–æ¬¡æ•°
+//è¿”å›å€¼:é€šé“chçš„timesæ¬¡è½¬æ¢ç»“æœå¹³å‡å€¼
 u16 Get_Adc_Average(ADC_ChannelConf ch,ADC_Channel_Sampling_Count times)
 {
 	u32 temp_val=0;

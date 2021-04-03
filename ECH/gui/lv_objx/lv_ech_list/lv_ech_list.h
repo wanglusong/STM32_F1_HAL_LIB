@@ -1,6 +1,6 @@
 
-#ifndef __INCLUDE_LV_POC_LIST__
-#define  __INCLUDE_LV_POC_LIST__
+#ifndef __INCLUDE_LV_ech_LIST__
+#define  __INCLUDE_LV_ech_LIST__
 
 #ifdef __cplusplus
 extern "C" {
@@ -34,7 +34,7 @@ extern "C" {
 *
 *************************************************/
 
-typedef void (* lv_poc_list_config_func_t)(lv_obj_t * list, lv_area_t list_area);
+typedef void (* lv_ech_list_config_func_t)(lv_obj_t * list, lv_area_t list_area);
 
 /*************************************************
 *
@@ -69,12 +69,12 @@ typedef void (* lv_poc_list_config_func_t)(lv_obj_t * list, lv_area_t list_area)
 *
 *************************************************/
 /*******************
-*     NAME:   lv_poc_list_create
+*     NAME:   lv_ech_list_create
 *   AUTHOR:   lugj
 * DESCRIPT:   ´´½¨interphone list
 *     DATE:   2019-11-25
 ********************/
-lv_obj_t * lv_poc_list_create(lv_obj_t * parent, lv_obj_t * copy,lv_area_t list_area, lv_poc_list_config_func_t func);
+lv_obj_t * lv_ech_list_create(lv_obj_t * parent, lv_obj_t * copy,lv_area_t list_area, lv_ech_list_config_func_t func);
 
 
 #ifdef __cplusplus

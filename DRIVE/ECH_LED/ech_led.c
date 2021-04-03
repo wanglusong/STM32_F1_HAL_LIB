@@ -57,8 +57,8 @@ void led_task(void *pvParameters)
 	while (1)
 	{
 		LED1 = !LED1;
-		UART1_apTrace("[%s %s] FILE: %s FUNC: %s LINE: %d [song]:led running \r\n", __DATE__, \
-			__TIME__, __FILE__,  __func__, __LINE__);
+		//UART1_apTrace("[%s %s] FILE: %s FUNC: %s LINE: %d [song]:led running \r\n", __DATE__, \
+			//__TIME__, __FILE__,  __func__, __LINE__);
 		vTaskDelay(500);
 	}
 }

@@ -330,7 +330,7 @@ void ST7735_Init(void)
 	ST7735_LCD_WR_DATA(0x0E); 
 	
 	ST7735_LCD_WR_REG(0x36); //MX, MY, RGB mode 				 
-	ST7735_LCD_WR_DATA(0xC8); 
+	ST7735_LCD_WR_DATA(0xC0); 
 	
 	//ST7735R Gamma Sequence
 	ST7735_LCD_WR_REG(0xe0); 

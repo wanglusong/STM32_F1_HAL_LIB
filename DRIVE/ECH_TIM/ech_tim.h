@@ -3,7 +3,7 @@
 
 #include "appstart.h"
 
-#if TIM_FUNC
+#ifdef TIM_FUNC
 
 typedef struct tim_config
 {

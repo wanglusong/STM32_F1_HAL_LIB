@@ -17,10 +17,10 @@ typedef unsigned short int   uint16_t;
 #define IN  const
 #define OUT
 
-//#define POC_UI_MACRO     1
-//#if POC_UI_MACRO != 0
-//#define GROUP_EQUATION(A,B,C,D,E) lv_poc_check_group_equation((A),(B),(C),(D),(E))
-//#define MEMBER_EQUATION(A,B,C,D,E) lv_poc_check_member_equation((A),(B),(C),(D),(E))
+//#define ech_UI_MACRO     1
+//#if ech_UI_MACRO != 0
+//#define GROUP_EQUATION(A,B,C,D,E) lv_ech_check_group_equation((A),(B),(C),(D),(E))
+//#define MEMBER_EQUATION(A,B,C,D,E) lv_ech_check_member_equation((A),(B),(C),(D),(E))
 //#else
 //#define GROUP_EQUATION(A,B,C,D,E) (0 == strcmp((A),(B)))
 //#define MEMBER_EQUATION(A,B,C,D,E) (0 == strcmp((A),(B)))
@@ -28,12 +28,12 @@ typedef unsigned short int   uint16_t;
 
 #define LIST_ELEMENT_NAME_MAX_LENGTH 64
 
-#define LV_POC_NAME_LEN LIST_ELEMENT_NAME_MAX_LENGTH
+#define LV_ech_NAME_LEN LIST_ELEMENT_NAME_MAX_LENGTH
 
-#define POC_MAX_BRIGHT 9
+#define ech_MAX_BRIGHT 9
 
 /*******************
-*     NAME:   lv_poc_time_t
+*     NAME:   lv_ech_time_t
 *   AUTHOR:   lugj
 * DESCRIPT:   获取时间的结构体
 *     DATE:   2019-11-01
@@ -47,7 +47,7 @@ typedef struct
     INT32 tm_mon;                                                                 // month of year [1,12]
     INT32 tm_year;                                                                // since 1970
     INT32 tm_wday;                                                                // sunday = 0
-} lv_poc_time_t;
+} lv_ech_time_t;
 
 
 
@@ -70,7 +70,7 @@ typedef struct
 	uint32_t idle_popwindows_msg_font;
 	uint32_t idle_lockgroupwindows_msg_font;
 	uint32_t idle_shutdownwindows_msg_font;
-} nv_poc_font_size_msg_t;
+} nv_ech_font_size_msg_t;
 
 
 typedef struct
@@ -95,26 +95,26 @@ typedef struct
 	uint32_t style_status_bar;
 	uint32_t style_status_bar_time;
 	uint32_t style_control;
-} nv_poc_theme_msg_node_t;
+} nv_ech_theme_msg_node_t;
 
 typedef struct
 {
 	uint8_t  type;                      //[0] white theme   [1]black theme    [default 0]
-	nv_poc_theme_msg_node_t * current_theme;
-#ifdef CONFIG_POC_GUI_CHOICE_THEME_SUPPORT
-	nv_poc_theme_msg_node_t * black;
+	nv_ech_theme_msg_node_t * current_theme;
+#ifdef CONFIG_ech_GUI_CHOICE_THEME_SUPPORT
+	nv_ech_theme_msg_node_t * black;
 #endif
-	nv_poc_theme_msg_node_t * white;
-} nv_poc_theme_msg_t;
+	nv_ech_theme_msg_node_t * white;
+} nv_ech_theme_msg_t;
 
 typedef struct
 {
 	uint8_t read_and_write_check;
 	uint8_t btn_voice_switch;         //[0]close   [1]open   [default 0]
-#ifdef CONFIG_POC_TTS_SUPPORT
+#ifdef CONFIG_ech_TTS_SUPPORT
 	uint8_t voice_broadcast_switch;   //[0]close   [1]open   [default 0]
 #endif
-#ifdef CONFIG_POC_GUI_KEYPAD_LIGHT_SUPPORT
+#ifdef CONFIG_ech_GUI_KEYPAD_LIGHT_SUPPORT
 	uint8_t keypad_led_switch;        //[0]close   [1]open   [default 0]
 #endif
 	uint8_t GPS_switch;               //[0]close   [1]open   [default 0]
@@ -123,32 +123,32 @@ typedef struct
 	uint8_t screen_bright_time;       //[0]5�?[1]15�?[2]30�?[3]1分钟 [4]2分钟 [5]5分钟 [6]10分钟 [7]30分钟     [default 2]
 	//uint8_t current_theme;          //[0] white theme   [1]black theme    [default 0]
 	uint8_t main_SIM;                 //[0]SIM 1   [1]SIM 2     [default 0]
-#ifdef CONFIG_POC_GUI_CHOICE_NET_TYPE_SUPPORT
+#ifdef CONFIG_ech_GUI_CHOICE_NET_TYPE_SUPPORT
 	uint8_t net_type;                 //[0]4G/3G/2G  [1]only 3G/2G    [default 0]
 #endif
 	uint8_t volume;                   //[0-10]    [default 5]
 	uint8_t language;                 //[0]简体中�?      [default 0]
-	nv_poc_font_size_msg_t font;
-	nv_poc_theme_msg_t theme;
+	nv_ech_font_size_msg_t font;
+	nv_ech_theme_msg_t theme;
 #ifdef CONFIG_AT_MY_ACCOUNT_SUPPORT
 	char account_name[32];
 	char account_passwd[32];
 	char ip_address[20];
 	int  ip_port;
 #endif
-} nv_poc_setting_msg_t;
+} nv_ech_setting_msg_t;
 
 typedef enum
 {
-    POC_SIM_1 = 0,
-    POC_SIM_2
-} POC_SIM_ID;
+    ech_SIM_1 = 0,
+    ech_SIM_2
+} ech_SIM_ID;
 
 typedef enum
 {
-    POC_CHG_CONNECTED,                                                          // charger connected
-    POC_CHG_DISCONNECTED                                                        // charger disconnected
-} POC_CHG_STATUS;
+    ech_CHG_CONNECTED,                                                          // charger connected
+    ech_CHG_DISCONNECTED                                                        // charger disconnected
+} ech_CHG_STATUS;
 
 typedef struct{
     UINT32 battery_status;   // 0 - no battery; 1 - has battery
@@ -156,7 +156,7 @@ typedef struct{
     UINT32 charge_cur_mA;    // current
     INT32 battery_temp;     // temperature
     int8_t battery_value;     // surplus electric quantity
-    POC_CHG_STATUS charging;         // is charging
+    ech_CHG_STATUS charging;         // is charging
 } battery_values_t;
 
 typedef enum
@@ -167,7 +167,7 @@ typedef enum
     MMI_MODEM_SIGNAL_BAR_3,
     MMI_MODEM_SIGNAL_BAR_4,
     MMI_MODEM_SIGNAL_BAR_5
-} POC_MMI_MODEM_SIGNAL_BAR;
+} ech_MMI_MODEM_SIGNAL_BAR;
 
 typedef enum
 {
@@ -175,16 +175,16 @@ typedef enum
     MMI_MODEM_PLMN_RAT_UMTS,                                                    // UTRAN network
     MMI_MODEM_PLMN_RAT_LTE,                                                     // LTE network
     MMI_MODEM_PLMN_RAT_UNKNOW
-} POC_MMI_MODEM_PLMN_RAT;
+} ech_MMI_MODEM_PLMN_RAT;
 
 typedef enum
 {
-	POC_MMI_VOICE_MSG,
-	POC_MMI_VOICE_NOTE,
-	POC_MMI_VOICE_KEY,
-	POC_MMI_VOICE_PLAY,
-	POC_MMI_VOICE_CALL,
-} POC_MMI_VOICE_TYPE_E;
+	ech_MMI_VOICE_MSG,
+	ech_MMI_VOICE_NOTE,
+	ech_MMI_VOICE_KEY,
+	ech_MMI_VOICE_PLAY,
+	ech_MMI_VOICE_CALL,
+} ech_MMI_VOICE_TYPE_E;
 
 typedef enum
 {
@@ -204,7 +204,7 @@ typedef enum
 	LV_GROUP_KEY_MB             = 44,
 	LV_GROUP_KEY_VOL_DOWN       = 45,
 	LV_GROUP_KEY_VOL_UP         = 46,
-	LV_GROUP_KEY_POC            = 47,
+	LV_GROUP_KEY_ech            = 47,
 	LV_GROUP_KEY_SET            = 48
 } LV_GROUP_KEY_E;
 
@@ -214,116 +214,116 @@ typedef enum {
     LIST_TYPE_GROUP_BUILD,
     LIST_TYPE_CALL,
     LIST_TYPE_NUM
-} lv_poc_list_type_t;
+} lv_ech_list_type_t;
 
 typedef enum {
-    POC_OPERATE_FAILD,
-    POC_OPERATE_SECCESS,
+    ech_OPERATE_FAILD,
+    ech_OPERATE_SECCESS,
 
-    POC_MEMBER_ONLINE,
-    POC_MEMBER_OFFLINE,
-    POC_MEMBER_EXISTS,
-    POC_MEMBER_NONENTITY,
+    ech_MEMBER_ONLINE,
+    ech_MEMBER_OFFLINE,
+    ech_MEMBER_EXISTS,
+    ech_MEMBER_NONENTITY,
 
-    POC_GROUP_EXISTS,
-    POC_GROUP_NONENTITY,
-    POC_GROUP_EMPTY,
-    POC_GROUP_NON_NULL,
+    ech_GROUP_EXISTS,
+    ech_GROUP_NONENTITY,
+    ech_GROUP_EMPTY,
+    ech_GROUP_NON_NULL,
 
-    POC_UNKNOWN_FAULT
-} lv_poc_status_t;
+    ech_UNKNOWN_FAULT
+} lv_ech_status_t;
 
 typedef enum
 {
-	LV_POC_NOTATION_NONE       = 0,
-	LV_POC_NOTATION_HIDEN      = 1,
-	LV_POC_NOTATION_DESTORY    = 2,
-	LV_POC_NOTATION_REFRESH    = 3,
-	LV_POC_NOTATION_LISTENING  = 4,
-	LV_POC_NOTATION_SPEAKING   = 5,
-	LV_POC_NOTATION_NORMAL_MSG = 6,
-} lv_poc_notation_msg_type_t;
+	LV_ech_NOTATION_NONE       = 0,
+	LV_ech_NOTATION_HIDEN      = 1,
+	LV_ech_NOTATION_DESTORY    = 2,
+	LV_ech_NOTATION_REFRESH    = 3,
+	LV_ech_NOTATION_LISTENING  = 4,
+	LV_ech_NOTATION_SPEAKING   = 5,
+	LV_ech_NOTATION_NORMAL_MSG = 6,
+} lv_ech_notation_msg_type_t;
 
 typedef enum {
-	lv_poc_idle_page2_none_msg = 0,
-	lv_poc_idle_page2_normal_info,
-	lv_poc_idle_page2_warnning_info,
-	lv_poc_idle_page2_login_info,
-	lv_poc_idle_page2_audio,
-	lv_poc_idle_page2_join_group,
-	lv_poc_idle_page2_list_update,
-	lv_poc_idle_page2_speak,
-	lv_poc_idle_page2_tone,
-	lv_poc_idle_page2_tts,
-	lv_poc_idle_page2_listen
-} lv_poc_idle_page2_display_t;
+	lv_ech_idle_page2_none_msg = 0,
+	lv_ech_idle_page2_normal_info,
+	lv_ech_idle_page2_warnning_info,
+	lv_ech_idle_page2_login_info,
+	lv_ech_idle_page2_audio,
+	lv_ech_idle_page2_join_group,
+	lv_ech_idle_page2_list_update,
+	lv_ech_idle_page2_speak,
+	lv_ech_idle_page2_tone,
+	lv_ech_idle_page2_tts,
+	lv_ech_idle_page2_listen
+} lv_ech_idle_page2_display_t;
 
 typedef enum{//指示灯状�?
-	LVPOCLEDIDTCOM_SIGNAL_STATUS_START = 0,
+	LVechLEDIDTCOM_SIGNAL_STATUS_START = 0,
 
-	LVPOCLEDIDTCOM_SIGNAL_NORMAL_STATUS ,//正常状�?	LVPOCLEDIDTCOM_SIGNAL_CHARGING_STATUS ,//充电状�?	LVPOCLEDIDTCOM_SIGNAL_LOW_BATTERY_STATUS	,//低电�?	LVPOCLEDIDTCOM_SIGNAL_MERMEBER_LIST_SUCCESS_STATUS	,//获取成员列表成功
-	LVPOCLEDIDTCOM_SIGNAL_MERMEBER_LIST_FAIL_STATUS	,//获取成员列表失败
-	LVPOCLEDIDTCOM_SIGNAL_GROUP_LIST_SUCCESS_STATUS	,//获取群组列表成功
-	LVPOCLEDIDTCOM_SIGNAL_GROUP_LIST_FAIL_STATUS	,//获取群组列表失败
-	LVPOCLEDIDTCOM_SIGNAL_START_TALK_STATUS	,//对讲状�?	LVPOCLEDIDTCOM_SIGNAL_CONNECT_NETWORK_STATUS	,//注册上网络状�?	LVPOCLEDIDTCOM_SIGNAL_FAIL_STATUS	,//错误消息
-}LVPOCIDTCOM_Led_SignalType_t;
+	LVechLEDIDTCOM_SIGNAL_NORMAL_STATUS ,//正常状�?	LVechLEDIDTCOM_SIGNAL_CHARGING_STATUS ,//充电状�?	LVechLEDIDTCOM_SIGNAL_LOW_BATTERY_STATUS	,//低电�?	LVechLEDIDTCOM_SIGNAL_MERMEBER_LIST_SUCCESS_STATUS	,//获取成员列表成功
+	LVechLEDIDTCOM_SIGNAL_MERMEBER_LIST_FAIL_STATUS	,//获取成员列表失败
+	LVechLEDIDTCOM_SIGNAL_GROUP_LIST_SUCCESS_STATUS	,//获取群组列表成功
+	LVechLEDIDTCOM_SIGNAL_GROUP_LIST_FAIL_STATUS	,//获取群组列表失败
+	LVechLEDIDTCOM_SIGNAL_START_TALK_STATUS	,//对讲状�?	LVechLEDIDTCOM_SIGNAL_CONNECT_NETWORK_STATUS	,//注册上网络状�?	LVechLEDIDTCOM_SIGNAL_FAIL_STATUS	,//错误消息
+}LVechIDTCOM_Led_SignalType_t;
 
 typedef enum{//呼吸灯周�?
-	LVPOCLEDIDTCOM_BREATH_LAMP_PERIOD_0 = 0,
+	LVechLEDIDTCOM_BREATH_LAMP_PERIOD_0 = 0,
 
-	LVPOCLEDIDTCOM_BREATH_LAMP_PERIOD_50 = 50,
-	LVPOCLEDIDTCOM_BREATH_LAMP_PERIOD_100 = 100 ,
-	LVPOCLEDIDTCOM_BREATH_LAMP_PERIOD_300 = 300	,
-	LVPOCLEDIDTCOM_BREATH_LAMP_PERIOD_500 = 500	,
-	LVPOCLEDIDTCOM_BREATH_LAMP_PERIOD_800 = 800	,
-	LVPOCLEDIDTCOM_BREATH_LAMP_PERIOD_1200 = 1200	,
-	LVPOCLEDIDTCOM_BREATH_LAMP_PERIOD_1500 = 1500	,
-	LVPOCLEDIDTCOM_BREATH_LAMP_PERIOD_2000 = 2000	,
-	LVPOCLEDIDTCOM_BREATH_LAMP_PERIOD_3000 = 3000	,
-	LVPOCLEDIDTCOM_BREATH_LAMP_PERIOD_5000 = 5000	,
-}LVPOCIDTCOM_Led_Period_t;
+	LVechLEDIDTCOM_BREATH_LAMP_PERIOD_50 = 50,
+	LVechLEDIDTCOM_BREATH_LAMP_PERIOD_100 = 100 ,
+	LVechLEDIDTCOM_BREATH_LAMP_PERIOD_300 = 300	,
+	LVechLEDIDTCOM_BREATH_LAMP_PERIOD_500 = 500	,
+	LVechLEDIDTCOM_BREATH_LAMP_PERIOD_800 = 800	,
+	LVechLEDIDTCOM_BREATH_LAMP_PERIOD_1200 = 1200	,
+	LVechLEDIDTCOM_BREATH_LAMP_PERIOD_1500 = 1500	,
+	LVechLEDIDTCOM_BREATH_LAMP_PERIOD_2000 = 2000	,
+	LVechLEDIDTCOM_BREATH_LAMP_PERIOD_3000 = 3000	,
+	LVechLEDIDTCOM_BREATH_LAMP_PERIOD_5000 = 5000	,
+}LVechIDTCOM_Led_Period_t;
 
 typedef enum{//刷新机制周期
 
-	LVPOCLISTIDTCOM_LIST_PERIOD_0 = 0,
-	LVPOCLISTIDTCOM_LIST_PERIOD_10 = 10,
-	LVPOCLISTIDTCOM_LIST_PERIOD_50 = 50 ,
-	LVPOCLISTIDTCOM_LIST_PERIOD_100 = 100 ,
-	LVPOCLISTIDTCOM_LIST_PERIOD_300 = 300	,
-	LVPOCLISTIDTCOM_LIST_PERIOD_500 = 500	,
-	LVPOCLISTIDTCOM_LIST_PERIOD_800 = 800	,
-	LVPOCLISTIDTCOM_LIST_PERIOD_1200 = 1200	,
-	LVPOCLISTIDTCOM_LIST_PERIOD_1500 = 1500	,
-	LVPOCLISTIDTCOM_LIST_PERIOD_2000 = 2000	,
-}LVPOCIDTCOM_List_Period_t;
+	LVechLISTIDTCOM_LIST_PERIOD_0 = 0,
+	LVechLISTIDTCOM_LIST_PERIOD_10 = 10,
+	LVechLISTIDTCOM_LIST_PERIOD_50 = 50 ,
+	LVechLISTIDTCOM_LIST_PERIOD_100 = 100 ,
+	LVechLISTIDTCOM_LIST_PERIOD_300 = 300	,
+	LVechLISTIDTCOM_LIST_PERIOD_500 = 500	,
+	LVechLISTIDTCOM_LIST_PERIOD_800 = 800	,
+	LVechLISTIDTCOM_LIST_PERIOD_1200 = 1200	,
+	LVechLISTIDTCOM_LIST_PERIOD_1500 = 1500	,
+	LVechLISTIDTCOM_LIST_PERIOD_2000 = 2000	,
+}LVechIDTCOM_List_Period_t;
 
 
 typedef enum{
-	LVPOCUPDATE_TYPE_START = 0 ,
-	LVPOCUPDATE_TYPE_MEMBERLIST ,
-	LVPOCUPDATE_TYPE_GROUPLIST ,
-	LVPOCUPDATE_TYPE_BUILD_GROUPLIST ,
-	LVPOCUPDATE_TYPE_END ,
-}poc_update_type;
+	LVechUPDATE_TYPE_START = 0 ,
+	LVechUPDATE_TYPE_MEMBERLIST ,
+	LVechUPDATE_TYPE_GROUPLIST ,
+	LVechUPDATE_TYPE_BUILD_GROUPLIST ,
+	LVechUPDATE_TYPE_END ,
+}ech_update_type;
 
 typedef enum{
-	LVPOCAUDIO_Type_Start_Index,
-	LVPOCAUDIO_Type_Start_Machine,      // 欢迎使用数字公网对讲�?	LVPOCAUDIO_Type_Fail_Update_Group,      //群组信息更新失败
-	LVPOCAUDIO_Type_Fail_Update_Member,      //成员列表更新失败
-	LVPOCAUDIO_Type_Insert_SIM_Card,      //请插入SIM�?	LVPOCAUDIO_Type_Join_Group,      //加入群组
-	LVPOCAUDIO_Type_Low_Battery,      //电量低请充电
-	LVPOCAUDIO_Type_No_Login,      //当前未登�?	LVPOCAUDIO_Type_Offline_Member,      //成员不在�?	LVPOCAUDIO_Type_Success_Member_Call,      //单呼成功
-	LVPOCAUDIO_Type_Success_Build_Group,      //建组成功
-	LVPOCAUDIO_Type_Success_Login,      //登录成功
-	LVPOCAUDIO_Type_No_Connected,      //当前网络未连�?	LVPOCAUDIO_Type_Tone_Cannot_Speak,   //
-	LVPOCAUDIO_Type_Tone_Lost_Mic,   //
-	LVPOCAUDIO_Type_Tone_Note,   //
-	LVPOCAUDIO_Type_Tone_Start_Listen,   //
-	LVPOCAUDIO_Type_Tone_Start_Speak,   //
-	LVPOCAUDIO_Type_Tone_Stop_Listen,   //
-	LVPOCAUDIO_Type_Tone_Stop_Speak,   //
-	LVPOCAUDIO_Type_End_Index,
-} LVPOCAUDIO_Type_e;
+	LVechAUDIO_Type_Start_Index,
+	LVechAUDIO_Type_Start_Machine,      // 欢迎使用数字公网对讲�?	LVechAUDIO_Type_Fail_Update_Group,      //群组信息更新失败
+	LVechAUDIO_Type_Fail_Update_Member,      //成员列表更新失败
+	LVechAUDIO_Type_Insert_SIM_Card,      //请插入SIM�?	LVechAUDIO_Type_Join_Group,      //加入群组
+	LVechAUDIO_Type_Low_Battery,      //电量低请充电
+	LVechAUDIO_Type_No_Login,      //当前未登�?	LVechAUDIO_Type_Offline_Member,      //成员不在�?	LVechAUDIO_Type_Success_Member_Call,      //单呼成功
+	LVechAUDIO_Type_Success_Build_Group,      //建组成功
+	LVechAUDIO_Type_Success_Login,      //登录成功
+	LVechAUDIO_Type_No_Connected,      //当前网络未连�?	LVechAUDIO_Type_Tone_Cannot_Speak,   //
+	LVechAUDIO_Type_Tone_Lost_Mic,   //
+	LVechAUDIO_Type_Tone_Note,   //
+	LVechAUDIO_Type_Tone_Start_Listen,   //
+	LVechAUDIO_Type_Tone_Start_Speak,   //
+	LVechAUDIO_Type_Tone_Stop_Listen,   //
+	LVechAUDIO_Type_Tone_Stop_Speak,   //
+	LVechAUDIO_Type_End_Index,
+} LVechAUDIO_Type_e;
 
 typedef struct _list_element_t{
     char name[LIST_ELEMENT_NAME_MAX_LENGTH];
@@ -335,11 +335,11 @@ typedef struct _list_element_t{
 typedef struct {
     unsigned int group_number;
     list_element_t * group_list;
-} lv_poc_group_list_t;
+} lv_ech_group_list_t;
 
-typedef void * lv_poc_group_info_t;
+typedef void * lv_ech_group_info_t;
 
-typedef void * lv_poc_member_info_t;
+typedef void * lv_ech_member_info_t;
 
 typedef struct {
 	  bool hide_offline;
@@ -347,13 +347,13 @@ typedef struct {
     unsigned int offline_number;
     list_element_t * online_list;
     list_element_t * offline_list;
-} lv_poc_member_list_t;
+} lv_ech_member_list_t;
 
-typedef struct _lv_poc_audio_dsc_t
+typedef struct _lv_ech_audio_dsc_t
 {
 	uint32_t data_size;
   uint8_t * data;
-} lv_poc_audio_dsc_t;
+} lv_ech_audio_dsc_t;
 
 #endif 
 

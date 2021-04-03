@@ -20,7 +20,7 @@ extern "C" {
 *                  DEFINE
 *
 *************************************************/
-#define LV_POC_WIN_TITLE_HEIGHT_RATIO  5
+#define LV_ech_WIN_TITLE_HEIGHT_RATIO  5
 
 /*************************************************
 *
@@ -41,9 +41,9 @@ typedef struct
     lv_obj_t * header;
     lv_area_t display_area;
     void * display_obj;
-} lv_poc_win_t;
+} lv_ech_win_t;
 
-typedef void *(* lv_poc_win_create_func_t)(lv_obj_t * parent, lv_area_t display_area);
+typedef void *(* lv_ech_win_create_func_t)(lv_obj_t * parent, lv_area_t display_area);
 
 /*************************************************
 *
@@ -78,12 +78,12 @@ typedef void *(* lv_poc_win_create_func_t)(lv_obj_t * parent, lv_area_t display_
 *
 *************************************************/
 /*******************
-*     NAME:   lv_poc_win_create
+*     NAME:   lv_ech_win_create
 *   AUTHOR:   lugj
-* DESCRIPT:   创建poc窗口
+* DESCRIPT:   创建ech窗口
 *     DATE:   2019-11-25
 ********************/
-lv_poc_win_t * lv_poc_win_create(lv_obj_t * parent, const char * title, lv_poc_win_create_func_t func);
+lv_ech_win_t * lv_ech_win_create(lv_obj_t * parent, const char * title, lv_ech_win_create_func_t func);
 
 
 #ifdef __cplusplus

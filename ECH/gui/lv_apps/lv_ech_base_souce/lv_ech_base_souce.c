@@ -17,13 +17,15 @@
 //******************************************************************
 void lv_ech_start_task(void *pvParameters)
 { 
+#ifdef LVGL_FUNC
 	/*userinit*/
 	lv_start();
-	
+#endif
+
 	while(1)
 	{
-		UART1_apTrace("[%s %s] FILE: %s FUNC: %s LINE: %d [song]:system running \r\n", __DATE__, \
-			__TIME__, __FILE__,  __func__, __LINE__);
+		//UART1_apTrace("[%s %s] FILE: %s FUNC: %s LINE: %d [song]:system running \r\n", __DATE__, \
+			//__TIME__, __FILE__,  __func__, __LINE__);
 		vTaskDelay(500);
 	}
 

@@ -3,7 +3,7 @@
 
 #include "appstart.h"
 
-#if UART_FUNC
+#ifdef UART_FUNC
 
 typedef struct uart_param_t
 {

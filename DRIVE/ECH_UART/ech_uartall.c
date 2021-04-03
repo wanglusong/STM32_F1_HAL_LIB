@@ -2,12 +2,12 @@
 #include "stdio.h"	
 #include "stdarg.h"	
 
-#if UART_FUNC
+#ifdef UART_FUNC
 
 #include "string.h"
 #include "ech_tim.h"	
 
-#if ESP8266_FUNC
+#ifdef ESP8266_FUNC
 #include "esp8266_uart.h"
 #endif
 
